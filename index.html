@@ -698,6 +698,42 @@ header .nav nav a{position:relative!important;border-bottom:0!important;padding-
 header .nav nav a::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:3px;border-radius:6px;background:#29d477;transform:scaleX(0);transform-origin:center;transition:transform .28s ease,box-shadow .28s ease;box-shadow:0 0 12px #29d47755;pointer-events:none}
 header .nav nav a.po-nav-active{color:#5fe28c!important}
 header .nav nav a.po-nav-active::after{transform:scaleX(1)}
+</style><style id="pickout-live-cafe-realism-2026">
+/* Detailed staggered brick courses: mortar, rough pigment and chipped highlights */
+#pickoutBackdrop .backdrop-bricks{
+background-color:#793b2b!important;
+background-image:
+radial-gradient(ellipse at 18% 28%,#e7a17b24 0 1px,transparent 4px),
+radial-gradient(ellipse at 71% 76%,#200a0844 0 2px,transparent 6px),
+repeating-linear-gradient(0deg,transparent 0 66px,#29130f 67px 71px,#bd846048 72px 73px,transparent 74px 146px),
+repeating-linear-gradient(90deg,transparent 0 212px,#260f0d 213px 219px,#e4a27c2b 220px 221px,transparent 222px 440px),
+repeating-linear-gradient(90deg,transparent 0 212px,#260f0d 213px 219px,#e4a27c2b 220px 221px,transparent 222px 440px),
+repeating-linear-gradient(135deg,#b35b3e 0%,#8b402c 23%,#572719 52%,#a55236 77%,#5e291d 100%)!important;
+background-size:87px 91px,113px 73px,100% 146px,440px 292px,440px 292px,100% 100%!important;
+background-position:0 0,19px 27px,0 0,0 0,220px 73px,0 0!important;
+box-shadow:inset 0 0 140px #170907b8,inset 0 16px 45px #d98b5930!important;
+}
+#pickoutBackdrop .backdrop-bricks:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.33;background-image:repeating-linear-gradient(108deg,transparent 0 3px,#16080625 4px 5px,transparent 6px 17px),radial-gradient(circle at 30% 40%,#e5a17855 0 1px,transparent 2px);background-size:100% 100%,23px 29px;mix-blend-mode:overlay}
+#pickoutBackdrop .backdrop-wood{
+background-color:#5b301b!important;
+background-image:
+radial-gradient(ellipse at 20% 42%,#1408034d 0 2px,transparent 17px),
+repeating-linear-gradient(1deg,transparent 0 24px,#201008c4 25px 28px,#d3a0714a 29px 30px,transparent 31px 82px),
+repeating-linear-gradient(178deg,#28140d 0px,#89502c 5px,#b07747 12px,#6b371e 21px,#a1663b 31px,#43200f 43px,#965a32 57px,#40200f 82px)!important;
+background-size:180px 110px,100% 83px,100% 83px!important;
+box-shadow:inset 0 25px 35px #170804b8,inset 0 -65px 95px #0d0604a6!important;
+}
+#pickoutBackdrop .backdrop-wood:after{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;background:repeating-radial-gradient(ellipse at 35% 52%,transparent 0 8px,#210e0950 9px 10px,transparent 11px 25px);background-size:380px 110px}
+#pickoutBackdrop .po-amber-lamp{position:absolute;right:13%;top:0;width:170px;height:205px;z-index:3;pointer-events:none;opacity:.9}
+#pickoutBackdrop .po-amber-lamp:before{content:"";position:absolute;left:50%;top:0;width:3px;height:83px;background:linear-gradient(#110b08,#c48a50);box-shadow:0 0 3px #000;transform:translateX(-50%)}
+#pickoutBackdrop .po-amber-lamp:after{content:"";position:absolute;left:50%;top:69px;width:108px;height:72px;transform:translateX(-50%);clip-path:polygon(30% 0,70% 0,100% 95%,0 95%);border-radius:14px 14px 9px 9px;background:linear-gradient(90deg,#27170e,#d59a48 42%,#f6c56c 50%,#9b602c 68%,#29180e);filter:drop-shadow(0 5px 7px #0009)}
+#pickoutBackdrop .po-lamp-halo{position:absolute;right:calc(13% - 155px);top:85px;width:480px;height:450px;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 8%,#ffe6a78a 0%,#f7b44745 15%,#ef9c3020 38%,transparent 72%);mix-blend-mode:screen;transform-origin:50% 0;animation:poLampFlicker 8.5s steps(1,end) infinite}
+#pickoutBackdrop .po-lamp-cone{position:absolute;right:calc(13% - 155px);top:115px;width:480px;height:550px;z-index:1;pointer-events:none;clip-path:polygon(45% 0,55% 0,100% 100%,0 100%);background:linear-gradient(#f9bf6536,transparent 90%);opacity:.55;animation:poLampFlicker 8.5s steps(1,end) infinite}
+@keyframes poLampFlicker{0%,7%,11%,17%,52%,55%,61%,100%{opacity:.85}8%,10%,53%,60%{opacity:.14}9%,54%{opacity:.48}62%{opacity:1}}
+#pickoutBackdrop .po-cafe-mist{position:absolute;left:var(--left);bottom:var(--bottom);width:clamp(85px,13vw,190px);height:240px;z-index:4;pointer-events:none;opacity:0;border-radius:50%;background:radial-gradient(ellipse at 50% 55%,#ffead95e,transparent 69%);filter:blur(15px);animation:poMistRise var(--duration) ease-out infinite;animation-delay:var(--delay);will-change:transform,opacity}
+@keyframes poMistRise{0%{transform:translate3d(0,45px,0) scale(.45) rotate(-12deg);opacity:0}25%{opacity:.28}60%{opacity:.4}100%{transform:translate3d(var(--drift),-210px,0) scale(1.65) rotate(14deg);opacity:0}}
+@media(max-width:700px){#pickoutBackdrop .po-amber-lamp{right:7%;transform:scale(.7);transform-origin:top right}#pickoutBackdrop .po-lamp-halo,#pickoutBackdrop .po-lamp-cone{right:calc(7% - 155px);transform:scale(.7);transform-origin:top right}}
+@media(prefers-reduced-motion:reduce){#pickoutBackdrop .po-lamp-halo,#pickoutBackdrop .po-lamp-cone,#pickoutBackdrop .po-cafe-mist{animation:none!important}#pickoutBackdrop .po-cafe-mist{opacity:.12}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
@@ -1146,5 +1182,11 @@ document.addEventListener('click',e=>{if(e.target.closest('[onclick*="openModal"
  window.addEventListener('resize',update);
  links.forEach(a=>a.addEventListener('click',()=>setTimeout(update,450)));
  update();
+})();
+</script><script id="pickout-live-cafe-realism-runtime">
+(function(){
+const b=document.getElementById('pickoutBackdrop');if(!b||b.querySelector('.po-amber-lamp'))return;
+['po-lamp-cone','po-lamp-halo','po-amber-lamp'].forEach(c=>{const e=document.createElement('div');e.className=c;b.appendChild(e)});
+for(let i=0;i<5;i++){const e=document.createElement('i');e.className='po-cafe-mist';e.style.setProperty('--left',[4,13,28,68,85][i]+'%');e.style.setProperty('--bottom',[12,18,8,14,22][i]+'%');e.style.setProperty('--duration',(9+i*1.7)+'s');e.style.setProperty('--delay',(-i*2.6)+'s');e.style.setProperty('--drift',(i%2?65:-55)+'px');b.appendChild(e)}
 })();
 </script></body></html>
