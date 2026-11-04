@@ -862,6 +862,35 @@ box-shadow:inset 0 14px 24px #1009056b,inset 0 -35px 50px #0c07065a!important;
 background:repeating-linear-gradient(90deg,transparent 0 239px,#10090655 240px 244px,#f2bc8540 245px 246px,transparent 247px 248px)!important;
 background-size:248px 100%!important;opacity:.72!important;
 }
+</style><style id="po-harmonized-brick-wood-v7">
+/* Unified warm mahogany palette: preserve real texture and soften the brick/wood transition. */
+#pickoutBackdrop .backdrop-bricks{
+filter:saturate(.96) contrast(1.04) brightness(.84)!important;
+box-shadow:inset 0 0 110px #1b0c09a0,inset 0 -35px 38px #23120d80!important;
+}
+#pickoutBackdrop .backdrop-wood{
+background-color:#382418!important;
+background-image:
+linear-gradient(180deg,rgba(24,13,8,.48),rgba(30,17,10,.42) 45%,rgba(17,10,7,.55)),
+repeating-linear-gradient(90deg,transparent 0 279px,rgba(17,10,7,.5) 280px 282px,rgba(201,146,98,.1) 283px,transparent 284px 285px),
+url("https://commons.wikimedia.org/wiki/Special:FilePath/Wood_planks_texture.jpg?width=1024"),
+repeating-linear-gradient(178deg,#392519 0px,#67452e 8px,#442b1d 18px,#785239 27px,#382419 37px,#60412d 51px,#38271c 65px)!important;
+background-size:100% 100%,285px 100%,auto 100%,100% 84px!important;
+background-position:center,0 0,center,center!important;
+background-repeat:no-repeat,repeat-x,repeat-x,repeat!important;
+filter:brightness(.87) saturate(.7) contrast(1.03)!important;
+box-shadow:inset 0 24px 35px #1d0e09a0,inset 0 -40px 70px #10090780!important;
+}
+#pickoutBackdrop .backdrop-wood:after{
+background:repeating-linear-gradient(90deg,transparent 0 279px,#12090650 280px 282px,#c99b6c1b 283px,transparent 284px 285px)!important;
+background-size:285px 100%!important;opacity:.48!important;
+}
+#pickoutBackdrop .po-brick-wood-seam{
+position:absolute;top:calc(51% - 13px);left:0;right:0;height:31px;z-index:2;pointer-events:none;
+background:linear-gradient(180deg,#2a160d 0%,#58351f 16%,#825537 34%,#3b2418 53%,#21140e 72%,transparent 100%);
+box-shadow:0 8px 20px #11090760,inset 0 1px 1px #c08b594a;
+}
+#pickoutBackdrop .backdrop-light{opacity:.72!important}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
@@ -1330,4 +1359,4 @@ const b=document.getElementById('pickoutBackdrop');if(!b||b.querySelector('.po-s
 ['po-shadow-fan','po-soft-glow'].forEach(c=>{const el=document.createElement('div');el.className=c;b.appendChild(el)});
 for(let i=0;i<7;i++){const e=document.createElement('i');e.className='po-aroma';e.style.setProperty('--ax',(5+i*4)+'%');e.style.setProperty('--ay',(16+(i%3)*4)+'%');e.style.setProperty('--aw',(28+i%3*9)+'px');e.style.setProperty('--ah',(100+i%3*30)+'px');e.style.setProperty('--at',(6+i*.8)+'s');e.style.setProperty('--ad',(-i*1.2)+'s');e.style.setProperty('--adrift',((i%2?1:-1)*(20+i*6))+'px');b.appendChild(e)}
 })();
-</script></body></html>
+</script><script id="po-harmonized-seam-runtime">(function(){const b=document.getElementById('pickoutBackdrop');if(b&&!b.querySelector('.po-brick-wood-seam')){const e=document.createElement('div');e.className='po-brick-wood-seam';b.appendChild(e)}})();</script></body></html>
