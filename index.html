@@ -650,6 +650,20 @@ filter:drop-shadow(0 23px 15px #000a)!important;will-change:transform!important
 #pickoutSplash2026.po-exit{animation:poSplashExit .85s cubic-bezier(.7,0,.2,1) forwards!important}
 @keyframes poSplashExit{0%{opacity:1;transform:scale(1)}70%{opacity:1;transform:scale(1.08)}100%{opacity:0;transform:scale(1.2);visibility:hidden}}
 @media(prefers-reduced-motion:reduce){#pickoutBackdrop .extra-vapor{animation:none!important}}
+</style><style id="pickout-polish-v2">
+header .nav>a.brand{width:clamp(180px,23vw,290px)!important;min-width:150px!important;max-width:290px!important;height:74px!important;padding:0!important;overflow:visible!important;display:flex!important;align-items:center!important}
+header .nav>a.brand>img{width:100%!important;height:100%!important;max-height:none!important;object-fit:contain!important;object-position:center!important}
+@media(max-width:700px){header .nav>a.brand{width:150px!important;min-width:130px!important;height:54px!important}}
+#payerWheel{border-radius:50%!important;overflow:hidden!important;transform-origin:center center!important}
+#payerWheel .wheel-labels span{white-space:normal!important;overflow:hidden!important;line-height:1.25!important;max-height:38px!important;display:block!important;box-sizing:border-box!important}
+#pickoutBackdrop .extra-vapor{mix-blend-mode:screen;filter:blur(17px);opacity:.5}
+#pickoutBackdrop .po-coffee-glimmer{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 80% 78%,#f5c98b18,transparent 30%),radial-gradient(ellipse at 24% 40%,#fff0c008,transparent 40%);animation:poCafeLight 12s ease-in-out infinite alternate}
+@keyframes poCafeLight{from{opacity:.25;transform:translateX(-2%)}to{opacity:.85;transform:translateX(2%)}}
+#pickoutSplash2026.po-exit{animation:poSplashExit .85s cubic-bezier(.7,0,.2,1) forwards!important}
+#modal.pick-closing{animation:poModalExit .36s ease-in forwards!important;pointer-events:none}
+#modal.pick-closing .dialog{animation:poDialogExit .36s cubic-bezier(.5,0,.8,.3) forwards!important}
+@keyframes poModalExit{to{opacity:0;visibility:hidden}}
+@keyframes poDialogExit{to{opacity:0;transform:translateY(80px) scale(.72) rotateX(-12deg);filter:blur(8px)}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
@@ -1045,5 +1059,25 @@ function reset(){clearInterval(timer);timer=setInterval(()=>{if(document.hidden)
 menu.addEventListener('click',e=>{const card=e.target.closest('.card');if(!card||e.target.closest('button,a,input'))return;selected=[...menu.children].indexOf(card);apply();reset()});
 new MutationObserver(()=>{selected=0;apply()}).observe(menu,{childList:true});
 apply();reset();
+})();
+</script><script id="pickout-polish-runtime-v2">
+(function(){
+ const backdrop=document.getElementById('pickoutBackdrop');
+ if(backdrop&&!backdrop.querySelector('.po-coffee-glimmer')){const g=document.createElement('div');g.className='po-coffee-glimmer';backdrop.appendChild(g)}
+ const modal=document.getElementById('modal');
+ if(modal){
+  const syncWheel=()=>{
+   const wheel=document.getElementById('payerWheel'),field=document.getElementById('wheelNames');
+   if(!wheel||!field||window.payerWheelBusy)return;
+   const names=field.value.split(/[،,\n]/).map(x=>x.trim()).filter(Boolean).slice(0,12);
+   if(!names.length){wheel.innerHTML='';return}
+   const n=names.length,step=360/n,colors=['#175f41','#8c5735','#ad844d','#315b4b','#6c4939','#9b6c40'];
+   wheel.style.background='conic-gradient('+names.map((_,i)=>colors[i%colors.length]+' '+(i*step)+'deg '+((i+1)*step)+'deg').join(',')+')';
+   wheel.innerHTML='<div class="wheel-labels">'+names.map((name,i)=>'<span style="transform:translate(-50%,-50%) rotate('+(i*step+step/2)+'deg) translateY(-98px) rotate('+(-(i*step+step/2))+'deg)">'+name.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))+'</span>').join('')+'</div>';
+  };
+  modal.addEventListener('input',e=>{if(e.target.id==='wheelNames')syncWheel()});
+  modal.addEventListener('click',e=>{if(e.target.id==='startDrinkSpin'||e.target.closest('[onclick*="spinPayerWheel"]')){const r=modal.querySelector('#wheelResult,#drinkSpinResult');if(r)r.hidden=true}});
+ }
+ window.addEventListener('pagehide',()=>{const splash=document.getElementById('pickoutSplash2026');if(splash)splash.classList.add('po-exit')});
 })();
 </script></body></html>
