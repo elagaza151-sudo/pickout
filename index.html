@@ -214,15 +214,67 @@ body:after{background:radial-gradient(ellipse at 20% 15%,rgba(250,161,78,.16),tr
 #introV3 img,.intro-logo-wrap img,.brand img{object-fit:contain}
 .brand img{width:min(190px,34vw);height:54px}
 @media(max-width:650px){#menuCards .productArt{height:205px}.modal .dialog{max-height:80dvh!important}}
+</style><style id="pickcut-showcase">
+:root{--green:#22ad53;--green-dark:#06592c}
+html{scroll-padding-top:90px}
+body{background:#170d09!important}
+header{position:fixed!important;top:0!important;right:0;left:0;z-index:100!important;background:rgba(28,14,9,.91)!important;border-bottom:1px solid #98603988!important;box-shadow:0 8px 35px #0007;backdrop-filter:blur(20px)}
+.nav{max-width:1380px;padding:9px 28px;min-height:70px}
+.brand img{width:125px!important;height:44px!important}
+nav a:hover,nav a:focus{color:#5fe28c!important}
+nav a[href="#home"]{color:#5fe28c;border-bottom:2px solid var(--green);padding-bottom:6px}
+main{max-width:1370px;padding-top:112px!important}
+.hero{max-width:none!important;display:grid!important;grid-template-columns:1fr 1fr!important;min-height:470px!important;gap:22px!important;text-align:right!important;position:relative;isolation:isolate;padding:32px 36px 20px;border:1px solid #8b4d2c66;border-radius:28px;background:linear-gradient(95deg,#1b0d08d9,#2e160cb5);box-shadow:0 25px 70px #0008;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(0deg,transparent 0 43px,#2a0f09cc 44px 49px),repeating-linear-gradient(90deg,#823a24 0 114px,#4a1c13 115px 121px);opacity:.48;filter:contrast(1.25)}
+.hero>div:first-child{align-self:center;z-index:2}
+.hero h1{font-size:clamp(40px,5vw,72px)!important;text-shadow:0 5px 15px #0009}
+.hero h1 em{color:#f4d7b4!important;text-align:right!important;direction:ltr}
+.hero p{color:#f5e0c7!important;max-width:470px}
+.hero .actions{justify-content:flex-start!important}
+.menu-cta,.btn.primary{background:linear-gradient(140deg,#157e3c,#064c27)!important;color:white!important;border-color:#57d888!important;box-shadow:0 6px 22px #064e29a0!important}
+.menu-cta-icon,.menu-cta-arrow{background:#1aaf57!important;color:white!important}
+.filter.active,.filter:hover{background:linear-gradient(145deg,#2cb965,#075b2d)!important;color:white!important;border-color:#56d889!important}
+#liveCafe{background:repeating-linear-gradient(0deg,transparent 0 50px,#1d0b08 51px 55px),repeating-linear-gradient(90deg,#80331d 0 140px,#35150f 141px 147px),linear-gradient(120deg,#512519,#301a11)!important;opacity:.48!important}
+#liveCafe .smoke{opacity:.65;filter:blur(20px)}
+.pick-scene{height:430px;position:relative;overflow:hidden;perspective:900px;align-self:end;filter:drop-shadow(0 20px 30px #0008)}
+.scene-counter{position:absolute;bottom:0;left:-10%;right:-10%;height:115px;background:repeating-linear-gradient(0deg,#2e170b 0 12px,#65371b 13px 16px,#31170e 17px 28px);border-top:13px solid #8d502b;transform:rotateX(19deg);box-shadow:0 -18px 38px #0008;z-index:3}
+.scene-shelf{position:absolute;right:8%;width:150px;height:12px;background:#6d3a20;box-shadow:0 12px 16px #000a;border-radius:3px}.shelf-a{top:135px}.shelf-b{top:220px}
+.scene-shelf:before{content:"☕ ☕ ☕";position:absolute;bottom:12px;font-size:28px;white-space:nowrap;filter:drop-shadow(0 3px 3px #000)}
+.scene-lamp{position:absolute;top:0;width:3px;height:75px;background:#a36c44;z-index:2}.lamp-a{left:25%}.lamp-b{right:25%}.scene-lamp:after{content:"";position:absolute;top:70px;left:-42px;width:86px;height:32px;border-radius:50% 50% 14px 14px;background:linear-gradient(#26150f,#a15c2d);box-shadow:0 22px 55px 16px #e79a4666,0 5px 12px #0009}
+.scene-sign{position:absolute;top:133px;left:16%;font:bold 34px Georgia,serif;color:#e4ae71;text-shadow:0 4px 4px #000,0 0 20px #d78a4280;transform:rotateY(-12deg);border:9px ridge #603317;padding:13px;background:#2a140b;box-shadow:0 14px 26px #0008}
+.scene-sign span,.scene-cup b span{color:#27c164}
+.scene-leaves{position:absolute;right:0;top:15px;color:#277e3d;font-size:130px;transform:rotate(-22deg);filter:drop-shadow(0 6px 10px #000)}
+.scene-cup{position:absolute;bottom:64px;left:35%;width:176px;height:145px;border-radius:18px 18px 75px 75px;background:linear-gradient(105deg,#092a18,#145c35 42%,#06351f);border:3px solid #a1784a;box-shadow:inset 13px 0 16px #ffffff18,14px 24px 25px #000b;z-index:4;transform:rotateY(-9deg);animation:cupHover 6s ease-in-out infinite}
+.scene-cup:before{content:"";position:absolute;top:17px;right:-60px;width:62px;height:73px;border:15px solid #145333;border-left:0;border-radius:0 50% 50% 0}
+.scene-cup:after{content:"";position:absolute;top:-16px;left:-2px;right:-2px;height:29px;border-radius:50%;background:radial-gradient(ellipse,#e6a46a 0 37%,#7a3e21 55%,#e2b581 69%,#0e291b 72%);border:2px solid #b58b58}
+.scene-cup b{position:absolute;top:72px;left:20px;color:#e2bc86;font:700 23px Georgia,serif;white-space:nowrap}
+.latte-art{position:absolute;top:-17px;left:65px;z-index:2;color:#fff3d7;font-size:23px}
+.cup-steam{position:absolute;bottom:140px;width:28px;height:110px;border-left:7px solid #f6e9d080;border-radius:50%;filter:blur(7px);animation:cupSmoke 4s ease-in-out infinite}.steam-a{left:45px}.steam-b{left:85px;animation-delay:1.2s}.steam-c{left:120px;animation-delay:2.3s}
+.scene-beans{position:absolute;bottom:65px;right:10%;color:#a96835;letter-spacing:10px;z-index:4;transform:rotate(-15deg)}
+@keyframes cupHover{50%{transform:translateY(-8px) rotateY(7deg)}}
+@keyframes cupSmoke{0%{transform:translateY(15px) scale(.7);opacity:0}45%{opacity:.8}100%{transform:translateY(-85px) scale(1.9);opacity:0}}
+#menuCards{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+#menuCards .card{padding:10px!important;background:linear-gradient(155deg,#462719e8,#1e100bd9)!important;border:1px solid #885b3a!important;transform-style:preserve-3d;perspective:700px;transition:transform .4s,box-shadow .4s}
+#menuCards .card:hover{transform:translateY(-9px) rotateX(2deg) rotateY(-2deg)!important;box-shadow:0 18px 38px #000a,0 0 18px #1d974344}
+#menuCards .productArt{height:180px!important}
+#menuCards .productPrice{color:#eabf78;font-size:18px}
+#menuCards .btn.primary{width:100%;margin-top:10px}
+.cart-fab{position:fixed!important;right:22px!important;bottom:22px!important;left:auto!important;top:auto!important;z-index:500!important;border-radius:999px!important;background:linear-gradient(135deg,#0c8c43,#034a24)!important;border:2px solid #62d993!important;color:#fff!important;box-shadow:0 9px 35px #000b,0 0 22px #147c4777!important;animation:cartFloat 3s ease-in-out infinite}
+@keyframes cartFloat{50%{transform:translateY(-5px)}}
+.modal.show .dialog{animation:pickPop .42s cubic-bezier(.18,1.5,.36,1) both!important}
+@keyframes pickPop{from{opacity:0;transform:translateY(55px) scale(.75) rotateX(12deg);filter:blur(10px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@media(max-width:900px){#menuCards{grid-template-columns:repeat(2,minmax(0,1fr))!important}.hero{grid-template-columns:1fr!important}.pick-scene{height:330px}.hero h1{font-size:43px!important}}
+@media(max-width:550px){.nav{padding:9px 12px;gap:6px}.nav nav{gap:8px;flex-wrap:wrap}.nav nav a{font-size:11px}.nav>.btn{display:none}.brand img{width:95px!important}.hero{padding:24px 17px!important}.pick-scene{height:285px}.scene-sign{font-size:23px;left:5%}.scene-cup{left:27%;transform:scale(.8);transform-origin:bottom}.section{padding:30px 0}#menuCards{gap:9px!important}#menuCards .card h3{font-size:14px}.cart-fab{right:12px!important;bottom:12px!important}}
+@media(prefers-reduced-motion:reduce){.scene-cup,.cup-steam,.cart-fab{animation:none!important}}
 </style></head>
 <body>\n<div id="liveCafe" aria-hidden="true"><i class="smoke"></i><i class="smoke"></i><i class="smoke"></i><i class="lampGlow"></i></div>
 <div class="atmosphere"></div><div class="ambient-light"></div><div class="intro" id="intro"><div class="intro-logo-wrap"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201100%20320%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22r%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%238e310e%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233c1107%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23007b29%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23004d1a%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ctext%20x%3D%2212%22%20y%3D%22242%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22260%22%20letter-spacing%3D%22-18%22%20fill%3D%22url(%23r)%22%3EPICK%3C%2Ftext%3E%3Ctext%20x%3D%22510%22%20y%3D%22242%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22260%22%20fill%3D%22url(%23g)%22%3E%26amp%3B%3C%2Ftext%3E%3Ctext%20x%3D%22655%22%20y%3D%22242%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22260%22%20letter-spacing%3D%22-18%22%20fill%3D%22url(%23r)%22%3ECUT%3C%2Ftext%3E%3Cpath%20d%3D%22M750%20145h115v-23l73%2054-73%2054v-25H750z%22%20fill%3D%22url(%23g)%22%2F%3E%3C%2Fsvg%3E" alt="PICK & OUT"><div class="intro-line"></div><small>COFFEE · FOOD · GOOD MOOD</small></div></div>
 <header><div class="nav"><a class="brand" href="#home" aria-label="PICK & OUT"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201100%20320%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22r%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%238e310e%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233c1107%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23007b29%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23004d1a%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ctext%20x%3D%2212%22%20y%3D%22242%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22260%22%20letter-spacing%3D%22-18%22%20fill%3D%22url(%23r)%22%3EPICK%3C%2Ftext%3E%3Ctext%20x%3D%22510%22%20y%3D%22242%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22260%22%20fill%3D%22url(%23g)%22%3E%26amp%3B%3C%2Ftext%3E%3Ctext%20x%3D%22655%22%20y%3D%22242%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22260%22%20letter-spacing%3D%22-18%22%20fill%3D%22url(%23r)%22%3ECUT%3C%2Ftext%3E%3Cpath%20d%3D%22M750%20145h115v-23l73%2054-73%2054v-25H750z%22%20fill%3D%22url(%23g)%22%2F%3E%3C%2Fsvg%3E" alt="PICK & OUT"></a><nav><a href="#home">الرئيسية</a><a href="#features">التجربة</a><a href="#games">الألعاب</a><a href="#menu" >المنيو</a></nav><a class="btn primary" href="#menu">تصفح المنيو</a></div></header>
 <main id="home">
 <section class="hero">
-<div><div class="eyebrow">PICKOUT • EAT · DRINK · ENJOY</div><h1>قهوة ومزاج<br><em>على رواق.</em></h1><p>أهلاً بيك في Pickout. اختار اللي بتحبه، اطلب بسهولة، وخلي تجربتك ألطف من أول لحظة.</p><div class="actions"><a class="menu-cta" href="#menu" ><span class="menu-cta-icon">☕</span><span class="menu-cta-copy"><strong>تصفح المنيو</strong><small>اكتشف مشروبك ووجبتك المفضلة</small></span><span class="menu-cta-arrow">←</span></a></div></div>
+<div><div class="eyebrow">PICK & CUT • COFFEE · FOOD · GOOD MOOD</div><h1>أهلاً بيك في<br><em>PICK<span style="color:#23b957">&amp;</span>CUT</em></h1><p>مشروبات مميزة، حلويات لذيذة، وتجربة كافيه متكاملة. اطلب الآن واستلم من الكافيه بكل سهولة!</p><div class="actions"><a class="menu-cta" href="#menu" ><span class="menu-cta-icon">☕</span><span class="menu-cta-copy"><strong>تصفح المنيو</strong><small>اكتشف مشروبك ووجبتك المفضلة</small></span><span class="menu-cta-arrow">←</span></a><a class="btn" href="#features">اكتشف تجربتنا ◉</a></div></div>
 </section>
-<section class="section" id="features"><div class="section-head"><div><h2>تجربة Pickout</h2><p>كل حاجة بسيطة وواضحة، من غير دوشة.</p></div></div><div class="cards"><article class="card"><div class="ico">☕</div><h3>اختار طلبك</h3><p>تصفح المنيو وشوف الأصناف المتاحة قبل ما تطلب.</p></article><article class="card"><div class="ico">🔔</div><h3>تابع طلبك</h3><p>تصميم مهيأ لإضافة تحديثات الطلب والإشعارات المباشرة.</p></article><article class="card"><div class="ico">🪵</div><h3>مكانك المفضل</h3><p>ألوان دافئة وخشب وطوب ولمسات إضاءة صفراء هادية.</p></article></div></section>
+<div class="pick-scene" aria-hidden="true"><div class="scene-shelf shelf-a"></div><div class="scene-shelf shelf-b"></div><div class="scene-lamp lamp-a"></div><div class="scene-lamp lamp-b"></div><div class="scene-sign">PICK<span>&amp;</span>CUT</div><div class="scene-leaves">❧</div><div class="scene-counter"></div><div class="scene-cup"><i class="cup-steam steam-a"></i><i class="cup-steam steam-b"></i><i class="cup-steam steam-c"></i><div class="latte-art">❧</div><b>PICK<span>&amp;</span>CUT</b></div><div class="scene-beans">●　●　●</div></div><section class="section" id="features"><div class="section-head"><div><h2>تجربة Pickout</h2><p>كل حاجة بسيطة وواضحة، من غير دوشة.</p></div></div><div class="cards"><article class="card"><div class="ico">☕</div><h3>اختار طلبك</h3><p>تصفح المنيو وشوف الأصناف المتاحة قبل ما تطلب.</p></article><article class="card"><div class="ico">🔔</div><h3>تابع طلبك</h3><p>تصميم مهيأ لإضافة تحديثات الطلب والإشعارات المباشرة.</p></article><article class="card"><div class="ico">🪵</div><h3>مكانك المفضل</h3><p>ألوان دافئة وخشب وطوب ولمسات إضاءة صفراء هادية.</p></article></div></section>
 
 <section class="section" id="menu"><div class="section-head"><div><h2>منيو Pickout</h2><p>اختار مشروبك أو الحلو المفضل</p></div></div>
 <div class="filters" id="filters"></div><div class="cards" id="menuCards"></div></section>
