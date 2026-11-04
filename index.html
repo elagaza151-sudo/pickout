@@ -637,6 +637,19 @@ filter:drop-shadow(0 23px 15px #000a)!important;will-change:transform!important
 }
 @media(max-width:650px){#menuCards .card:hover .photo-stage img{transform:translate3d(0,-12px,0) rotate(-5deg) scale(1.38)!important}}
 @media(prefers-reduced-motion:reduce){#menuCards .card:hover .photo-stage img{transition:none!important}}
+</style><style id="pickout-polish-november">
+.nav .brand{display:flex!important;align-items:center!important;width:clamp(165px,21vw,260px)!important;min-width:145px!important;max-width:260px!important;overflow:visible!important;flex-shrink:0!important}
+.nav .brand img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:78px!important;object-fit:contain!important;object-position:center!important;transform:none!important}
+@media(max-width:700px){.nav .brand{width:145px!important;min-width:115px!important}.nav .brand img{max-height:54px!important}}
+#payerWheel{overflow:visible!important;will-change:transform}
+#payerWheel .wheel-labels{position:absolute;inset:0;z-index:3;pointer-events:none}
+#payerWheel .wheel-labels span{position:absolute;left:50%;top:50%;width:94px;max-width:94px;margin:0!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transform-origin:center center;font-size:clamp(9px,2.5vw,12px);line-height:20px;padding:1px 3px;border-radius:6px;background:#1b100b70;text-shadow:0 1px 3px #000}
+#payerWheel:after{z-index:5}
+#pickoutBackdrop .extra-vapor{position:absolute;bottom:17%;left:calc(14% + var(--i)*8%);width:45px;height:100px;z-index:2;pointer-events:none;opacity:0;background:radial-gradient(ellipse at center,#f4dfc64a,transparent 65%);filter:blur(13px);animation:poExtraVapor calc(6s + var(--i)*.4s) ease-out infinite;animation-delay:calc(var(--i)*-.7s)}
+@keyframes poExtraVapor{0%{transform:translate3d(0,20px,0) scale(.5);opacity:0}20%{opacity:.36}75%{opacity:.2}100%{transform:translate3d(32px,-180px,0) scale(2);opacity:0}}
+#pickoutSplash2026.po-exit{animation:poSplashExit .85s cubic-bezier(.7,0,.2,1) forwards!important}
+@keyframes poSplashExit{0%{opacity:1;transform:scale(1)}70%{opacity:1;transform:scale(1.08)}100%{opacity:0;transform:scale(1.2);visibility:hidden}}
+@media(prefers-reduced-motion:reduce){#pickoutBackdrop .extra-vapor{animation:none!important}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
@@ -876,7 +889,32 @@ function openModal(type){const c=document.getElementById('modalContent'),modal=d
 }
 const oldClose=window.closeModal;window.closeModal=function(){document.getElementById('modal').classList.remove('show');document.querySelector('#modal .dialog')?.classList.remove('wide')};
 function getNames(){return (document.getElementById('wheelNames')?.value||'').split(/[،,\n]/).map(x=>x.trim()).filter(Boolean)}
-function spinPayerWheel(){let names=getNames(),count=Number(document.getElementById('wheelCount').value);if(!names.length){document.getElementById('wheelResult').hidden=false;document.getElementById('wheelResult').textContent='اكتب اسم واحد على الأقل.';return}if(count>names.length){document.getElementById('wheelResult').hidden=false;document.getElementById('wheelResult').textContent='عدد الأشخاص أكبر من عدد الأسماء.';return}let wheel=document.getElementById('payerWheel');wheel.style.transform=`rotate(${1800+Math.random()*1800}deg)`;let chosen=[...names].sort(()=>Math.random()-.5).slice(0,count);setTimeout(()=>{let r=document.getElementById('wheelResult');r.hidden=false;r.innerHTML=document.getElementById('wheelMode').value==='equal'?`🎉 التقسيمة على: <b>${chosen.join(' و ')}</b>`:`😄 اللي عليهم الحساب: <b>${chosen.join(' و ')}</b>`},5500)}
+let payerWheelBusy=false,payerWheelAngle=0;
+function spinPayerWheel(){
+ const names=getNames(),count=Number(document.getElementById('wheelCount').value),wheel=document.getElementById('payerWheel'),result=document.getElementById('wheelResult');
+ if(payerWheelBusy)return;
+ if(!names.length){result.hidden=false;result.textContent='اكتب اسم واحد على الأقل.';return}
+ if(count>names.length||count<1){result.hidden=false;result.textContent='راجع عدد الأشخاص.';return}
+ payerWheelBusy=true;result.hidden=true;
+ const n=names.length,step=360/n;
+ wheel.style.background='conic-gradient('+names.map((_,i)=>['#175f41','#8c5735','#ad844d','#315b4b','#6c4939','#9b6c40'][i%6]+' '+(i*step)+'deg '+((i+1)*step)+'deg').join(',')+')';
+ wheel.innerHTML='<div class="wheel-labels">'+names.map((name,i)=>'<span style="transform:translate(-50%,-50%) rotate('+(i*step+step/2)+'deg) translateY(-98px) rotate('+(-(i*step+step/2))+'deg)">'+safeText(name)+'</span>').join('')+'</div>';
+ const winnerIndex=Math.floor(Math.random()*n);
+ const desired=(360-(winnerIndex+.5)*step)%360;
+ const current=((payerWheelAngle%360)+360)%360;
+ const extra=(desired-current+360)%360;
+ payerWheelAngle+=2160+extra;
+ wheel.style.transition='transform 6.4s cubic-bezier(.12,.76,.08,1)';
+ requestAnimationFrame(()=>{wheel.style.transform='rotate('+payerWheelAngle+'deg)'});
+ setTimeout(()=>{
+ const chosen=[names[winnerIndex]];
+ const remaining=names.filter((_,i)=>i!==winnerIndex).sort(()=>Math.random()-.5);
+ chosen.push(...remaining.slice(0,count-1));
+ result.hidden=false;
+ result.innerHTML=document.getElementById('wheelMode').value==='equal'?'🎉 التقسيمة على: <b>'+chosen.map(safeText).join(' و ')+'</b>':'😄 اللي عليهم الحساب: <b>'+chosen.map(safeText).join(' و ')+'</b>';
+ payerWheelBusy=false;
+ },6500);
+}
 function calculateSplit(){let total=Number(document.getElementById('billTotal').value),n=Math.floor(Number(document.getElementById('billPeople').value));let r=document.getElementById('splitResult');r.hidden=false;if(!(total>=0)||!(n>=1)||n>100){r.textContent='اكتب إجمالي صحيح وعدد أشخاص من 1 إلى 100.';return}let each=Math.floor(total*100/n)/100,rest=Math.round((total-each*n)*100)/100;r.innerHTML=`نصيب كل شخص: <b>${each.toFixed(2)} جنيه</b><br>عدد الأشخاص: ${n}<br>${rest?`الباقي بعد التقسيم: ${rest.toFixed(2)} جنيه`: 'الحساب متقسم بالتساوي تماماً.'}`}
 function aiAskQuestion(){let prompts=['تحب حاجة سخنة ولا ساقعة؟','عايز قهوة بطعم واضح ولا حاجة فاكهية ومنعشة؟','نفسك في مشروب بس ولا نضيف ديسرت معاه؟','تحب الطعم حلو وغني ولا خفيف؟'];let r=document.getElementById('aiResult');r.hidden=false;r.textContent='سؤال الباريستا ليك: '+prompts[Math.floor(Math.random()*prompts.length)]}
 async function aiRecommend(){
@@ -960,8 +998,9 @@ document.getElementById('menuCards').innerHTML=rows.map((p,i)=>'<article class="
 const backdrop=document.getElementById('pickoutBackdrop');
 if(backdrop){for(let i=0;i<16;i++){const d=document.createElement('i');d.className='cafe-spark';d.style.cssText='--x:'+(5+(i*37)%90)+'%;--y:'+(15+(i*19)%78)+'%;--sz:'+(2+i%3)+'px;--dur:'+(8+i%7)+'s;--delay:-'+(i*.8)+'s';backdrop.appendChild(d)}}
 const splash=document.getElementById('pickoutSplash2026');
+if(backdrop){for(let i=0;i<7;i++){const v=document.createElement('i');v.className='extra-vapor';v.style.setProperty('--i',i);backdrop.appendChild(v)}}
 function dismissSplash(){if(!splash)return;splash.classList.add('po-dismiss');setTimeout(()=>splash.remove(),750)}
-setTimeout(dismissSplash,3500);
+setTimeout(()=>{if(splash){splash.classList.add('po-exit');setTimeout(dismissSplash,850)}},3500);
 let closeTimer;
 const originalClose=window.closeModal;
 window.closeModal=function(){
