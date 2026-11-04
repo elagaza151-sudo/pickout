@@ -533,6 +533,15 @@ html,body{margin:0}
 @keyframes poSteam{0%{opacity:0;transform:translateY(8px) scale(.6)}30%{opacity:.7}100%{opacity:0;transform:translateY(-90px) scale(1.6)}}
 @keyframes poProgress{to{width:100%}}
 @media(prefers-reduced-motion:reduce){#pickoutSplash2026 .po-cup,#pickoutSplash2026 .po-steam{animation:none!important}}
+</style><style id="pickout-menu-3d-final">
+/* Final cascade override: earlier legacy !important rules were suppressing 3D */
+#menuCards .productArt{height:215px!important;overflow:visible!important;padding:10px!important;perspective:850px!important}
+#menuCards .photo-stage{overflow:visible!important;clip-path:none!important;perspective:850px!important;transform-style:preserve-3d!important;display:grid!important;place-items:center!important}
+#menuCards .photo-stage img{display:block!important;position:relative!important;width:86%!important;height:88%!important;max-width:225px!important;max-height:185px!important;object-fit:contain!important;object-position:center!important;border-radius:10px!important;transform-origin:center center!important;animation:pickout3DVisible 3.4s ease-in-out infinite!important;filter:drop-shadow(0 15px 10px rgba(0,0,0,.45))!important;will-change:transform!important;backface-visibility:visible!important}
+#menuCards .card:hover .photo-stage img{animation:pickout3DVisible 2s ease-in-out infinite!important;filter:drop-shadow(0 22px 15px rgba(0,0,0,.6))!important}
+@keyframes pickout3DVisible{0%,100%{transform:perspective(850px) rotateY(-12deg) rotateX(4deg) translateY(0) scale(.95)}50%{transform:perspective(850px) rotateY(12deg) rotateX(-4deg) translateY(-13px) scale(1.045)}}
+@media(max-width:650px){#menuCards .productArt{height:175px!important}#menuCards .photo-stage img{max-height:150px!important;max-width:175px!important}}
+@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .card:hover .photo-stage img{animation:none!important;transform:none!important}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
