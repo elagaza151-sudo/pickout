@@ -744,6 +744,41 @@ main .filter:not(.active){background:rgba(30,19,12,.48)!important;backdrop-filte
 main .section-head,main .section-head h2{background:transparent!important}
 main .card h3,main .card p,main .hero h1,main .hero p{text-shadow:0 2px 6px #0009}
 @media(max-width:700px){main .section .card,main #menuCards .card{background:rgba(30,20,14,.58)!important}main .hero{background:rgba(30,18,12,.55)!important}}
+</style><style id="po-old-money-atmosphere-v2">
+/* Aged brick: mottled terracotta, limewash patches, tiny pits and irregular mortar. */
+#pickoutBackdrop .backdrop-bricks{
+background-image:
+radial-gradient(ellipse 120px 58px at 17% 19%,#dca07c36,transparent 75%),
+radial-gradient(ellipse 180px 90px at 78% 65%,#1809064d,transparent 76%),
+radial-gradient(circle at 24% 32%,#16080566 0 1px,transparent 2px),
+radial-gradient(circle at 71% 68%,#efb78b48 0 1px,transparent 3px),
+repeating-linear-gradient(0deg,transparent 0 66px,#27120de8 67px 71px,#d4a1854a 72px 73px,transparent 74px 146px),
+repeating-linear-gradient(90deg,transparent 0 212px,#2b130fc9 213px 219px,#e7b08d38 220px 221px,transparent 222px 440px),
+repeating-linear-gradient(90deg,transparent 0 212px,#2b130fc9 213px 219px,#e7b08d38 220px 221px,transparent 222px 440px),
+linear-gradient(115deg,#b36b4c,#733523 32%,#a65b3d 56%,#4b241b 82%,#8e4934)!important;
+background-size:410px 270px,530px 340px,29px 31px,41px 37px,100% 146px,440px 292px,440px 292px,100% 100%!important;
+background-position:0 0,80px 25px,0 0,13px 17px,0 0,0 0,220px 73px,0 0!important;
+filter:saturate(.78) contrast(1.07)!important
+}
+#pickoutBackdrop .backdrop-bricks:after{opacity:.52!important;background-image:repeating-linear-gradient(112deg,transparent 0 5px,#190b0742 6px 7px,transparent 8px 19px),radial-gradient(circle at 31% 53%,#e9c2a55c 0 1px,transparent 2px),radial-gradient(ellipse at 65% 26%,#29100955,transparent 57%)!important;background-size:100% 100%,19px 23px,100% 100%!important}
+/* Antique walnut: fine pores, alternating grain and dark seams. */
+#pickoutBackdrop .backdrop-wood{
+background-image:
+repeating-radial-gradient(ellipse 170px 28px at 31% 50%,transparent 0 8px,#24110830 9px 10px,transparent 11px 17px),
+repeating-linear-gradient(1deg,transparent 0 76px,#160b07d9 77px 80px,#d4a16e50 81px 82px,transparent 83px 164px),
+repeating-linear-gradient(178deg,#2a150d 0px,#754426 4px,#9b6842 9px,#53301d 17px,#a27046 24px,#482518 35px,#875435 47px,#30180f 60px,#a17149 72px,#382017 82px)!important;
+background-size:440px 164px,100% 164px,100% 83px!important;
+filter:saturate(.77) contrast(1.1)!important
+}
+#pickoutBackdrop .backdrop-wood:after{opacity:.5!important;background-image:repeating-linear-gradient(179deg,transparent 0 3px,#1d0c063b 4px,transparent 5px 11px),radial-gradient(ellipse at 36% 46%,#1b0b0744,transparent 66%)!important;background-size:100% 100%,420px 164px!important}
+/* Old-money atmosphere: subdued sepia, soft window rays, floating dust. */
+#pickoutBackdrop .po-vintage-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 48% 38%,transparent 23%,#1d100c3d 70%,#1009079e 100%),linear-gradient(180deg,#c49a4920,transparent 34%,#1d120b35);mix-blend-mode:multiply}
+#pickoutBackdrop .po-window-ray{position:absolute;left:var(--ray-left);top:-15%;width:clamp(120px,19vw,350px);height:125%;z-index:2;pointer-events:none;transform:rotate(19deg);transform-origin:top;background:linear-gradient(90deg,transparent,#f8c97d0b 24%,#ffe4ad21 50%,#f8c97d0b 76%,transparent);filter:blur(23px);animation:poRayBreathe 11s ease-in-out infinite alternate;animation-delay:var(--ray-delay)}
+@keyframes poRayBreathe{from{opacity:.3;transform:rotate(18deg) translateX(-12px)}to{opacity:.85;transform:rotate(21deg) translateX(18px)}}
+#pickoutBackdrop .po-gold-dust{position:absolute;left:var(--dx);top:var(--dy);width:var(--ds);height:var(--ds);border-radius:50%;z-index:5;pointer-events:none;background:#f9d8a1;box-shadow:0 0 9px #efc47877;opacity:0;animation:poDustFloat var(--dt) linear infinite;animation-delay:var(--dd)}
+@keyframes poDustFloat{0%{opacity:0;transform:translate3d(0,18px,0)}25%{opacity:.4}70%{opacity:.3}100%{opacity:0;transform:translate3d(var(--ddrift),-55px,0)}}
+@media(max-width:700px){#pickoutBackdrop .po-window-ray:nth-of-type(2){display:none}#pickoutBackdrop .po-gold-dust:nth-of-type(3n){display:none}}
+@media(prefers-reduced-motion:reduce){#pickoutBackdrop .po-window-ray,#pickoutBackdrop .po-gold-dust{animation:none!important}#pickoutBackdrop .po-gold-dust{display:none}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
@@ -1198,5 +1233,12 @@ document.addEventListener('click',e=>{if(e.target.closest('[onclick*="openModal"
 const b=document.getElementById('pickoutBackdrop');if(!b||b.querySelector('.po-amber-lamp'))return;
 ['po-lamp-cone','po-lamp-halo','po-amber-lamp'].forEach(c=>{const e=document.createElement('div');e.className=c;b.appendChild(e)});
 for(let i=0;i<5;i++){const e=document.createElement('i');e.className='po-cafe-mist';e.style.setProperty('--left',[4,13,28,68,85][i]+'%');e.style.setProperty('--bottom',[12,18,8,14,22][i]+'%');e.style.setProperty('--duration',(9+i*1.7)+'s');e.style.setProperty('--delay',(-i*2.6)+'s');e.style.setProperty('--drift',(i%2?65:-55)+'px');b.appendChild(e)}
+})();
+</script><script id="po-old-money-atmosphere-runtime">
+(function(){
+const b=document.getElementById('pickoutBackdrop');if(!b||b.querySelector('.po-vintage-vignette'))return;
+const vignette=document.createElement('div');vignette.className='po-vintage-vignette';b.appendChild(vignette);
+[18,73].forEach((x,i)=>{const el=document.createElement('div');el.className='po-window-ray';el.style.setProperty('--ray-left',x+'%');el.style.setProperty('--ray-delay',(-i*4)+'s');b.appendChild(el)});
+for(let i=0;i<18;i++){const e=document.createElement('i');e.className='po-gold-dust';e.style.setProperty('--dx',((i*37+13)%97)+'%');e.style.setProperty('--dy',((i*29+9)%92)+'%');e.style.setProperty('--ds',(1+i%3)+'px');e.style.setProperty('--dt',(9+i%6*1.8)+'s');e.style.setProperty('--dd',(-i*.9)+'s');e.style.setProperty('--ddrift',((i%2?1:-1)*(14+i%5*8))+'px');b.appendChild(e)}
 })();
 </script></body></html>
