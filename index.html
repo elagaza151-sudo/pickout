@@ -797,6 +797,33 @@ filter:saturate(.72) contrast(1.13) sepia(.16)!important;
 @keyframes poAromaFlow{0%{opacity:0;transform:translate3d(0,30px,0) rotate(-15deg) scale(.65)}24%{opacity:.45}70%{opacity:.2}100%{opacity:0;transform:translate3d(var(--adrift),-190px,0) rotate(25deg) scale(1.65)}}
 @media(max-width:700px){#pickoutBackdrop .po-shadow-fan{display:none}#pickoutBackdrop .backdrop-bricks{background-size:100% 100%,auto 340px!important}}
 @media(prefers-reduced-motion:reduce){#pickoutBackdrop .po-shadow-fan,#pickoutBackdrop .po-soft-glow,#pickoutBackdrop .po-aroma{animation:none!important}#pickoutBackdrop .po-aroma{display:none}}
+</style><style id="po-red-brick-dark-real-wood-v4">
+/* Stronger vintage red brick without washing out mortar or photographic detail. */
+#pickoutBackdrop .backdrop-bricks{
+background-color:#872e23!important;
+background-image:linear-gradient(115deg,rgba(142,24,15,.34),rgba(116,20,15,.19) 42%,rgba(40,7,6,.46)),url("https://commons.wikimedia.org/wiki/Special:FilePath/Red_brick_texture_wall.jpg?width=1024")!important;
+background-blend-mode:multiply,normal!important;
+filter:saturate(1.24) contrast(1.13) sepia(.05)!important
+}
+/* Deep stained walnut with photographic grain overlay and CSS grain fallback. */
+#pickoutBackdrop .backdrop-wood{
+background-color:#29160f!important;
+background-image:
+linear-gradient(180deg,rgba(13,7,5,.72),rgba(36,18,10,.59) 43%,rgba(12,7,5,.78)),
+url("https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=1400&q=85"),
+repeating-linear-gradient(178deg,#20110c 0px,#4e2c1b 5px,#2a160f 12px,#603c25 17px,#25120c 23px,#4d2d1c 32px,#1c0f0a 40px,#53321f 53px,#21120d 68px,#402519 83px)!important;
+background-size:100% 100%,cover,100% 83px!important;
+background-position:center,center,center!important;
+background-repeat:no-repeat,no-repeat,repeat!important;
+background-blend-mode:normal,multiply,normal!important;
+filter:saturate(.7) contrast(1.23)!important;
+box-shadow:inset 0 25px 45px #080403b8,inset 0 -90px 110px #090504c9!important
+}
+#pickoutBackdrop .backdrop-wood:after{
+content:"";position:absolute;inset:0;opacity:.48!important;pointer-events:none;
+background-image:repeating-linear-gradient(0deg,transparent 0 78px,#0b0705c9 79px 81px,#9c65401f 82px 83px,transparent 84px 164px),repeating-linear-gradient(179deg,transparent 0 2px,#0e070531 3px,transparent 4px 9px)!important;
+background-size:100% 164px,100% 100%!important
+}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
