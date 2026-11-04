@@ -939,4 +939,26 @@ closeTimer=setTimeout(()=>{modal.classList.remove('show','pick-closing');modal.q
 };
 document.addEventListener('click',e=>{if(e.target.closest('[onclick*="openModal"]')){clearTimeout(closeTimer);document.getElementById('modal')?.classList.remove('pick-closing')}},true)
 })();
+</script><script id="pickout-menu-motion-engine">
+/* Animate real rendered product images, including products drawn asynchronously from Supabase. */
+(function(){
+const menu=document.getElementById('menuCards');if(!menu)return;
+const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const running=new WeakMap();
+function start(){
+menu.querySelectorAll('.photo-stage img').forEach((img,i)=>{
+if(running.has(img))return;
+if(reduce)return;
+const motion=img.animate([
+{transform:'translate3d(-14px,15px,0) rotate(-17deg) scale(.72)',filter:'drop-shadow(8px 12px 6px #0009)',offset:0},
+{transform:'translate3d(3px,-15px,0) rotate(11deg) scale(1.18)',filter:'drop-shadow(-8px 22px 12px #000b)',offset:.32},
+{transform:'translate3d(0,-28px,0) rotate(22deg) scale(1.65)',filter:'drop-shadow(-15px 28px 16px #000c)',offset:.55},
+{transform:'translate3d(12px,-6px,0) rotate(-11deg) scale(1.12)',filter:'drop-shadow(10px 20px 11px #000b)',offset:.77},
+{transform:'translate3d(-14px,15px,0) rotate(-17deg) scale(.72)',filter:'drop-shadow(8px 12px 6px #0009)',offset:1}
+],{duration:3300,iterations:Infinity,easing:'ease-in-out',delay:-(i%9)*230});
+running.set(img,motion);
+});
+}
+const obs=new MutationObserver(start);obs.observe(menu,{childList:true,subtree:true});start();
+})();
 </script></body></html>
