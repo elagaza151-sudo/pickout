@@ -1341,7 +1341,7 @@ function startDrinkSpin(){
  setTimeout(()=>{
   result.hidden=false;
   const image=winner.image_url||photoForProduct(winner);
-  result.innerHTML=(image?'<img src="'+safeText(image)+'" alt="">':'')+'<b>🎉 اختيارنا ليك: '+safeText(winner.name_ar||winner.name)+'</b><br><strong>'+egp(winner.base_price)+'</strong><br><small>اختيار عشوائي من المنيو.</small><br><button class="btn" style="margin-top:12px" onclick="addToCart(\''+winner.id+'\');closeModal()">ضيفه للسلة</button>';
+  result.innerHTML=(image?'<img src="'+safeText(image)+'" alt="">':'')+'<b>🎉 اختيارنا ليك: '+safeText(winner.name_ar||winner.name)+'</b><br><strong>'+egp(winner.base_price)+'</strong><br><small>اختيار عشوائي من المنيو.</small><br><button class="btn" style="margin-top:12px" onclick="poCartVisual(this);addToCart(\''+winner.id+'\');closeModal()">ضيفه للسلة</button>';
   btn.disabled=false;drinkSpinBusy=false;
  },8350);
 }
@@ -1371,7 +1371,7 @@ return '<div class="photo-stage"><img loading="lazy" src="'+safeText(real||photo
 window.drawLiveMenu=function(category){
 const rows=category==='الكل'?liveProducts:liveProducts.filter(p=>{const c=liveCategories.find(x=>x.id===p.category_id);return(c?.name_ar||c?.name)===category});
 document.querySelectorAll('#filters .filter').forEach(b=>b.classList.toggle('active',b.textContent===category));
-document.getElementById('menuCards').innerHTML=rows.map((p,i)=>'<article class="card" style="--card-index:'+(i%12)+'"><div class="productArt">'+pickoutProductVisual(p)+'</div><h3>'+safeText(p.name_ar||p.name)+'</h3><p>'+safeText(p.description||'')+'</p><div class="productPrice">'+egp(p.base_price)+'</div><button class="btn primary" onclick="addToCart(\''+p.id+'\')">أضف للسلة</button></article>').join('');
+document.getElementById('menuCards').innerHTML=rows.map((p,i)=>'<article class="card" style="--card-index:'+(i%12)+'"><div class="productArt">'+pickoutProductVisual(p)+'</div><h3>'+safeText(p.name_ar||p.name)+'</h3><p>'+safeText(p.description||'')+'</p><div class="productPrice">'+egp(p.base_price)+'</div><button class="btn primary" onclick="poCartVisual(this);addToCart(\''+p.id+'\')">أضف للسلة</button></article>').join('');
 };
 </script>
 
