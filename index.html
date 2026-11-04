@@ -572,6 +572,23 @@ html,body{margin:0}
 @keyframes pickoutCinematicZoom{0%,100%{transform:perspective(1000px) translate3d(0,10px,0) rotateY(-9deg) rotateZ(-3deg) scale(.76);filter:drop-shadow(7px 13px 7px #000a)}42%{transform:perspective(1000px) translate3d(0,-13px,65px) rotateY(7deg) rotateZ(2deg) scale(1.2);filter:drop-shadow(-10px 24px 14px #000b)}66%{transform:perspective(1000px) translate3d(0,-19px,80px) rotateY(12deg) rotateZ(3deg) scale(1.29);filter:drop-shadow(-14px 30px 16px #000c)}}
 @keyframes pickoutAuraSpin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .productArt:before{animation:none!important}}
+</style><style id="pickout-zoom-roll-showcase">
+/* High-energy zoom + rolling showcase for actual live menu cards */
+#menuCards .productArt{overflow:hidden!important;perspective:1100px!important;isolation:isolate!important}
+#menuCards .photo-stage{overflow:visible!important;clip-path:none!important;transform-style:preserve-3d!important}
+#menuCards .photo-stage img{position:relative!important;z-index:2!important;width:83%!important;height:82%!important;max-width:225px!important;max-height:175px!important;object-fit:contain!important;transform-origin:center center!important;animation:pickoutHeroZoomRoll 4.5s cubic-bezier(.45,0,.3,1) infinite!important;animation-delay:calc(var(--card-index,0) * -.31s)!important;will-change:transform,filter!important;filter:drop-shadow(0 15px 13px #000a)!important}
+#menuCards .card:hover .photo-stage img{animation:pickoutHeroZoomRoll 3s cubic-bezier(.45,0,.3,1) infinite!important;animation-delay:0s!important}
+#menuCards .productArt:before{animation:pickoutAuraSpin 5s linear infinite!important}
+#menuCards .photo-stage:after{animation:pickoutGroundShadow 4.5s ease-in-out infinite!important}
+@keyframes pickoutHeroZoomRoll{
+0%,100%{transform:perspective(1100px) translate3d(-9px,14px,0) rotateZ(-12deg) rotateY(-19deg) rotateX(6deg) scale(.62);filter:drop-shadow(12px 12px 6px #0009)}
+22%{transform:perspective(1100px) translate3d(3px,-12px,55px) rotateZ(6deg) rotateY(7deg) rotateX(-5deg) scale(1.02);filter:drop-shadow(-5px 22px 11px #000a)}
+46%{transform:perspective(1100px) translate3d(0,-18px,90px) rotateZ(13deg) rotateY(20deg) rotateX(7deg) scale(1.42);filter:drop-shadow(-18px 26px 14px #000b)}
+64%{transform:perspective(1100px) translate3d(8px,-9px,65px) rotateZ(-7deg) rotateY(-10deg) rotateX(-5deg) scale(1.16);filter:drop-shadow(9px 21px 10px #000a)}
+83%{transform:perspective(1100px) translate3d(-4px,5px,15px) rotateZ(-15deg) rotateY(-18deg) rotateX(5deg) scale(.8);filter:drop-shadow(12px 13px 7px #0009)}
+}
+@media(max-width:650px){#menuCards .photo-stage img{max-width:170px!important;max-height:145px!important}}
+@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .card:hover .photo-stage img,#menuCards .productArt:before,#menuCards .photo-stage:after{animation:none!important;transform:none!important}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
