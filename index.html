@@ -664,6 +664,19 @@ header .nav>a.brand>img{width:100%!important;height:100%!important;max-height:no
 #modal.pick-closing .dialog{animation:poDialogExit .36s cubic-bezier(.5,0,.8,.3) forwards!important}
 @keyframes poModalExit{to{opacity:0;visibility:hidden}}
 @keyframes poDialogExit{to{opacity:0;transform:translateY(80px) scale(.72) rotateX(-12deg);filter:blur(8px)}}
+</style><style id="po-logo-modal-final">
+header .nav>a.brand{box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;flex:0 0 clamp(170px,22vw,275px)!important;width:clamp(170px,22vw,275px)!important;min-width:0!important;max-width:none!important;height:78px!important;overflow:visible!important;padding:0!important;margin:0!important;line-height:1!important}
+header .nav>a.brand::before,header .nav>a.brand::after{display:none!important;content:none!important}
+header .nav>a.brand>img{display:block!important;width:100%!important;height:74px!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:left center!important;filter:drop-shadow(0 3px 5px #0005)!important}
+@media(max-width:700px){header .nav>a.brand{flex-basis:145px!important;width:145px!important;height:56px!important}header .nav>a.brand>img{height:52px!important}}
+#modal.modal{perspective:900px}
+#modal.modal.show:not(.pick-closing) .dialog{animation:poActualPopIn .42s cubic-bezier(.16,1.15,.32,1) both!important}
+#modal.modal.show.pick-closing .dialog{animation:poActualPopOut .34s cubic-bezier(.55,0,.85,.4) both!important}
+#modal.modal.show.pick-closing{animation:poActualFadeOut .34s ease both!important;pointer-events:none!important}
+@keyframes poActualPopIn{0%{opacity:0;transform:translate3d(0,75px,0) scale(.64) rotateX(14deg);filter:blur(7px)}75%{opacity:1;transform:translate3d(0,-6px,0) scale(1.035);filter:none}100%{opacity:1;transform:translate3d(0,0,0) scale(1);filter:none}}
+@keyframes poActualPopOut{0%{opacity:1;transform:translate3d(0,0,0) scale(1);filter:none}100%{opacity:0;transform:translate3d(0,65px,0) scale(.7) rotateX(-12deg);filter:blur(6px)}}
+@keyframes poActualFadeOut{from{opacity:1}to{opacity:0}}
+@media(prefers-reduced-motion:reduce){#modal.modal.show .dialog,#modal.modal.show.pick-closing{animation-duration:.01ms!important}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
@@ -1079,5 +1092,26 @@ apply();reset();
   modal.addEventListener('click',e=>{if(e.target.id==='startDrinkSpin'||e.target.closest('[onclick*="spinPayerWheel"]')){const r=modal.querySelector('#wheelResult,#drinkSpinResult');if(r)r.hidden=true}});
  }
  window.addEventListener('pagehide',()=>{const splash=document.getElementById('pickoutSplash2026');if(splash)splash.classList.add('po-exit')});
+})();
+</script><script id="po-modal-verified-controller">
+(function(){
+const modal=document.getElementById('modal');if(!modal)return;
+let closing=false,closeTimeout=null;
+function finish(){modal.classList.remove('show','pick-closing');modal.querySelector('.dialog')?.classList.remove('wide');closing=false;closeTimeout=null}
+window.closeModal=function(){
+ if(closing||!modal.classList.contains('show'))return;
+ closing=true;modal.classList.add('pick-closing');
+ clearTimeout(closeTimeout);closeTimeout=setTimeout(finish,350);
+};
+const observer=new MutationObserver(()=>{
+ if(modal.classList.contains('show')&&closing){
+ clearTimeout(closeTimeout);closing=false;modal.classList.remove('pick-closing');
+ }
+});
+observer.observe(modal,{attributes:true,attributeFilter:['class']});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('show'))window.closeModal()});
+document.addEventListener('click',e=>{
+ if(e.target.closest('[onclick*="openModal"]')&&closing){clearTimeout(closeTimeout);closing=false;modal.classList.remove('pick-closing')}
+},true);
 })();
 </script></body></html>
