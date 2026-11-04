@@ -179,6 +179,18 @@ transform:translateX(-100%);animation:introSweep 1.5s .35s ease forwards}
 @media(max-width:650px){.brand img{width:160px;max-height:48px}.brand{height:50px}.menu-cta{min-width:0;width:100%;max-width:370px}.menu-cta-copy strong{font-size:16px}#liveCafe .steam-ribbon{height:46vh}}
 @media(prefers-reduced-motion:reduce){#liveCafe *,#liveCafe:before,#liveCafe:after,.menu-cta:before{animation:none!important}}
 
+
+/* PICKOUT product photography: consistent responsive sizing and subtle 3D movement */
+#menuCards{align-items:stretch}
+#menuCards .card{min-width:0;overflow:hidden;transform-style:preserve-3d}
+#menuCards .productArt{height:220px!important;width:100%;padding:14px;display:grid;place-items:center;overflow:hidden!important;border-radius:16px;background:radial-gradient(ellipse at 50% 65%,rgba(173,113,64,.35),rgba(29,17,11,.45) 74%)!important;perspective:900px}
+#menuCards .photo-stage{height:100%;width:100%;min-width:0;position:relative;display:flex;align-items:center;justify-content:center;perspective:900px;transform-style:preserve-3d}
+#menuCards .photo-stage:after{bottom:2px;left:24%;right:24%;height:12px;opacity:.5}
+#menuCards .photo-stage img{display:block;width:100%;height:100%;max-width:230px;max-height:190px;object-fit:contain;object-position:center;border-radius:0;box-shadow:none;filter:drop-shadow(0 14px 11px rgba(0,0,0,.45));will-change:transform;animation:pickoutProductFloat 5s ease-in-out infinite;animation-delay:calc(var(--card-index,0) * -.29s);backface-visibility:hidden}
+#menuCards .card:hover .photo-stage img{animation-play-state:paused;transform:perspective(850px) rotateY(12deg) rotateX(5deg) translateY(-9px) scale(1.075);filter:drop-shadow(0 21px 15px rgba(0,0,0,.55))}
+@keyframes pickoutProductFloat{0%,100%{transform:perspective(850px) rotateY(-7deg) rotateX(2deg) translateY(0) scale(.98)}50%{transform:perspective(850px) rotateY(7deg) rotateX(-2deg) translateY(-8px) scale(1.02)}}
+@media(max-width:650px){#menuCards .productArt{height:175px!important;padding:9px}#menuCards .photo-stage img{max-width:180px;max-height:155px}}
+@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img{animation:none!important;transform:none!important;will-change:auto}#menuCards .card:hover .photo-stage img{transform:none}}
 </style>
 <style id="pickout-enhancements">
 /* Warm moving red-brick wall over natural wood */
