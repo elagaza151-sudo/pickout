@@ -554,6 +554,15 @@ html,body{margin:0}
 @keyframes pickoutGroundShadow{0%,100%{transform:scale(.9) translateX(7px);opacity:.65}50%{transform:scale(1.3) translateX(-8px);opacity:.35}}
 @keyframes pickoutLightShift{0%,100%{transform:translateX(-15px);opacity:.6}50%{transform:translateX(15px);opacity:1}}
 @media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .photo-stage:before,#menuCards .photo-stage:after{animation:none!important}}
+</style><style id="pickout-product-zoom-motion">
+/* Final product animation: noticeable zoom pulse + depth, with alternating timings */
+#menuCards .productArt{overflow:hidden!important;perspective:1000px!important}
+#menuCards .photo-stage{overflow:visible!important;clip-path:none!important}
+#menuCards .photo-stage img{width:88%!important;height:90%!important;max-width:240px!important;max-height:195px!important;object-fit:contain!important;transform-origin:50% 50%!important;animation:pickoutZoomOrbit 3.6s ease-in-out infinite!important;animation-delay:calc(var(--card-index,0) * -.35s)!important;will-change:transform!important;transition:filter .3s!important}
+#menuCards .card:hover .photo-stage img{animation:pickoutZoomOrbit 2.2s ease-in-out infinite!important;animation-delay:0s!important}
+@keyframes pickoutZoomOrbit{0%,100%{transform:perspective(950px) translate3d(-5px,4px,0) rotateY(-10deg) rotateZ(-2deg) scale(.83)}35%{transform:perspective(950px) translate3d(3px,-13px,35px) rotateY(5deg) rotateZ(1deg) scale(1.09)}65%{transform:perspective(950px) translate3d(7px,-17px,45px) rotateY(12deg) rotateZ(2deg) scale(1.18)}}
+@media(max-width:650px){#menuCards .photo-stage img{max-width:190px!important;max-height:160px!important}}
+@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .card:hover .photo-stage img{animation:none!important;transform:none!important}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
