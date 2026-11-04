@@ -516,7 +516,7 @@ html,body{margin:0}
 #pickoutSplash2026 .po-s1{left:24%}#pickoutSplash2026 .po-s2{left:48%;animation-delay:1.1s}#pickoutSplash2026 .po-s3{left:70%;animation-delay:2.2s}
 #pickoutSplash2026 .po-content p{font:700 clamp(16px,2.5vw,25px) Cairo,Arial,sans-serif;margin:0;color:#f5dfc1}
 #pickoutSplash2026 .po-progress{width:min(70vw,440px);height:10px;background:#210e09;border:1px solid #b7834b;border-radius:50px;overflow:hidden}
-#pickoutSplash2026 .po-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#107a3d,#4dea83);animation:poProgress 5.7s linear forwards}
+#pickoutSplash2026 .po-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#107a3d,#4dea83);animation:poProgress 3.2s linear forwards}
 @keyframes poFloat{50%{transform:translateY(-10px) rotateY(8deg)}}
 @keyframes poSteam{0%{opacity:0;transform:translateY(8px) scale(.6)}30%{opacity:.7}100%{opacity:0;transform:translateY(-90px) scale(1.6)}}
 @keyframes poProgress{to{width:100%}}
@@ -845,7 +845,7 @@ const backdrop=document.getElementById('pickoutBackdrop');
 if(backdrop){for(let i=0;i<16;i++){const d=document.createElement('i');d.className='cafe-spark';d.style.cssText='--x:'+(5+(i*37)%90)+'%;--y:'+(15+(i*19)%78)+'%;--sz:'+(2+i%3)+'px;--dur:'+(8+i%7)+'s;--delay:-'+(i*.8)+'s';backdrop.appendChild(d)}}
 const splash=document.getElementById('pickoutSplash2026');
 function dismissSplash(){if(!splash)return;splash.classList.add('po-dismiss');setTimeout(()=>splash.remove(),750)}
-setTimeout(dismissSplash,6000);
+setTimeout(dismissSplash,3500);
 let closeTimer;
 const originalClose=window.closeModal;
 window.closeModal=function(){
