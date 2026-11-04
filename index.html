@@ -180,14 +180,32 @@ transform:translateX(-100%);animation:introSweep 1.5s .35s ease forwards}
 @media(prefers-reduced-motion:reduce){#liveCafe *,#liveCafe:before,#liveCafe:after,.menu-cta:before{animation:none!important}}
 
 </style>
-</head>
+<style id="pickout-enhancements">
+/* Warm moving red-brick wall over natural wood */
+body:before{background:linear-gradient(90deg,rgba(32,17,11,.22),rgba(77,31,18,.1)),repeating-linear-gradient(0deg,transparent 0 57px,rgba(21,9,5,.56) 58px 62px),repeating-linear-gradient(90deg,rgba(116,39,22,.58) 0 146px,rgba(61,25,16,.65) 147px 152px)!important;background-size:100% 100%,100% 124px,304px 124px!important;animation:brickDrift 38s linear infinite;opacity:.7!important}
+body:after{background:radial-gradient(ellipse at 20% 15%,rgba(250,161,78,.16),transparent 48%),radial-gradient(ellipse at 82% 72%,rgba(142,50,24,.26),transparent 48%)!important;animation:ambientShift 13s ease-in-out infinite alternate}
+@keyframes brickDrift{to{background-position:0 0,0 124px,304px 0}}
+@keyframes ambientShift{to{transform:translate3d(-2%,3%,0) scale(1.08);opacity:.65}}
+.hero{grid-template-columns:1fr!important;max-width:880px;margin-inline:auto;text-align:center}
+.hero .actions{justify-content:center}
+.hero .eyebrow{letter-spacing:3px}
+.modal{align-items:center!important;justify-items:center!important;overflow-y:auto;backdrop-filter:blur(9px);animation:overlayEnter .25s ease both}
+.modal.show .dialog{animation:modalPop .5s cubic-bezier(.16,1,.3,1) both;max-height:min(84vh,820px);overflow:auto;overscroll-behavior:contain}
+@keyframes overlayEnter{from{opacity:0}to{opacity:1}}
+@keyframes modalPop{from{opacity:0;transform:translateY(65px) scale(.83);filter:blur(10px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+#menuCards .card{opacity:0;animation:menuCardReveal .65s cubic-bezier(.2,.9,.2,1) both;animation-delay:calc(var(--card-index,0) * 65ms);transform-origin:center bottom;overflow:hidden}
+#menuCards .card:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 18px 38px #0008}
+#menuCards .menu-photo{width:100%;height:100%;object-fit:cover;transition:transform .65s ease,filter .65s ease}
+#menuCards .card:hover .menu-photo{transform:scale(1.1) rotate(1deg);filter:saturate(1.13)}
+@keyframes menuCardReveal{from{opacity:0;transform:translateY(40px) scale(.93);filter:blur(6px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@media(prefers-reduced-motion:reduce){body:before,body:after,#menuCards .card,.modal.show .dialog{animation:none!important;opacity:1!important}}
+</style></head>
 <body>\n<div id="liveCafe" aria-hidden="true"><i class="smoke"></i><i class="smoke"></i><i class="smoke"></i><i class="lampGlow"></i></div>
 <div class="atmosphere"></div><div class="ambient-light"></div><div class="intro" id="intro"><div class="intro-logo-wrap"><img src="pickout_wordmark.png" alt="PICK & OUT"><div class="intro-line"></div><small>COFFEE · FOOD · GOOD MOOD</small></div></div>
 <header><div class="nav"><a class="brand" href="#home" aria-label="PICK & OUT"><img src="pickout_wordmark.png" alt="PICK & OUT"></a><nav><a href="#home">الرئيسية</a><a href="#features">التجربة</a><a href="#games">الألعاب</a><a href="#menu" target="_blank">المنيو</a></nav><a class="btn primary" href="#menu">تصفح المنيو</a></div></header>
 <main id="home">
 <section class="hero">
 <div><div class="eyebrow">PICKOUT • EAT · DRINK · ENJOY</div><h1>قهوة ومزاج<br><em>على رواق.</em></h1><p>أهلاً بيك في Pickout. اختار اللي بتحبه، اطلب بسهولة، وخلي تجربتك ألطف من أول لحظة.</p><div class="actions"><a class="menu-cta" href="#menu" ><span class="menu-cta-icon">☕</span><span class="menu-cta-copy"><strong>تصفح المنيو</strong><small>اكتشف مشروبك ووجبتك المفضلة</small></span><span class="menu-cta-arrow">←</span></a></div></div>
-<div class="coffee-scene"><div class="lamp"></div><span class="bean b1">✦</span><span class="bean b2">✦</span><span class="bean b3">✦</span><div class="steam"></div><div class="steam s2"></div><div class="steam s3"></div><div class="cup"><div class="coffee"></div><b>Pickout</b></div></div>
 </section>
 <section class="section" id="features"><div class="section-head"><div><h2>تجربة Pickout</h2><p>كل حاجة بسيطة وواضحة، من غير دوشة.</p></div></div><div class="cards"><article class="card"><div class="ico">☕</div><h3>اختار طلبك</h3><p>تصفح المنيو وشوف الأصناف المتاحة قبل ما تطلب.</p></article><article class="card"><div class="ico">🔔</div><h3>تابع طلبك</h3><p>تصميم مهيأ لإضافة تحديثات الطلب والإشعارات المباشرة.</p></article><article class="card"><div class="ico">🪵</div><h3>مكانك المفضل</h3><p>ألوان دافئة وخشب وطوب ولمسات إضاءة صفراء هادية.</p></article></div></section>
 
@@ -211,7 +229,7 @@ function drawPickoutMenu(){
  const cats=['الكل',...new Set(pickoutMenu.map(x=>x[0]))];
  document.getElementById('filters').innerHTML=cats.map(c=>`<button class="filter ${c===currentMenuCategory?'active':''}" onclick="currentMenuCategory='${c}';drawPickoutMenu()">${c}</button>`).join('');
  const items=currentMenuCategory==='الكل'?pickoutMenu:pickoutMenu.filter(x=>x[0]===currentMenuCategory);
- document.getElementById('menuCards').innerHTML=items.map((x,i)=>`<article class="card"><div class="productArt"><div class="productCup"></div></div><h3>${x[1]}</h3><p>${x[0]}</p><div class="productPrice">${x[2]} جنيه</div></article>`).join('');
+ document.getElementById('menuCards').innerHTML=items.map((x,i)=>`<article class="card" style="--card-index:${rows.indexOf(p)%12}"><div class="productArt"><div class="productCup"></div></div><h3>${x[1]}</h3><p>${x[0]}</p><div class="productPrice">${x[2]} جنيه</div></article>`).join('');
 }
 drawPickoutMenu();
 
@@ -258,7 +276,7 @@ async function loadPickoutBackend(){
 function drawLiveMenu(category){
  document.querySelectorAll('#filters .filter').forEach(b=>b.classList.toggle('active',b.textContent===category));
  const rows=category==='الكل'?liveProducts:liveProducts.filter(p=>{const c=liveCategories.find(x=>x.id===p.category_id);return (c?.name_ar||c?.name)===category});
- document.getElementById('menuCards').innerHTML=rows.map(p=>`<article class="card"><div class="productArt">${p.image_url?`<img src="${safeText(p.image_url)}" alt="" style="max-width:100%;max-height:120px;object-fit:contain">`:'<div class="productCup"></div>'}</div><h3>${safeText(p.name_ar||p.name)}</h3><p>${safeText(p.description||'')}</p><div class="productPrice">${egp(p.base_price)}</div><button class="btn primary" onclick="addToCart('${p.id}')">أضف للسلة</button></article>`).join('');
+ document.getElementById('menuCards').innerHTML=rows.map(p=>`<article class="card" style="--card-index:${rows.indexOf(p)%12}"><div class="productArt">${p.image_url?`<img src="${safeText(p.image_url)}" alt="" style="max-width:100%;max-height:120px;object-fit:contain">`:'<div class="productCup"></div>'}</div><h3>${safeText(p.name_ar||p.name)}</h3><p>${safeText(p.description||'')}</p><div class="productPrice">${egp(p.base_price)}</div><button class="btn primary" onclick="addToCart('${p.id}')">أضف للسلة</button></article>`).join('');
 }
 async function addToCart(id){
  const product=liveProducts.find(x=>x.id===id);if(!product)return;
@@ -475,7 +493,7 @@ function photoForProduct(p){
  if(/green tea|شاي اخضر|شاي أخضر/.test(n)) return 'https://pickout.fodoapps.net/CompaniesUploads/Company-230182/Uploads/Items/545cc931-be97-481d-8773-af055cc2f294WhatsApp%20Image%202025-03-20%20at%201.31.56%20PM%20%283%29.jpeg';
  return '';
 }
-const _drawLiveMenu=window.drawLiveMenu;window.drawLiveMenu=function(category){const rows=category==='الكل'?liveProducts:liveProducts.filter(p=>{const c=liveCategories.find(x=>x.id===p.category_id);return (c?.name_ar||c?.name)===category});document.querySelectorAll('#filters .filter').forEach(b=>b.classList.toggle('active',b.textContent===category));document.getElementById('menuCards').innerHTML=rows.map(p=>`<article class="card"><div class="productArt">${(p.image_url||photoForProduct(p))?`<img class="menu-photo" loading="lazy" src="${safeText(p.image_url||photoForProduct(p))}" alt="${safeText(p.name_ar||p.name)}">`:'<div class="product-placeholder">☕<small>صورة الصنف قريباً</small></div>'}</div><h3>${safeText(p.name_ar||p.name)}</h3><p>${safeText(p.description||'')}</p><div class="productPrice">${egp(p.base_price)}</div><button class="btn primary" onclick="addToCart('${p.id}')">أضف للسلة</button></article>`).join('')};
+const _drawLiveMenu=window.drawLiveMenu;window.drawLiveMenu=function(category){const rows=category==='الكل'?liveProducts:liveProducts.filter(p=>{const c=liveCategories.find(x=>x.id===p.category_id);return (c?.name_ar||c?.name)===category});document.querySelectorAll('#filters .filter').forEach(b=>b.classList.toggle('active',b.textContent===category));document.getElementById('menuCards').innerHTML=rows.map(p=>`<article class="card" style="--card-index:${rows.indexOf(p)%12}"><div class="productArt">${(p.image_url||photoForProduct(p))?`<img class="menu-photo" loading="lazy" src="${safeText(p.image_url||photoForProduct(p))}" alt="${safeText(p.name_ar||p.name)}">`:'<div class="product-placeholder">☕<small>صورة الصنف قريباً</small></div>'}</div><h3>${safeText(p.name_ar||p.name)}</h3><p>${safeText(p.description||'')}</p><div class="productPrice">${egp(p.base_price)}</div><button class="btn primary" onclick="addToCart('${p.id}')">أضف للسلة</button></article>`).join('')};
 </script>
 
 </body></html>
