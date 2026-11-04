@@ -688,6 +688,16 @@ header .nav a.brand{display:flex!important;visibility:visible!important;opacity:
 header .nav a.brand img{display:block!important;visibility:visible!important;opacity:1!important;position:static!important;width:100%!important;height:80px!important;max-width:100%!important;max-height:none!important;min-width:0!important;object-fit:contain!important;object-position:center!important;transform:none!important;filter:none!important}
 #pickoutSplash2026 .po-cup>b{position:absolute!important;top:53%!important;left:50%!important;right:auto!important;bottom:auto!important;transform:translate(-50%,-50%)!important;width:max-content!important;max-width:94%!important;text-align:center!important;white-space:nowrap!important;font-size:clamp(12px,1.5vw,19px)!important;line-height:1.2!important;z-index:5!important}
 @media(max-width:700px){header .nav a.brand{width:150px!important;height:58px!important}header .nav a.brand img{height:56px!important}#pickoutSplash2026 .po-cup>b{font-size:14px!important}}
+</style><style id="po-cup-nav-active-fix">
+.scene-cup>b,.backdrop-coffee>strong{position:absolute!important;left:50%!important;right:auto!important;top:53%!important;bottom:auto!important;transform:translate(-50%,-50%)!important;max-width:96%!important;width:max-content!important;text-align:center!important;white-space:nowrap!important;line-height:1.2!important;z-index:5!important}
+.scene-cup>b{font-size:clamp(14px,1.6vw,22px)!important}
+.backdrop-coffee>strong{font-size:clamp(12px,1.35vw,20px)!important}
+header .nav nav{position:relative!important}
+header .nav nav a[href="#home"]{border-bottom:0!important;padding-bottom:0!important;color:var(--muted)!important}
+header .nav nav a{position:relative!important;border-bottom:0!important;padding-bottom:0!important}
+header .nav nav a::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:3px;border-radius:6px;background:#29d477;transform:scaleX(0);transform-origin:center;transition:transform .28s ease,box-shadow .28s ease;box-shadow:0 0 12px #29d47755;pointer-events:none}
+header .nav nav a.po-nav-active{color:#5fe28c!important}
+header .nav nav a.po-nav-active::after{transform:scaleX(1)}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
@@ -1118,5 +1128,23 @@ window.closeModal=function(){
 };
 document.addEventListener('keydown',e=>{if(e.key==='Escape')window.closeModal()});
 document.addEventListener('click',e=>{if(e.target.closest('[onclick*="openModal"]')){clearTimeout(timer);timer=null;modal.classList.remove('pick-closing')}},true);
+})();
+</script><script id="po-nav-scroll-tracker">
+(function(){
+ const links=[...document.querySelectorAll('header .nav nav a[href^="#"]')];
+ const sections=links.map(a=>({a,el:document.querySelector(a.getAttribute('href'))})).filter(x=>x.el);
+ if(!sections.length)return;
+ function update(){
+  const line=window.scrollY+Math.min(180,window.innerHeight*.3);
+  let active=sections[0];
+  for(const x of sections){if(x.el.getBoundingClientRect().top+window.scrollY<=line)active=x}
+  if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-35)active=sections.reduce((best,x)=>x.el.offsetTop>best.el.offsetTop?x:best);
+  sections.forEach(x=>{x.a.classList.toggle('po-nav-active',x===active);if(x===active)x.a.setAttribute('aria-current','location');else x.a.removeAttribute('aria-current')});
+ }
+ let scheduled=false;
+ window.addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(()=>{scheduled=false;update()})}},{passive:true});
+ window.addEventListener('resize',update);
+ links.forEach(a=>a.addEventListener('click',()=>setTimeout(update,450)));
+ update();
 })();
 </script></body></html>
