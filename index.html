@@ -605,6 +605,17 @@ html,body{margin:0}
 }
 @keyframes pickoutStageBounce{0%,100%{transform:translateY(6px)}50%{transform:translateY(-9px)}}
 @media(prefers-reduced-motion:reduce){#menuCards .photo-stage,#menuCards .photo-stage img{animation:none!important}}
+</style><style id="pickout-reference-showcase">
+/* TikTok reference: selectable product lineup, not random endless wobbling */
+#menuCards .photo-stage,#menuCards .photo-stage img,#menuCards .productArt:before,#menuCards .photo-stage:after{animation:none!important}
+#menuCards .photo-stage img{transform:none!important;transition:transform .65s cubic-bezier(.2,.85,.25,1),filter .65s ease!important}
+#menuCards .card{transition:transform .65s cubic-bezier(.2,.85,.25,1),opacity .45s ease,box-shadow .5s ease!important;cursor:pointer}
+#menuCards .card.po-selected{z-index:4!important;transform:translateY(-12px) scale(1.035)!important;box-shadow:0 22px 42px #0007!important}
+#menuCards .card.po-selected .photo-stage img{transform:translateY(-10px) scale(1.35) rotate(-3deg)!important;filter:drop-shadow(0 28px 17px #000a)!important}
+#menuCards .card.po-neighbor .photo-stage img{transform:translateX(-8px) scale(.86) rotate(6deg)!important;filter:drop-shadow(0 12px 8px #0007)!important}
+#menuCards .card.po-dim{opacity:.7}
+#menuCards .card.po-selected .productArt{overflow:visible!important}
+@media(prefers-reduced-motion:reduce){#menuCards .card,#menuCards .photo-stage img{transition:none!important}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
@@ -939,7 +950,7 @@ closeTimer=setTimeout(()=>{modal.classList.remove('show','pick-closing');modal.q
 };
 document.addEventListener('click',e=>{if(e.target.closest('[onclick*="openModal"]')){clearTimeout(closeTimer);document.getElementById('modal')?.classList.remove('pick-closing')}},true)
 })();
-</script><script id="pickout-menu-motion-engine">
+</script><script type="text/plain" id="pickout-menu-motion-engine-disabled">
 /* Animate real rendered product images, including products drawn asynchronously from Supabase. */
 (function(){
 const menu=document.getElementById('menuCards');if(!menu)return;
@@ -960,5 +971,19 @@ running.set(img,motion);
 });
 }
 const obs=new MutationObserver(start);obs.observe(menu,{childList:true,subtree:true});start();
+})();
+</script><script id="pickout-reference-selection">
+(function(){
+const menu=document.getElementById('menuCards');if(!menu)return;
+let selected=0,timer;
+function apply(){
+const cards=[...menu.querySelectorAll(':scope > .card')];if(!cards.length)return;
+selected=((selected%cards.length)+cards.length)%cards.length;
+cards.forEach((c,i)=>{c.classList.toggle('po-selected',i===selected);c.classList.toggle('po-neighbor',Math.abs(i-selected)===1);c.classList.toggle('po-dim',Math.abs(i-selected)>1)});
+}
+function reset(){clearInterval(timer);timer=setInterval(()=>{if(document.hidden)return;selected++;apply()},3400)}
+menu.addEventListener('click',e=>{const card=e.target.closest('.card');if(!card||e.target.closest('button,a,input'))return;selected=[...menu.children].indexOf(card);apply();reset()});
+new MutationObserver(()=>{selected=0;apply()}).observe(menu,{childList:true});
+apply();reset();
 })();
 </script></body></html>
