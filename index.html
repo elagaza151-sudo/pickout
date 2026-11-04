@@ -388,8 +388,51 @@ body>.modal,body>.intro,#introV3{z-index:9999!important}
 @keyframes productPhotoSafe{0%,100%{transform:scale(1.025)}50%{transform:scale(1.09)}}
 @media(max-width:650px){#menuCards .productArt{height:145px!important}#menuCards .card h3{font-size:14px!important}#pickoutBackdrop .backdrop-coffee{opacity:.6!important}}
 @media(prefers-reduced-motion:reduce){#menuCards .photo-stage img{animation:none!important}}
+</style><style id="pickout-motion-release">
+/* More lively but restrained brick and wood ambience */
+#pickoutBackdrop .backdrop-bricks{animation:wallLight 12s ease-in-out infinite alternate}
+#pickoutBackdrop .backdrop-wood{animation:woodGlow 15s ease-in-out infinite alternate}
+#pickoutBackdrop .backdrop-light{background:radial-gradient(ellipse at 73% 25%,#ffd18b65,transparent 45%),radial-gradient(ellipse at 10% 75%,#f5a75b32,transparent 40%)!important;animation:lightRoam 14s ease-in-out infinite alternate!important}
+#pickoutBackdrop .backdrop-coffee{animation:backdropCup 5.5s ease-in-out infinite!important;filter:drop-shadow(0 15px 18px #0008)}
+#pickoutBackdrop .backdrop-vapor{animation-duration:4.3s!important}
+#pickoutBackdrop .cafe-spark{position:absolute;top:var(--y);left:var(--x);width:var(--sz);height:var(--sz);border-radius:50%;background:#ffca86;box-shadow:0 0 15px #ffb969aa;opacity:0;animation:particleFloat var(--dur) linear infinite;animation-delay:var(--delay)}
+@keyframes particleFloat{0%{opacity:0;transform:translate3d(0,20px,0)}25%{opacity:.5}85%{opacity:.35}100%{opacity:0;transform:translate3d(25px,-100px,0)}}
+@keyframes wallLight{to{filter:brightness(1.16) saturate(1.07)}}
+@keyframes woodGlow{to{filter:brightness(1.09)}}
+@keyframes lightRoam{to{transform:translateX(-7%) scale(1.1);opacity:.65}}
+/* Photo is isolated visually in a dedicated stage, no overlap with text */
+#menuCards .card{overflow:hidden!important}
+#menuCards .productArt{height:195px!important;overflow:hidden!important;border:1px solid #ad794533!important;background:radial-gradient(ellipse at 50% 60%,#805030,#21120c 72%)!important}
+#menuCards .photo-stage{position:relative!important;display:grid!important;place-items:center!important;overflow:hidden!important}
+#menuCards .photo-stage:before{content:"";position:absolute;inset:8%;border-radius:50%;background:radial-gradient(circle,#d2a16a44,transparent 70%);animation:photoHalo 5s ease-in-out infinite}
+#menuCards .photo-stage img{position:relative!important;z-index:1!important;width:86%!important;height:85%!important;object-fit:contain!important;object-position:center!important;mix-blend-mode:normal;box-shadow:none!important;border-radius:12px!important;animation:photoDepth 5.5s ease-in-out infinite!important;filter:drop-shadow(8px 13px 9px #0009) saturate(1.12)!important}
+#menuCards .card:hover .photo-stage img{animation-duration:2.5s!important;animation-play-state:running!important}
+#menuCards .card h3,#menuCards .card p,#menuCards .productPrice,#menuCards .card button{z-index:5!important;position:relative!important}
+@keyframes photoDepth{0%,100%{transform:perspective(700px) translateY(2px) rotateY(-9deg) scale(.95)}50%{transform:perspective(700px) translateY(-9px) rotateY(9deg) scale(1.02)}}
+@keyframes photoHalo{50%{transform:scale(1.16);opacity:.5}}
+/* Smooth modal entrance and exit */
+.modal{transition:opacity .28s ease,backdrop-filter .28s ease!important}
+.modal.show{opacity:1!important}
+.modal.pick-closing{display:grid!important;opacity:0!important;pointer-events:none!important}
+.modal.pick-closing .dialog{animation:modalExit .28s ease-in forwards!important}
+.modal.show:not(.pick-closing) .dialog{animation:modalEnter .48s cubic-bezier(.18,1.25,.28,1) both!important}
+@keyframes modalEnter{from{opacity:0;transform:translateY(45px) scale(.82) rotateX(10deg);filter:blur(8px)}to{opacity:1;transform:translateY(0) scale(1) rotateX(0);filter:blur(0)}}
+@keyframes modalExit{to{opacity:0;transform:translateY(32px) scale(.88);filter:blur(6px)}}
+/* New short loading sequence */
+#pickoutLoading{position:fixed;inset:0;z-index:20000;display:grid;place-items:center;background:radial-gradient(circle at center,#54311c,#170d09 75%);transition:opacity .7s ease,visibility .7s ease;pointer-events:auto}
+#pickoutLoading.done{opacity:0;visibility:hidden;pointer-events:none}
+.pick-loading-center{text-align:center;display:grid;justify-items:center;gap:15px;color:#f7e1bd;font-family:Cairo,sans-serif}
+.pick-loading-cup{position:relative;font-size:76px;filter:drop-shadow(0 12px 10px #0009);animation:loadingBounce 1.3s ease-in-out infinite}
+.pick-loading-steam{font-size:32px;color:#ffe2b9;opacity:.75;animation:loadingSteam 1.5s ease-in-out infinite}
+.pick-loading-name{font:900 clamp(30px,6vw,54px) Georgia,serif;letter-spacing:2px}.pick-loading-name span{color:#2ac869}
+.pick-loading-track{height:5px;width:210px;background:#7b4b31;border-radius:20px;overflow:hidden}.pick-loading-track i{display:block;width:0;height:100%;background:#37d477;animation:loadingProgress 1.8s ease forwards}
+@keyframes loadingBounce{50%{transform:translateY(-9px) rotate(-4deg)}}
+@keyframes loadingSteam{50%{transform:translateY(-12px);opacity:.2}}
+@keyframes loadingProgress{to{width:100%}}
+@media(max-width:650px){#menuCards .productArt{height:155px!important}}
+@media(prefers-reduced-motion:reduce){#pickoutBackdrop .cafe-spark,#pickoutBackdrop .backdrop-bricks,#pickoutBackdrop .backdrop-wood,#menuCards .photo-stage img,#menuCards .photo-stage:before{animation:none!important}}
 </style></head>
-<body><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div>\n<div id="liveCafe" aria-hidden="true"><i class="smoke"></i><i class="smoke"></i><i class="smoke"></i><i class="lampGlow"></i></div>
+<body><div id="pickoutLoading" role="status" aria-label="جاري تحميل Pick & Out"><div class="pick-loading-center"><div class="pick-loading-steam">〰 〰 〰</div><div class="pick-loading-cup">☕</div><div class="pick-loading-name">PICK <span>&amp;</span> OUT</div><div class="pick-loading-track"><i></i></div><small>قهوة ومزاج على رواق</small></div></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div>\n<div id="liveCafe" aria-hidden="true"><i class="smoke"></i><i class="smoke"></i><i class="smoke"></i><i class="lampGlow"></i></div>
 <div class="atmosphere"></div><div class="ambient-light"></div><div class="intro" id="intro"><div class="intro-logo-wrap"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201160%20300%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22r%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23a3431b%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23451607%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%230b9b45%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23005524%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ctext%20x%3D%2210%22%20y%3D%22230%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22244%22%20letter-spacing%3D%22-14%22%20fill%3D%22url(%23r)%22%3EPICK%3C%2Ftext%3E%3Ctext%20x%3D%22495%22%20y%3D%22230%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22244%22%20fill%3D%22url(%23g)%22%3E%26amp%3B%3C%2Ftext%3E%3Ctext%20x%3D%22648%22%20y%3D%22230%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22244%22%20letter-spacing%3D%22-14%22%20fill%3D%22url(%23r)%22%3EOUT%3C%2Ftext%3E%3Cpath%20d%3D%22M789%20135h57v-16l43%2035-43%2035v-17h-57z%22%20fill%3D%22url(%23g)%22%2F%3E%3C%2Fsvg%3E" alt="PICK & OUT"><div class="intro-line"></div><small>COFFEE · FOOD · GOOD MOOD</small></div></div>
 <header><div class="nav"><a class="brand" href="#home" aria-label="PICK & OUT"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201160%20300%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22r%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23a3431b%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23451607%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%230b9b45%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23005524%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ctext%20x%3D%2210%22%20y%3D%22230%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22244%22%20letter-spacing%3D%22-14%22%20fill%3D%22url(%23r)%22%3EPICK%3C%2Ftext%3E%3Ctext%20x%3D%22495%22%20y%3D%22230%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22244%22%20fill%3D%22url(%23g)%22%3E%26amp%3B%3C%2Ftext%3E%3Ctext%20x%3D%22648%22%20y%3D%22230%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22244%22%20letter-spacing%3D%22-14%22%20fill%3D%22url(%23r)%22%3EOUT%3C%2Ftext%3E%3Cpath%20d%3D%22M789%20135h57v-16l43%2035-43%2035v-17h-57z%22%20fill%3D%22url(%23g)%22%2F%3E%3C%2Fsvg%3E" alt="PICK & OUT"></a><nav><a href="#home">الرئيسية</a><a href="#features">التجربة</a><a href="#games">الألعاب</a><a href="#menu" >المنيو</a></nav><a class="btn primary" href="#menu">تصفح المنيو</a></div></header>
 <main id="home">
@@ -704,4 +747,21 @@ document.getElementById('menuCards').innerHTML=rows.map((p,i)=>'<article class="
 };
 </script>
 
-</body></html>
+<script id="pickout-motion-script">
+(function(){
+const backdrop=document.getElementById('pickoutBackdrop');
+if(backdrop){for(let i=0;i<16;i++){const d=document.createElement('i');d.className='cafe-spark';d.style.cssText='--x:'+(5+(i*37)%90)+'%;--y:'+(15+(i*19)%78)+'%;--sz:'+(2+i%3)+'px;--dur:'+(8+i%7)+'s;--delay:-'+(i*.8)+'s';backdrop.appendChild(d)}}
+const loading=document.getElementById('pickoutLoading');
+function hideLoader(){if(loading){loading.classList.add('done');setTimeout(()=>loading.remove(),850)}}
+if(document.readyState==='complete')setTimeout(hideLoader,1850);else window.addEventListener('load',()=>setTimeout(hideLoader,1850),{once:true});
+setTimeout(hideLoader,4800);
+let closeTimer;
+const originalClose=window.closeModal;
+window.closeModal=function(){
+const modal=document.getElementById('modal');if(!modal||!modal.classList.contains('show')){if(typeof originalClose==='function')originalClose();return}
+clearTimeout(closeTimer);modal.classList.add('pick-closing');
+closeTimer=setTimeout(()=>{modal.classList.remove('show','pick-closing');modal.querySelector('.dialog')?.classList.remove('wide')},280)
+};
+document.addEventListener('click',e=>{if(e.target.closest('[onclick*="openModal"]')){clearTimeout(closeTimer);document.getElementById('modal')?.classList.remove('pick-closing')}},true)
+})();
+</script></body></html>
