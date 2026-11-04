@@ -563,6 +563,15 @@ html,body{margin:0}
 @keyframes pickoutZoomOrbit{0%,100%{transform:perspective(950px) translate3d(-5px,4px,0) rotateY(-10deg) rotateZ(-2deg) scale(.83)}35%{transform:perspective(950px) translate3d(3px,-13px,35px) rotateY(5deg) rotateZ(1deg) scale(1.09)}65%{transform:perspective(950px) translate3d(7px,-17px,45px) rotateY(12deg) rotateZ(2deg) scale(1.18)}}
 @media(max-width:650px){#menuCards .photo-stage img{max-width:190px!important;max-height:160px!important}}
 @media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .card:hover .photo-stage img{animation:none!important;transform:none!important}}
+</style><style id="pickout-cinematic-product-motion">
+#menuCards .productArt{position:relative!important;isolation:isolate!important;overflow:hidden!important;perspective:1200px!important}
+#menuCards .productArt:before{content:"";position:absolute;inset:-45%;background:conic-gradient(from 0deg,transparent 0deg,#e7b65b18 65deg,transparent 110deg,#1ae58814 220deg,transparent 290deg);animation:pickoutAuraSpin 9s linear infinite;pointer-events:none}
+#menuCards .photo-stage{overflow:visible!important;clip-path:none!important;transform-style:preserve-3d!important}
+#menuCards .photo-stage img{position:relative!important;z-index:2!important;animation:pickoutCinematicZoom 3.1s cubic-bezier(.45,0,.55,1) infinite!important;animation-delay:calc(var(--card-index,0) * -.22s)!important;transform-origin:center!important;will-change:transform,filter!important;filter:drop-shadow(0 14px 11px #000b) saturate(1.12)!important}
+#menuCards .card:hover .photo-stage img{animation:pickoutCinematicZoom 1.85s cubic-bezier(.45,0,.55,1) infinite!important}
+@keyframes pickoutCinematicZoom{0%,100%{transform:perspective(1000px) translate3d(0,10px,0) rotateY(-9deg) rotateZ(-3deg) scale(.76);filter:drop-shadow(7px 13px 7px #000a)}42%{transform:perspective(1000px) translate3d(0,-13px,65px) rotateY(7deg) rotateZ(2deg) scale(1.2);filter:drop-shadow(-10px 24px 14px #000b)}66%{transform:perspective(1000px) translate3d(0,-19px,80px) rotateY(12deg) rotateZ(3deg) scale(1.29);filter:drop-shadow(-14px 30px 16px #000c)}}
+@keyframes pickoutAuraSpin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .productArt:before{animation:none!important}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
