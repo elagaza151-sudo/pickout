@@ -616,6 +616,27 @@ html,body{margin:0}
 #menuCards .card.po-dim{opacity:.7}
 #menuCards .card.po-selected .productArt{overflow:visible!important}
 @media(prefers-reduced-motion:reduce){#menuCards .card,#menuCards .photo-stage img{transition:none!important}}
+</style><style id="pickout-hover-only-performance-fix">
+/* No auto motion. Animate only the hovered product, using compositor-friendly transforms. */
+#menuCards .card{opacity:1!important;transform:none!important;transition:box-shadow .25s ease!important;will-change:auto!important;z-index:1}
+#menuCards .card.po-selected,#menuCards .card.po-neighbor,#menuCards .card.po-dim{opacity:1!important;transform:none!important;box-shadow:none!important}
+#menuCards .productArt{overflow:visible!important;isolation:isolate!important}
+#menuCards .productArt:before,#menuCards .photo-stage:after{animation:none!important}
+#menuCards .photo-stage{animation:none!important;transform:none!important;will-change:auto!important}
+#menuCards .photo-stage img,#menuCards .card.po-selected .photo-stage img,#menuCards .card.po-neighbor .photo-stage img{
+animation:none!important;transform:translate3d(0,0,0) scale(1) rotate(0deg)!important;
+filter:drop-shadow(0 12px 9px #0007)!important;
+transition:transform .48s cubic-bezier(.2,.8,.2,1),filter .48s ease!important;
+will-change:auto!important;backface-visibility:hidden!important
+}
+#menuCards .card:hover{z-index:10!important;box-shadow:0 16px 32px #0005!important}
+#menuCards .card:hover .productArt{z-index:11!important}
+#menuCards .card:hover .photo-stage img{
+animation:none!important;transform:translate3d(0,-18px,0) rotate(-7deg) scale(1.58)!important;
+filter:drop-shadow(0 23px 15px #000a)!important;will-change:transform!important
+}
+@media(max-width:650px){#menuCards .card:hover .photo-stage img{transform:translate3d(0,-12px,0) rotate(-5deg) scale(1.38)!important}}
+@media(prefers-reduced-motion:reduce){#menuCards .card:hover .photo-stage img{transition:none!important}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
@@ -972,7 +993,7 @@ running.set(img,motion);
 }
 const obs=new MutationObserver(start);obs.observe(menu,{childList:true,subtree:true});start();
 })();
-</script><script id="pickout-reference-selection">
+</script><script type="text/plain" id="pickout-reference-selection-disabled">
 (function(){
 const menu=document.getElementById('menuCards');if(!menu)return;
 let selected=0,timer;
