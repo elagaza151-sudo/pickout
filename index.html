@@ -973,9 +973,21 @@ box-shadow:0 10px 18px #100805a1,inset 0 2px 2px #c3955a5e!important
 #pickoutSplash2026 .po-content{z-index:5!important}
 @media(max-width:700px){#pickoutSplash2026 .po-splash-lamp{left:10%;transform:scale(.7);transform-origin:top}#pickoutSplash2026 .po-splash-particle:nth-of-type(n+15){display:none}}
 @media(prefers-reduced-motion:reduce){#pickoutSplash2026 .po-splash-lamp,#pickoutSplash2026 .po-splash-lamp:after,#pickoutSplash2026 .po-splash-particle,#pickoutSplash2026 .po-splash-bean{animation:none!important}}
+</style><style id="po-splash-visible-reliable-v13">
+/* Immediate static HTML effects: visible before JS loads, even on slow devices. */
+#pickoutSplash2026 .po-splash-visible-effects{position:absolute;inset:0;z-index:3;pointer-events:none}
+#pickoutSplash2026 .po-visible-dust{position:absolute;width:8px;height:8px;border-radius:50%;background:#ffe4a7;box-shadow:0 0 12px 5px #ffbf62,0 0 35px 12px #fba94e70;animation:po-visible-splash-dust 3.5s ease-in-out infinite alternate}
+#pickoutSplash2026 .po-visible-dust.d1{left:11%;top:20%}#pickoutSplash2026 .po-visible-dust.d2{left:29%;top:33%;animation-delay:-1.5s}#pickoutSplash2026 .po-visible-dust.d3{left:45%;top:14%;animation-delay:-2.3s}#pickoutSplash2026 .po-visible-dust.d4{left:69%;top:27%;animation-delay:-.9s}#pickoutSplash2026 .po-visible-dust.d5{left:85%;top:16%;animation-delay:-2.7s}#pickoutSplash2026 .po-visible-dust.d6{left:78%;top:41%;animation-delay:-1.2s}
+@keyframes po-visible-splash-dust{from{opacity:.38;transform:translateY(12px) scale(.65)}to{opacity:1;transform:translate(14px,-25px) scale(1.25)}}
+#pickoutSplash2026 .po-visible-bean{position:absolute;top:56%;width:19px;height:29px;border-radius:55% 45%;background:linear-gradient(90deg,#1b0d08,#a96e3c 46%,#27130c 52%,#6c3b20);box-shadow:0 5px 12px #000a;animation:po-visible-splash-bean 4s ease-in-out infinite}
+#pickoutSplash2026 .po-visible-bean.b1{left:17%}#pickoutSplash2026 .po-visible-bean.b2{left:78%;animation-delay:-1.3s}#pickoutSplash2026 .po-visible-bean.b3{left:86%;animation-delay:-2.6s}
+@keyframes po-visible-splash-bean{0%{opacity:.2;transform:translateY(35px) rotate(-20deg)}45%{opacity:1}100%{opacity:.15;transform:translate(22px,-100px) rotate(145deg)}}
+#pickoutSplash2026 .po-splash-lamp{z-index:4!important}
+#pickoutSplash2026 .po-content{z-index:6!important}
+@media(prefers-reduced-motion:reduce){#pickoutSplash2026 .po-visible-dust,#pickoutSplash2026 .po-visible-bean{animation:none!important}}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
-<div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
+<div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
 <div class="po-content"><div class="po-title">PICK <span>&amp;</span> OUT</div><div class="po-cup"><i class="po-steam po-s1"></i><i class="po-steam po-s2"></i><i class="po-steam po-s3"></i><div class="po-coffee"></div><div class="po-handle"></div><b>PICK <span>&amp;</span> OUT</b></div><p>جاري تحضير تجربتك...</p><div class="po-progress"><i></i></div></div></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div>\n<div id="liveCafe" aria-hidden="true"><i class="smoke"></i><i class="smoke"></i><i class="smoke"></i><i class="lampGlow"></i></div>
 <div class="atmosphere"></div><div class="ambient-light"></div>
 <header><div class="nav"><a class="brand" href="#home" aria-label="PICK & OUT"><img src="https://elagaza151-sudo.github.io/pickout/pickout-logo.png?v=logo2" alt="PICK & OUT" loading="eager" decoding="async"></a><nav><a href="#home">الرئيسية</a><a href="#features">التجربة</a><a href="#games">الألعاب</a><a href="#menu" >المنيو</a></nav><a class="btn primary" href="#menu">تصفح المنيو</a></div></header>
@@ -1325,7 +1337,7 @@ if(backdrop){for(let i=0;i<16;i++){const d=document.createElement('i');d.classNa
 const splash=document.getElementById('pickoutSplash2026');
 if(backdrop){for(let i=0;i<7;i++){const v=document.createElement('i');v.className='extra-vapor';v.style.setProperty('--i',i);backdrop.appendChild(v)}}
 function dismissSplash(){if(!splash)return;splash.classList.add('po-dismiss');setTimeout(()=>splash.remove(),750)}
-setTimeout(()=>{if(splash){splash.classList.add('po-exit');setTimeout(dismissSplash,850)}},3500);
+setTimeout(()=>{if(splash){splash.classList.add('po-exit');setTimeout(dismissSplash,850)}},5100);
 let closeTimer;
 const originalClose=window.closeModal;
 window.closeModal=function(){
