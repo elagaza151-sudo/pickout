@@ -492,6 +492,11 @@ html body #pickoutLoading.done{opacity:0!important;visibility:hidden!important;p
 @keyframes loadFill{to{width:100%}}
 @media(max-width:550px){#pickoutLoading .loader-lamp{height:8vh}#pickoutLoading .loader-cup-wrap{height:190px}#pickoutLoading .loader-smoke{height:95px}}
 @media(prefers-reduced-motion:reduce){#pickoutLoading .loader-cup,#pickoutLoading .loader-smoke{animation:none}}
+</style><style id="pickout-loader-visibility-final">
+/* The branded intro is the only splash; keep it full-screen for six seconds */
+html body #pickoutLoading:not(.done){position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;display:block!important;z-index:2147483647!important;opacity:1!important;visibility:visible!important;transform:none!important}
+html body #pickoutLoading.done{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+body>.intro,body>#intro,body>#introV3,.intro-logo-wrap{display:none!important}
 </style></head>
 <body><div id="pickoutLoading" aria-label="جاري تحميل PICK & OUT" role="status"><div class="loader-scene"><div class="loader-lamp lamp-left"></div><div class="loader-lamp lamp-right"></div><div class="loader-logo">PICK <span>&amp;</span> OUT</div><div class="loader-tagline">مشروبات مميزة • حلويات لذيذة • تجربة متكاملة</div><div class="loader-cup-wrap"><div class="loader-smoke smoke-one"></div><div class="loader-smoke smoke-two"></div><div class="loader-smoke smoke-three"></div><div class="loader-cup"><div class="loader-coffee"></div><div class="loader-handle"></div><b>PICK <span>&amp;</span> OUT</b></div><div class="loader-saucer"></div></div><div class="loader-status">جاري تحضير تجربتك...</div><div class="loader-progress"><div></div></div></div></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div>\n<div id="liveCafe" aria-hidden="true"><i class="smoke"></i><i class="smoke"></i><i class="smoke"></i><i class="lampGlow"></i></div>
 <div class="atmosphere"></div><div class="ambient-light"></div>
@@ -824,10 +829,10 @@ loading.style.visibility='hidden';
 loading.style.pointerEvents='none';
 setTimeout(()=>loading.remove(),900);
 }
-function scheduleLoaderHide(){setTimeout(hideLoader,Math.max(0,3600-(performance.now()-startTime)))}
+function scheduleLoaderHide(){setTimeout(hideLoader,Math.max(0,6000-(performance.now()-startTime)))}
 if(document.readyState==='complete')scheduleLoaderHide();
 else window.addEventListener('load',scheduleLoaderHide,{once:true});
-setTimeout(hideLoader,6500);
+setTimeout(hideLoader,10000);
 let closeTimer;
 const originalClose=window.closeModal;
 window.closeModal=function(){
