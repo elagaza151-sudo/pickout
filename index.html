@@ -677,12 +677,18 @@ header .nav>a.brand>img{display:block!important;width:100%!important;height:74px
 @keyframes poActualPopOut{0%{opacity:1;transform:translate3d(0,0,0) scale(1);filter:none}100%{opacity:0;transform:translate3d(0,65px,0) scale(.7) rotateX(-12deg);filter:blur(6px)}}
 @keyframes poActualFadeOut{from{opacity:1}to{opacity:0}}
 @media(prefers-reduced-motion:reduce){#modal.modal.show .dialog,#modal.modal.show.pick-closing{animation-duration:.01ms!important}}
+</style><style id="po-reel-modal-fix">
+.spin-reel-item.active,.spin-reel-item:last-child{background:#ffffff0c!important;border-color:#ffffff12!important;color:#f5ead6!important}
+.spin-reel-track{transform:translate3d(0,0,0);will-change:transform}
+#modal.modal.show.pick-closing{display:grid!important;opacity:1!important;visibility:visible!important;animation:none!important;pointer-events:none!important}
+#modal.modal.show.pick-closing .dialog{animation:poActualPopOut .38s cubic-bezier(.55,0,.85,.4) forwards!important}
+#modal.modal.show:not(.pick-closing) .dialog{animation:poActualPopIn .42s cubic-bezier(.16,1.15,.32,1) both!important}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div>
 <div class="po-content"><div class="po-title">PICK <span>&amp;</span> OUT</div><div class="po-cup"><i class="po-steam po-s1"></i><i class="po-steam po-s2"></i><i class="po-steam po-s3"></i><div class="po-coffee"></div><div class="po-handle"></div><b>PICK <span>&amp;</span> OUT</b></div><p>جاري تحضير تجربتك...</p><div class="po-progress"><i></i></div></div></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div>\n<div id="liveCafe" aria-hidden="true"><i class="smoke"></i><i class="smoke"></i><i class="smoke"></i><i class="lampGlow"></i></div>
 <div class="atmosphere"></div><div class="ambient-light"></div>
-<header><div class="nav"><a class="brand" href="#home" aria-label="PICK & OUT"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201280%20320%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23bd6636%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2354240f%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22b%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2322b766%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23087038%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ctext%20x%3D%2228%22%20y%3D%22245%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%22242%22%20font-weight%3D%22900%22%20textLength%3D%22530%22%20lengthAdjust%3D%22spacingAndGlyphs%22%20fill%3D%22url(%23a)%22%3EPICK%3C%2Ftext%3E%3Ctext%20x%3D%22575%22%20y%3D%22245%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%22220%22%20font-weight%3D%22900%22%20textLength%3D%22125%22%20lengthAdjust%3D%22spacingAndGlyphs%22%20fill%3D%22url(%23b)%22%3E%26amp%3B%3C%2Ftext%3E%3Ctext%20x%3D%22725%22%20y%3D%22245%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%22242%22%20font-weight%3D%22900%22%20textLength%3D%22525%22%20lengthAdjust%3D%22spacingAndGlyphs%22%20fill%3D%22url(%23a)%22%3EOUT%3C%2Ftext%3E%3C%2Fsvg%3E" alt="PICK & OUT"></a><nav><a href="#home">الرئيسية</a><a href="#features">التجربة</a><a href="#games">الألعاب</a><a href="#menu" >المنيو</a></nav><a class="btn primary" href="#menu">تصفح المنيو</a></div></header>
+<header><div class="nav"><a class="brand" href="#home" aria-label="PICK & OUT"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201320%20330%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23bd6636%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2354240f%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22b%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2322b766%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23087038%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ctext%20x%3D%2222%22%20y%3D%22250%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%22245%22%20font-weight%3D%22900%22%20textLength%3D%22535%22%20lengthAdjust%3D%22spacingAndGlyphs%22%20fill%3D%22url(%23a)%22%3EPICK%3C%2Ftext%3E%3Ctext%20x%3D%22575%22%20y%3D%22250%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%22218%22%20font-weight%3D%22900%22%20textLength%3D%22125%22%20lengthAdjust%3D%22spacingAndGlyphs%22%20fill%3D%22url(%23b)%22%3E%26amp%3B%3C%2Ftext%3E%3Ctext%20x%3D%22725%22%20y%3D%22250%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%22245%22%20font-weight%3D%22900%22%20textLength%3D%22540%22%20lengthAdjust%3D%22spacingAndGlyphs%22%20fill%3D%22url(%23a)%22%3EOUT%3C%2Ftext%3E%3Cpath%20d%3D%22M805%20116%20H860%20V96%20L916%20145%20L860%20194%20V174%20H805%20Z%22%20fill%3D%22url(%23b)%22%20stroke%3D%22%2313462b%22%20stroke-width%3D%224%22%2F%3E%3C%2Fsvg%3E" alt="PICK & OUT"></a><nav><a href="#home">الرئيسية</a><a href="#features">التجربة</a><a href="#games">الألعاب</a><a href="#menu" >المنيو</a></nav><a class="btn primary" href="#menu">تصفح المنيو</a></div></header>
 <main id="home">
 <section class="hero">
 <div><div class="eyebrow">PICK & OUT • COFFEE · FOOD · GOOD MOOD</div><h1>أهلاً بيك في<br><em>PICK<span style="color:#23b957">&amp;</span>OUT</em></h1><p>مشروبات مميزة، حلويات لذيذة، وتجربة كافيه متكاملة. اطلب الآن واستلم من الكافيه بكل سهولة!</p><div class="actions"><a class="menu-cta" href="#menu" ><span class="menu-cta-icon">☕</span><span class="menu-cta-copy"><strong>تصفح المنيو</strong><small>اكتشف مشروبك ووجبتك المفضلة</small></span><span class="menu-cta-arrow">←</span></a><a class="btn" href="#features">اكتشف تجربتنا ◉</a></div></div>
@@ -969,26 +975,28 @@ let drinkSpinBusy=false;
 function startDrinkSpin(){
  if(drinkSpinBusy)return;
  const products=(liveProducts||[]).filter(p=>Number(p.base_price)>=0);
- const result=document.getElementById('drinkSpinResult'),track=document.getElementById('drinkReelTrack'),btn=document.getElementById('startDrinkSpin');
- if(!products.length){result.hidden=false;result.textContent='المنيو لسه محمّلش أصناف. جرّب بعد لحظات.';return;}
+ const result=document.getElementById('drinkSpinResult'),track=document.getElementById('drinkReelTrack'),btn=document.getElementById('startDrinkSpin'),viewport=document.getElementById('drinkReel');
+ if(!result||!track||!btn||!viewport)return;
+ if(!products.length){result.hidden=false;result.textContent='المنيو لسه محمّلش أصناف. جرّب بعد لحظات.';return}
  drinkSpinBusy=true;btn.disabled=true;result.hidden=true;
- const shuffled=[...products].sort(()=>Math.random()-.5);
- const winner=shuffled[Math.floor(Math.random()*shuffled.length)];
- const sequence=Array.from({length:22},(_,i)=>shuffled[i%shuffled.length]).concat([winner]);
- track.innerHTML=sequence.map((p,i)=>`<div class="spin-reel-item ${i===sequence.length-1?'active':''}">${safeText(p.name_ar||p.name)} <small>${egp(p.base_price)}</small></div>`).join('');
- track.style.transition='none';track.style.transform='translateY(0px)';
+ const winner=products[Math.floor(Math.random()*products.length)];
+ const winnerAt=70,tail=12,total=winnerAt+tail+1;
+ const sequence=Array.from({length:total},(_,i)=>i===winnerAt?winner:products[Math.floor(Math.random()*products.length)]);
+ track.innerHTML=sequence.map(p=>'<div class="spin-reel-item">'+safeText(p.name_ar||p.name)+' <small>'+egp(p.base_price)+'</small></div>').join('');
+ track.style.transition='none';track.style.transform='translate3d(0,0,0)';
+ const item=track.children[winnerAt],center=viewport.clientHeight/2;
+ const target=item.offsetTop+item.offsetHeight/2-center;
+ // The chosen item stops in the middle while more items remain below it.
  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-  const item=track.querySelector('.spin-reel-item');const step=item?item.getBoundingClientRect().height+8:62;
-  const target=Math.max(0,(sequence.length-1)*step-68);
-  track.style.transition='transform 5.8s cubic-bezier(.08,.72,.08,1)';
-  track.style.transform=`translateY(-${target}px)`;
+  track.style.transition='transform 8.2s cubic-bezier(.12,.74,.1,1)';
+  track.style.transform='translate3d(0,-'+target+'px,0)';
  }));
  setTimeout(()=>{
   result.hidden=false;
   const image=winner.image_url||photoForProduct(winner);
-  result.innerHTML=`${image?`<img src="${safeText(image)}" alt="">`:''}<b>🎉 اختيارنا ليك: ${safeText(winner.name_ar||winner.name)}</b><br><strong>${egp(winner.base_price)}</strong><br><small>اختيار عشوائي من الأصناف المتاحة حالياً في منيو Pickout.</small><br><button class="btn" style="margin-top:12px" onclick="addToCart('${winner.id}');closeModal()">ضيفه للسلة</button>`;
+  result.innerHTML=(image?'<img src="'+safeText(image)+'" alt="">':'')+'<b>🎉 اختيارنا ليك: '+safeText(winner.name_ar||winner.name)+'</b><br><strong>'+egp(winner.base_price)+'</strong><br><small>اختيار عشوائي من المنيو.</small><br><button class="btn" style="margin-top:12px" onclick="addToCart(\''+winner.id+'\');closeModal()">ضيفه للسلة</button>';
   btn.disabled=false;drinkSpinBusy=false;
- },6000);
+ },8350);
 }
 function safeText(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 // Only use original menu imagery when a verified product image URL exists.
