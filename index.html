@@ -362,6 +362,32 @@ main{background:transparent!important}
 @keyframes photoOrbit{0%,100%{transform:perspective(700px) rotateY(-11deg) rotateX(3deg) translateY(0)}50%{transform:perspective(700px) rotateY(12deg) rotateX(-3deg) translateY(-9px)}}
 @media(max-width:650px){#pickoutBackdrop .backdrop-coffee{left:4%;bottom:4%;opacity:.5}#menuCards .productArt{height:160px!important}.section{padding:18px!important}}
 @media(prefers-reduced-motion:reduce){#pickoutBackdrop .backdrop-coffee,.backdrop-vapor,#menuCards .photo-stage img{animation:none!important}}
+</style><style id="pickout-background-and-card-hotfix">
+/* Stable dark fallback: no white frame even if layered effects fail */
+html{background:#24120c!important}
+body{background:#24120c!important;isolation:isolate;color:#f4e8d4!important}
+#pickoutBackdrop{position:fixed!important;inset:0!important;z-index:0!important;background:linear-gradient(180deg,#78371f 0%,#78371f 49.8%,#482510 50%,#482510 100%)!important;opacity:1!important;visibility:visible!important;display:block!important;transform:none!important}
+#pickoutBackdrop .backdrop-bricks{background-color:#873b22!important;background-image:linear-gradient(0deg,transparent 0 48px,#2b1009 49px 53px,transparent 54px),linear-gradient(90deg,transparent 0 126px,#2b1009 127px 133px,transparent 134px),linear-gradient(135deg,#a84d2d,#5a2316)!important;background-size:100% 106px,266px 106px,100% 100%!important}
+#pickoutBackdrop .backdrop-wood{background:repeating-linear-gradient(0deg,#3d1d0e 0 4px,#754121 5px 25px,#a36b38 26px 29px,#4a240f 30px 35px)!important}
+#pickoutBackdrop .backdrop-coffee{z-index:3!important}
+body>header,body>main,body>footer{position:relative;z-index:2}
+body>header{position:fixed!important}
+body>.modal,body>.intro,#introV3{z-index:9999!important}
+.hero,.section{background-color:rgba(26,12,8,.86)!important}
+#menuCards{align-items:stretch}
+#menuCards .card{position:relative!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;min-width:0!important;isolation:isolate}
+#menuCards .productArt{position:relative!important;flex:none!important;height:175px!important;width:100%!important;overflow:hidden!important;clip-path:inset(0 round 13px)!important;contain:paint!important;transform:none!important;perspective:650px!important;margin-bottom:12px!important}
+#menuCards .photo-stage{width:100%!important;height:100%!important;overflow:hidden!important;display:block!important;transform:none!important;perspective:650px!important;border-radius:13px!important;background:radial-gradient(ellipse at center,#795037,#2b180f)!important}
+#menuCards .photo-stage img{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:cover!important;object-position:center 48%!important;border-radius:13px!important;box-shadow:none!important;filter:saturate(1.06) contrast(1.04)!important;transform:scale(1.025)!important;animation:productPhotoSafe 6s ease-in-out infinite!important;transform-origin:center!important}
+#menuCards .card:hover .photo-stage img{animation-play-state:paused!important;transform:scale(1.09)!important}
+#menuCards .productArt:after,#menuCards .photo-stage:after{display:none!important}
+#menuCards .card h3,#menuCards .card p,#menuCards .card .productPrice,#menuCards .card button{position:relative!important;z-index:4!important;transform:none!important}
+#menuCards .card h3{font-size:16px!important;line-height:1.6!important;margin:4px 4px 6px!important;min-height:25px!important}
+#menuCards .card .productPrice{margin-top:auto!important;padding:8px 4px!important;font-size:18px!important}
+#menuCards .card button{flex:none!important}
+@keyframes productPhotoSafe{0%,100%{transform:scale(1.025)}50%{transform:scale(1.09)}}
+@media(max-width:650px){#menuCards .productArt{height:145px!important}#menuCards .card h3{font-size:14px!important}#pickoutBackdrop .backdrop-coffee{opacity:.6!important}}
+@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img{animation:none!important}}
 </style></head>
 <body><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div>\n<div id="liveCafe" aria-hidden="true"><i class="smoke"></i><i class="smoke"></i><i class="smoke"></i><i class="lampGlow"></i></div>
 <div class="atmosphere"></div><div class="ambient-light"></div><div class="intro" id="intro"><div class="intro-logo-wrap"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201160%20300%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22r%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23a3431b%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23451607%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%230b9b45%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23005524%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ctext%20x%3D%2210%22%20y%3D%22230%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22244%22%20letter-spacing%3D%22-14%22%20fill%3D%22url(%23r)%22%3EPICK%3C%2Ftext%3E%3Ctext%20x%3D%22495%22%20y%3D%22230%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22244%22%20fill%3D%22url(%23g)%22%3E%26amp%3B%3C%2Ftext%3E%3Ctext%20x%3D%22648%22%20y%3D%22230%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22900%22%20font-size%3D%22244%22%20letter-spacing%3D%22-14%22%20fill%3D%22url(%23r)%22%3EOUT%3C%2Ftext%3E%3Cpath%20d%3D%22M789%20135h57v-16l43%2035-43%2035v-17h-57z%22%20fill%3D%22url(%23g)%22%2F%3E%3C%2Fsvg%3E" alt="PICK & OUT"><div class="intro-line"></div><small>COFFEE · FOOD · GOOD MOOD</small></div></div>
