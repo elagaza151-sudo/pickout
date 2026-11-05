@@ -1098,6 +1098,20 @@ body.po-loading-active #pickoutBackdrop,body.po-loading-active #pickoutBackdrop 
 header .nav>a.brand{display:flex!important;align-items:center;flex:0 0 auto;height:54px}
 header .nav>a.brand img{width:clamp(115px,15vw,175px);height:52px;object-fit:contain}
 @media(max-width:760px){header .nav>a.brand img{width:120px;height:44px}header .nav>a.brand{height:46px}}
+</style><style id="po-first-paint-hardfix-v38">
+/* Paint the final cafe wall before the first DOM frame, including slow connections. */
+#pickoutSplash2026::before,#pickoutSplash2026::after{display:none!important}
+html{background:#402113!important}
+body{background:#402113!important}
+#pickoutSplash2026{background:transparent!important}
+#pickoutBackdrop{display:block!important;visibility:visible!important;opacity:1!important;z-index:0!important}
+body.po-loading-active>#pickoutBackdrop,body.po-loading-active>#pickoutBackdrop *{visibility:visible!important}
+body.po-loading-active>#pickoutSplash2026{background:transparent!important}
+body.po-loading-active>#pickoutSplash2026 .po-wall,
+body.po-loading-active>#pickoutSplash2026 .po-floor,
+body.po-loading-active>#pickoutSplash2026 .po-glow{display:none!important}
+header .nav>a.brand{display:flex!important;visibility:visible!important;opacity:1!important}
+header .nav>a.brand img{display:block!important;opacity:1!important}
 </style></head>
 <body class="po-loading-active"><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
