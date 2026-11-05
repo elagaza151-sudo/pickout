@@ -1057,10 +1057,15 @@ background-size:292px 100%,100% 100%!important;box-shadow:inset 0 0 22px #110905
 #pickoutSplash2026 .po-wall,#pickoutSplash2026 .po-floor{display:none!important}
 #pickoutSplash2026.po-exit{animation:poSplashSoftFade .72s ease-in-out forwards!important;transform:none!important}
 @keyframes poSplashSoftFade{0%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+</style><style id="po-splash-one-backdrop-v33">
+/* The exact same fixed backdrop is visible before, during and after loading. */
+#pickoutSplash2026{background:transparent!important}
+#pickoutSplash2026 .po-glow{background:linear-gradient(#18090418,#18090440)!important;opacity:.35!important}
+#pickoutBackdrop{position:fixed!important;inset:0!important;z-index:0!important}
 </style></head>
-<body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
+<body><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
-<div class="po-content"><div class="po-title">PICK <span>&amp;</span> OUT</div><div class="po-cup"><i class="po-steam po-s1"></i><i class="po-steam po-s2"></i><i class="po-steam po-s3"></i><div class="po-coffee"></div><div class="po-handle"></div><b>PICK <span>&amp;</span> OUT</b></div><p>جاري تحضير تجربتك...</p><div class="po-progress"><i></i></div></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div></div>
+<div class="po-content"><div class="po-title">PICK <span>&amp;</span> OUT</div><div class="po-cup"><i class="po-steam po-s1"></i><i class="po-steam po-s2"></i><i class="po-steam po-s3"></i><div class="po-coffee"></div><div class="po-handle"></div><b>PICK <span>&amp;</span> OUT</b></div><p>جاري تحضير تجربتك...</p><div class="po-progress"><i></i></div></div></div>
 <div id="liveCafe" aria-hidden="true"><i class="smoke"></i><i class="smoke"></i><i class="smoke"></i><i class="lampGlow"></i></div>
 <div class="atmosphere"></div><div class="ambient-light"></div>
 <header><div class="nav"><a class="brand" href="#home" aria-label="PICK & OUT"><img src="https://elagaza151-sudo.github.io/pickout/pickout-logo.png?v=logo2" alt="PICK & OUT" loading="eager" decoding="async"></a><nav><a href="#home">الرئيسية</a><a href="#features">التجربة</a><a href="#games">الألعاب</a><a href="#menu" >المنيو</a></nav><a class="btn primary" href="#menu">تصفح المنيو</a></div></header>
@@ -1413,8 +1418,7 @@ function dismissSplash(){if(!splash)return;splash.classList.add('po-dismiss');sp
 setTimeout(()=>{
  if(!splash)return;
  // Keep the backdrop mounted and painted behind the splash before it fades.
- const actual=splash.querySelector('#pickoutBackdrop');
- if(actual)document.body.insertBefore(actual,splash.nextSibling);
+ // The shared backdrop stays mounted throughout loading and after it.
  splash.classList.add('po-exit');
  splash.addEventListener('animationend',dismissSplash,{once:true});
  setTimeout(dismissSplash,950);
