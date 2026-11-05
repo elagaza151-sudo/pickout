@@ -1247,6 +1247,7 @@ async function submitPickoutOrder(){
  const btn=status.parentElement.querySelector('button');btn.disabled=true;btn.textContent='جاري إرسال الطلب...';
  const {data,error}=await pickoutDb.rpc('submit_guest_order',payload);
  if(error){status.textContent='تعذر إرسال الطلب: '+error.message;btn.disabled=false;btn.textContent='تأكيد الطلب';return;}
+ if(window.pickoutRememberOrder)window.pickoutRememberOrder(data,payload.p_customer_phone);
  cart=[];updateCartCount();document.getElementById('modalContent').innerHTML=`<h3>طلبك وصل بنجاح 🎉</h3><p>رقم الطلب: <strong>#${data.order_number}</strong></p><p>قيمة المنتجات: ${egp(data.subtotal)}</p><p>الدليفري: ${egp(data.delivery_fee)}</p><h3>الإجمالي: ${egp(data.total)}</h3><p>هنبدأ نجهز طلبك وهنحدث حالته من الفرع.</p>`;
 }
 loadPickoutBackend();
@@ -1645,4 +1646,4 @@ document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
 },1250);
 }catch(e){console.error('PICKOUT cart animation',e)}
 };
-</script></body></html>
+</script><script src="customer-sync.js?v=customer24" defer></script></body></html>
