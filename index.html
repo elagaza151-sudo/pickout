@@ -1029,9 +1029,6 @@ background-size:292px 100%,100% 100%!important;box-shadow:inset 0 0 22px #110905
 #poCartFlyV22.po-moving{transition:top 1.15s cubic-bezier(.24,.65,.2,1),left 1.15s cubic-bezier(.24,.65,.2,1),opacity 1.15s ease!important}
 #poCartFlyV22.po-moving.po-end{opacity:.25!important}
 #poCartToastV22{position:fixed!important;z-index:2147483647!important;background:#10442c!important;border:2px solid #51e5a1!important;border-radius:14px!important;color:white!important;padding:12px 18px!important;font:800 16px Arial,sans-serif!important;box-shadow:0 0 24px #51e5a188!important;pointer-events:none!important}
-</style><style id="po-cart-image-only-v25">#poCartFlyV22:has(img){font-size:0!important;padding:5px!important;box-sizing:border-box!important}#poCartFlyV22 img{width:100%!important;height:100%!important;object-fit:contain!important;display:block!important}</style><style id="po-cart-arc-motion-v26">
-#poCartFlyV22,#poCartFlyV22.po-moving,#poCartFlyV22.po-moving.po-end{transition:none!important;opacity:1!important;will-change:transform,opacity!important;contain:layout paint style!important}
-#poCartFlyV22{box-shadow:0 0 14px #46df9b77!important}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
@@ -1507,26 +1504,17 @@ try{
 const cart=document.querySelector('.cart-fab');if(!cart)return;
 document.getElementById('poCartFlyV22')?.remove();
 const start=button.getBoundingClientRect(),end=cart.getBoundingClientRect();
-const fly=document.createElement('div');fly.id='poCartFlyV22';
-const image=button.closest('.card')?.querySelector('.productArt img');
-if(image && image.complete && image.naturalWidth>0){
- const clone=document.createElement('img');clone.src=image.currentSrc||image.src;clone.alt='';clone.decoding='async';clone.style.cssText='width:100%;height:100%;object-fit:contain;display:block;border-radius:12px;';fly.appendChild(clone);
-}else{fly.textContent='☕';}
+const fly=document.createElement('div');fly.id='poCartFlyV22';fly.textContent='☕';
 fly.style.setProperty('left',(start.left+start.width/2)+'px','important');
 fly.style.setProperty('top',(start.top+start.height/2)+'px','important');
 document.body.appendChild(fly);
 void fly.offsetWidth;
-const dx=(end.left+end.width/2)-(start.left+start.width/2);
-const dy=(end.top+end.height/2)-(start.top+start.height/2);
-const arc=Math.min(115,Math.max(40,Math.abs(dx)*.16));
-const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const duration=reduced?0:850;
-const anim=fly.animate([
-{transform:'translate(-50%,-50%) translate3d(0,0,0) scale(.82) rotate(0deg)',opacity:1,offset:0},
-{transform:'translate(-50%,-50%) translate3d(0,-'+arc+'px,0) scale(1.08) rotate(-7deg)',opacity:1,offset:.22},
-{transform:'translate(-50%,-50%) translate3d('+(dx*.58)+'px,'+(dy*.58-arc*.7)+'px,0) scale(.72) rotate(9deg)',opacity:1,offset:.65},
-{transform:'translate(-50%,-50%) translate3d('+dx+'px,'+dy+'px,0) scale(.16) rotate(0deg)',opacity:0,offset:1}
-],{duration:Math.max(1,duration),easing:'cubic-bezier(.22,.7,.2,1)',fill:'forwards'});
+fly.classList.add('po-moving');
+requestAnimationFrame(()=>requestAnimationFrame(()=>{
+fly.classList.add('po-end');
+fly.style.setProperty('left',(end.left+end.width/2)+'px','important');
+fly.style.setProperty('top',(end.top+end.height/2)+'px','important');
+}));
 setTimeout(()=>{
 fly.remove();
 cart.animate([{transform:'scale(1)'},{transform:'scale(1.22)'},{transform:'scale(1)'}],{duration:380});
@@ -1534,7 +1522,7 @@ const note=document.createElement('div');note.id='poCartToastV22';note.textConte
 note.style.setProperty('left',Math.max(8,end.left-25)+'px','important');
 note.style.setProperty('top',Math.max(8,end.top-60)+'px','important');
 document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
-},duration+100);
+},1250);
 }catch(e){console.error('PICKOUT cart animation',e)}
 };
 </script></body></html>
