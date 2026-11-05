@@ -1082,6 +1082,12 @@ body.po-loading-complete > header,
 body.po-loading-complete > main{animation:poSiteReveal .55s ease-out both}
 @keyframes poSiteReveal{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){body.po-loading-complete > header,body.po-loading-complete > main{animation:none}}
+</style><style id="po-loader-header-hard-fix-v36">
+/* Keep navigation and its logo completely out of the loading screen. */
+body.po-loading-active header,
+body.po-loading-active .nav,
+body.po-loading-active .brand{display:none!important}
+header .nav > a.brand{display:none!important}
 </style></head>
 <body class="po-loading-active"><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
