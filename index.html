@@ -1088,7 +1088,7 @@ body.po-loading-complete > main{animation:poSiteReveal .55s ease-out both}
 <div class="po-content"><div class="po-title">PICK <span>&amp;</span> OUT</div><div class="po-cup"><i class="po-steam po-s1"></i><i class="po-steam po-s2"></i><i class="po-steam po-s3"></i><div class="po-coffee"></div><div class="po-handle"></div><b>PICK <span>&amp;</span> OUT</b></div><p>جاري تحضير تجربتك...</p><div class="po-progress"><i></i></div></div></div>
 <div id="liveCafe" aria-hidden="true"><i class="smoke"></i><i class="smoke"></i><i class="smoke"></i><i class="lampGlow"></i></div>
 <div class="atmosphere"></div><div class="ambient-light"></div>
-<header><div class="nav"><a class="brand" href="#home" aria-label="PICK & OUT"><img src="https://elagaza151-sudo.github.io/pickout/pickout-logo.png?v=logo2" alt="PICK & OUT" loading="eager" decoding="async"></a><nav><a href="#home">الرئيسية</a><a href="#features">التجربة</a><a href="#games">الألعاب</a><a href="#menu" >المنيو</a></nav><a class="btn primary" href="#menu">تصفح المنيو</a></div></header>
+<header><div class="nav"><nav><a href="#home">الرئيسية</a><a href="#features">التجربة</a><a href="#games">الألعاب</a><a href="#menu" >المنيو</a></nav><a class="btn primary" href="#menu">تصفح المنيو</a></div></header>
 <main id="home">
 <section class="hero">
 <div><div class="eyebrow">PICK & OUT • COFFEE · FOOD · GOOD MOOD</div><h1>أهلاً بيك في<br><em>PICK<span style="color:#23b957">&amp;</span>OUT</em></h1><p>مشروبات مميزة، حلويات لذيذة، وتجربة كافيه متكاملة. اطلب الآن واستلم من الكافيه بكل سهولة!</p><div class="actions"><a class="menu-cta" href="#menu" ><span class="menu-cta-icon">☕</span><span class="menu-cta-copy"><strong>تصفح المنيو</strong><small>اكتشف مشروبك ووجبتك المفضلة</small></span><span class="menu-cta-arrow">←</span></a><a class="btn" href="#features">اكتشف تجربتنا ◉</a></div></div>
@@ -1440,7 +1440,7 @@ setTimeout(()=>{
  // Keep the backdrop mounted and painted behind the splash before it fades.
  // The shared backdrop stays mounted throughout loading and after it.
  splash.classList.add('po-exit');
- splash.addEventListener('animationend',dismissSplash,{once:true});
+ splash.addEventListener('animationend',e=>{if(e.target===splash)dismissSplash()});
  setTimeout(dismissSplash,950);
 },5100);
 let closeTimer;
