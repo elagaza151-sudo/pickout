@@ -1032,9 +1032,9 @@ background-size:292px 100%,100% 100%!important;box-shadow:inset 0 0 22px #110905
 </style><style id="po-cart-arc-css-v27">
 #poCartFlyV22.po-arc-cart-v27{width:64px!important;height:64px!important;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;display:block!important;transform:translate(-50%,-50%)!important;contain:layout style paint!important}
 .po-arc-x-v27,.po-arc-y-v27{width:100%;height:100%;transform:translate3d(0,0,0);will-change:transform}
-.po-arc-x-v27{transition:transform 1.45s cubic-bezier(.35,.05,.72,1)}
-.po-arc-y-v27{transition:transform 1.45s cubic-bezier(.1,.8,.42,1)}
-.po-arc-pic-v27{width:100%;height:100%;display:grid;place-items:center;font-size:36px;transition:transform 1.45s ease;will-change:transform,opacity}
+.po-arc-x-v27{transition:transform 2.6s cubic-bezier(.35,.05,.72,1)}
+.po-arc-y-v27{transition:transform 2.6s cubic-bezier(.1,.8,.42,1)}
+.po-arc-pic-v27{width:100%;height:100%;display:grid;place-items:center;font-size:36px;transition:transform 2.6s ease;will-change:transform,opacity}
 .po-arc-pic-v27{opacity:1!important}.po-arc-pic-v27 img{display:block;width:100%;height:100%;object-fit:contain}
 .cart-fab.po-cart-bump-v27{scale:1.1;transition:scale .12s ease}
 @media(prefers-reduced-motion:reduce){.po-arc-x-v27,.po-arc-y-v27,.po-arc-pic-v27{transition-duration:.01ms!important}}
@@ -1526,7 +1526,7 @@ try{
  if(source&&source.complete&&source.naturalWidth){const img=document.createElement('img');img.src=source.currentSrc||source.src;img.alt='';pic.appendChild(img);}
  else pic.textContent='☕';
  vertical.appendChild(pic);horizontal.appendChild(vertical);fly.appendChild(horizontal);document.body.appendChild(fly);
- const duration=1450;
+ const duration=2600;
  requestAnimationFrame(()=>requestAnimationFrame(()=>{
   horizontal.style.transform='translate3d('+dx+'px,0,0)';
   vertical.style.transform='translate3d(0,'+dy+'px,0)';
