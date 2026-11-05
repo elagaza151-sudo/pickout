@@ -1402,8 +1402,16 @@ const backdrop=document.getElementById('pickoutBackdrop');
 if(backdrop){for(let i=0;i<16;i++){const d=document.createElement('i');d.className='cafe-spark';d.style.cssText='--x:'+(5+(i*37)%90)+'%;--y:'+(15+(i*19)%78)+'%;--sz:'+(2+i%3)+'px;--dur:'+(8+i%7)+'s;--delay:-'+(i*.8)+'s';backdrop.appendChild(d)}}
 const splash=document.getElementById('pickoutSplash2026');
 if(backdrop){for(let i=0;i<7;i++){const v=document.createElement('i');v.className='extra-vapor';v.style.setProperty('--i',i);backdrop.appendChild(v)}}
-function dismissSplash(){if(!splash)return;splash.classList.add('po-dismiss');setTimeout(()=>{const actual=splash.querySelector('#pickoutBackdrop');if(actual)document.body.insertBefore(actual,splash.nextSibling);splash.remove()},750)}
-setTimeout(()=>{if(splash){splash.classList.add('po-exit');setTimeout(dismissSplash,850)}},5100);
+function dismissSplash(){if(!splash)return;splash.classList.add('po-dismiss');splash.remove()}
+setTimeout(()=>{
+ if(!splash)return;
+ // Keep the backdrop mounted and painted behind the splash before it fades.
+ const actual=splash.querySelector('#pickoutBackdrop');
+ if(actual)document.body.insertBefore(actual,splash.nextSibling);
+ splash.classList.add('po-exit');
+ splash.addEventListener('animationend',dismissSplash,{once:true});
+ setTimeout(dismissSplash,950);
+},5100);
 let closeTimer;
 const originalClose=window.closeModal;
 window.closeModal=function(){
