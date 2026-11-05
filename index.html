@@ -1419,10 +1419,10 @@ async function aiRecommend(){
   const {data,error}=await pickoutDb.functions.invoke('pickout-ai',{body:{preferences,products}});
   if(error)throw error;
   const chosen=(data?.recommendations||[]).map(x=>({...x,product:products.find(p=>p.id===x.product_id)})).filter(x=>x.product);
-  if(!chosen.length)throw new Error(data?.message||'مفيش ترشيح مناسب من المنيو.');
-  result.innerHTML=chosen.map((x,i)=>`<div style="margin:8px 0"><b>${i===0?'⭐ ترشيحنا الأول':'✨ اختيار إضافي'}: ${safeText(x.product.name)}</b> — ${egp(x.product.price)}<br><small>${safeText(x.reason||'اختيار مناسب لتفضيلاتك')}</small></div>`).join('');
+  if(!chosen.length){result.textContent=data?.message||'مفيش ترشيح مناسب من المنيو.';return;}
+  result.innerHTML=(data?.mode==='smart_matching'?'<p style="font-size:12px;opacity:.8">ترشيحات ذكية حسب تفضيلاتك والمنيو الحالي</p>':'<p style="font-size:12px;opacity:.8">ترشيحات المساعد الذكي</p>')+chosen.map((x,i)=>`<div style="margin:8px 0"><b>${i===0?'⭐ ترشيحنا الأول':'✨ اختيار إضافي'}: ${safeText(x.product.name)}</b> — ${egp(x.product.price)}<br><small>${safeText(x.reason||'اختيار مناسب لتفضيلاتك')}</small></div>`).join('');
  }catch(e){
-  result.textContent='مش قادر أوصل لمساعد Pickout الذكي دلوقتي. محتاج تفعيل خدمة AI على Supabase (pickout-ai) وإضافة مفتاح OpenAI كـ Secret. التفاصيل موجودة مع ملفات التحديث. '+(e?.message||'');
+  result.textContent='تعذر تحميل الترشيحات دلوقتي. جرّب تاني بعد لحظات. '+(e?.message||'');
  }finally{if(btn){btn.disabled=false;btn.textContent='رشحلي حاجة'}}
 }
 
