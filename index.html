@@ -1194,10 +1194,11 @@ function spin(){let a=['آيس لاتيه 🧊','كابتشينو ☕','موهي
 const PICKOUT_SUPABASE_URL='https://ybnujvjcqrrvacquedyr.supabase.co';
 const PICKOUT_SUPABASE_KEY='sb_publishable_oFXCDAq2QHOvyFcZGAe7NA_hL-MBiAM';
 const pickoutDb=window.supabase.createClient(PICKOUT_SUPABASE_URL,PICKOUT_SUPABASE_KEY);
-let liveProducts=[],liveCategories=[],deliveryZones=[],cart=[];
+let liveProducts=[],liveCategories=[],deliveryZones=[],cart=[],checkoutFees={tax_percent:0,service_percent:0};
 const egp=n=>Number(n||0).toLocaleString('ar-EG',{maximumFractionDigits:2})+' ج';
 function safeText(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 async function loadPickoutBackend(){
+ const feeResult=await pickoutDb.rpc('get_checkout_fees');if(!feeResult.error&&feeResult.data)checkoutFees=feeResult.data;
  const [c,p,z]=await Promise.all([
   pickoutDb.from('menu_categories').select('id,name,name_ar,sort_order').eq('is_active',true).order('sort_order'),
   pickoutDb.from('menu_products').select('id,category_id,name,name_ar,description,image_url,base_price,is_featured').eq('is_available',true).order('sort_order'),
@@ -1236,7 +1237,7 @@ function showCart(){
 function changeQty(i,d){cart[i].quantity+=d;if(cart[i].quantity<1)cart.splice(i,1);updateCartCount();showCart()}
 function checkoutForm(){
  const c=document.getElementById('modalContent');
- c.innerHTML=`<h3>بيانات الطلب</h3><div class="checkout-grid"><label>الاسم<input id="coName" maxlength="120" required></label><label>رقم الموبايل<input id="coPhone" type="tel" maxlength="30" required></label><label>نوع الطلب<select id="coType" onchange="toggleDeliveryFields()"><option value="takeaway">استلام من الفرع</option></select></label><label id="tableField" style="display:none">رقم أو اسم الطاولة<input id="coTable"></label><div id="deliveryFields" style="display:none"><label>منطقة التوصيل<select id="coZone" onchange="showDeliveryFee()"><option value="">اختار المنطقة</option>${deliveryZones.map(z=>`<option value="${z.id}" data-fee="${z.delivery_fee}">${safeText(z.name_ar||z.name)} — ${egp(z.delivery_fee)}</option>`).join('')}</select></label><label>العنوان بالتفصيل<textarea id="coAddress" rows="3"></textarea></label><p id="deliveryFeeText" class="status-line"></p></div><label>ملاحظات<textarea id="coNotes" rows="2"></textarea></label><p id="checkoutStatus" class="status-line"></p><button class="btn primary" onclick="submitPickoutOrder()">تأكيد الطلب</button></div>`;
+ c.innerHTML=`<h3>بيانات الطلب</h3><div class="checkout-grid"><label>الاسم<input id="coName" maxlength="120" required></label><label>رقم الموبايل<input id="coPhone" type="tel" maxlength="30" required></label><label>نوع الطلب<select id="coType" onchange="toggleDeliveryFields()"><option value="takeaway">استلام من الفرع</option></select></label><label id="tableField" style="display:none">رقم أو اسم الطاولة<input id="coTable"></label><div id="deliveryFields" style="display:none"><label>منطقة التوصيل<select id="coZone" onchange="showDeliveryFee()"><option value="">اختار المنطقة</option>${deliveryZones.map(z=>`<option value="${z.id}" data-fee="${z.delivery_fee}">${safeText(z.name_ar||z.name)} — ${egp(z.delivery_fee)}</option>`).join('')}</select></label><label>العنوان بالتفصيل<textarea id="coAddress" rows="3"></textarea></label><p id="deliveryFeeText" class="status-line"></p></div><label>ملاحظات<textarea id="coNotes" rows="2"></textarea></label><p class="status-line">المنتجات قبل الإضافات: ${egp(cart.reduce((a,x)=>a+x.price*x.quantity,0))}<br>الضريبة (${Number(checkoutFees.tax_percent||0)}%): ${egp(cart.reduce((a,x)=>a+x.price*x.quantity,0)*Number(checkoutFees.tax_percent||0)/100)}<br>الخدمة (${Number(checkoutFees.service_percent||0)}%): ${egp(cart.reduce((a,x)=>a+x.price*x.quantity,0)*Number(checkoutFees.service_percent||0)/100)}<br>الإجمالي النهائي يشمل الإضافات ويُحسب عند التأكيد.</p><p id="checkoutStatus" class="status-line"></p><button class="btn primary" onclick="submitPickoutOrder()">تأكيد الطلب</button></div>`;
 }
 function toggleDeliveryFields(){const t=document.getElementById('coType').value;document.getElementById('deliveryFields').style.display=t==='delivery'?'block':'none';document.getElementById('tableField').style.display=t==='dine_in'?'block':'none'}
 function showDeliveryFee(){const o=document.getElementById('coZone').selectedOptions[0];document.getElementById('deliveryFeeText').textContent=o?.dataset.fee!==undefined?'رسوم التوصيل: '+egp(o.dataset.fee):''}
@@ -1248,7 +1249,7 @@ async function submitPickoutOrder(){
  const {data,error}=await pickoutDb.rpc('submit_guest_order',payload);
  if(error){status.textContent='تعذر إرسال الطلب: '+error.message;btn.disabled=false;btn.textContent='تأكيد الطلب';return;}
  if(window.pickoutRememberOrder)window.pickoutRememberOrder(data,payload.p_customer_phone);
- cart=[];updateCartCount();document.getElementById('modalContent').innerHTML=`<h3>طلبك وصل بنجاح 🎉</h3><p>رقم الطلب: <strong>#${data.order_number}</strong></p><p>قيمة المنتجات: ${egp(data.subtotal)}</p><p>الدليفري: ${egp(data.delivery_fee)}</p><h3>الإجمالي: ${egp(data.total)}</h3><p>هنبدأ نجهز طلبك وهنحدث حالته من الفرع.</p>`;
+ cart=[];updateCartCount();document.getElementById('modalContent').innerHTML=`<h3>طلبك وصل بنجاح 🎉</h3><p>رقم الطلب: <strong>#${data.order_number}</strong></p><p>قيمة المنتجات: ${egp(data.subtotal)}</p><p>الضريبة: ${egp(data.tax_amount||0)}</p><p>رسوم الخدمة: ${egp(data.service_amount||0)}</p><p>الدليفري: ${egp(data.delivery_fee)}</p><h3>الإجمالي: ${egp(data.total)}</h3><p>هنبدأ نجهز طلبك وهنحدث حالته من الفرع.</p>`;
 }
 loadPickoutBackend();
 </script>
