@@ -1112,28 +1112,23 @@ body.po-loading-active>#pickoutSplash2026 .po-floor,
 body.po-loading-active>#pickoutSplash2026 .po-glow{display:none!important}
 header .nav>a.brand{display:flex!important;visibility:visible!important;opacity:1!important}
 header .nav>a.brand img{display:block!important;opacity:1!important}
-</style><style id="po-scene-image-ready-v39">
-/* Keep the splash scene offscreen until its external wall texture is ready.
-   This prevents the procedural fallback wall from appearing for one frame. */
-html:not(.po-scene-ready) body{background:#402113!important}
+</style><style id="po-scene-image-ready-v40">
+/* Keep a uniform first paint until the brick texture is decoded. */
 html:not(.po-scene-ready) #pickoutBackdrop,
-html:not(.po-scene-ready) #pickoutSplash2026 .po-content{opacity:0!important;visibility:hidden!important}
-html.po-scene-ready #pickoutBackdrop,
-html.po-scene-ready #pickoutSplash2026 .po-content{visibility:visible!important}
-html:not(.po-scene-ready) #pickoutSplash2026 .po-content *,
-html:not(.po-scene-ready) #pickoutBackdrop *{animation-play-state:paused!important}
+html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:hidden!important;opacity:0!important}
+html:not(.po-scene-ready),html:not(.po-scene-ready) body{background:#402113!important}
+html.po-scene-fallback #pickoutBackdrop .backdrop-bricks{background-image:linear-gradient(110deg,#763e2e,#9c513a 50%,#5d3025),repeating-linear-gradient(0deg,transparent 0 44px,#28130e 45px 49px)!important}
 </style>
 <link rel="preload" as="image" href="https://commons.wikimedia.org/wiki/Special:FilePath/Red_brick_texture_wall.jpg?width=1024">
-<script id="po-scene-image-gate-v39">
+<script id="po-scene-image-gate-v40">
 (function(){
- var ready=false;
- function show(){if(ready)return;ready=true;document.documentElement.classList.add('po-scene-ready')}
- var image=new Image();
- image.onload=show;
- image.onerror=show;
- image.src='https://commons.wikimedia.org/wiki/Special:FilePath/Red_brick_texture_wall.jpg?width=1024';
- if(image.complete&&image.naturalWidth)show();
- setTimeout(show,4500);
+var done=false;
+function finish(fallback){if(done)return;done=true;if(fallback)document.documentElement.classList.add('po-scene-fallback');document.documentElement.classList.add('po-scene-ready')}
+var img=new Image();
+img.onload=function(){if(img.decode){img.decode().then(function(){finish(false)},function(){finish(true)})}else finish(false)};
+img.onerror=function(){finish(true)};
+img.src='https://commons.wikimedia.org/wiki/Special:FilePath/Red_brick_texture_wall.jpg?width=1024';
+setTimeout(function(){finish(true)},7500);
 })();
 </script></head>
 <body class="po-loading-active"><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
