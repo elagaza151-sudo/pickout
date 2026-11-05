@@ -1029,13 +1029,9 @@ background-size:292px 100%,100% 100%!important;box-shadow:inset 0 0 22px #110905
 #poCartFlyV22.po-moving{transition:top 1.15s cubic-bezier(.24,.65,.2,1),left 1.15s cubic-bezier(.24,.65,.2,1),opacity 1.15s ease!important}
 #poCartFlyV22.po-moving.po-end{opacity:.25!important}
 #poCartToastV22{position:fixed!important;z-index:2147483647!important;background:#10442c!important;border:2px solid #51e5a1!important;border-radius:14px!important;color:white!important;padding:12px 18px!important;font:800 16px Arial,sans-serif!important;box-shadow:0 0 24px #51e5a188!important;pointer-events:none!important}
-</style><style id="po-cart-arc-css-v27">
-/* Single flight style: old verified transition, product photo only. */
-#poCartFlyV22{width:76px!important;height:76px!important;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;display:grid!important;place-items:center!important;filter:none!important;opacity:1!important;animation:none!important;transition:none!important;overflow:visible!important;transform:translate(-50%,-50%) scale(1)!important}
-#poCartFlyV22 img{width:100%!important;height:100%!important;object-fit:contain!important;display:block!important}
-#poCartFlyV22.po-moving{transition:left 1.8s cubic-bezier(.24,.65,.2,1),top 1.8s cubic-bezier(.24,.65,.2,1)!important}
-#poCartFlyV22.po-moving.po-end{opacity:1!important}
-.cart-fab.po-cart-bump-v27{scale:1.1;transition:scale .12s ease}
+</style><style id="po-product-photo-fix-v29">
+#poCartFlyV22:has(img){background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;font-size:0!important}
+#poCartFlyV22 img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
 </style></head>
 <body><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#492414!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
@@ -1508,33 +1504,34 @@ for(let i=0;i<7;i++){const e=document.createElement('i');e.className='po-aroma';
 </script><script id="po-harmonized-seam-runtime">(function(){const b=document.getElementById('pickoutBackdrop');if(b&&!b.querySelector('.po-brick-wood-seam')){const e=document.createElement('div');e.className='po-brick-wood-seam';b.appendChild(e)}})();</script><script id="po-classic-rail-runtime">(function(){const b=document.getElementById('pickoutBackdrop');if(b&&!b.querySelector('.po-classic-rail')){const e=document.createElement('div');e.className='po-classic-rail';b.appendChild(e)}})();</script><script id="po-coffee-motion-runtime">(function(){const b=document.getElementById('pickoutBackdrop');if(!b||b.querySelector('.po-cup-aura'))return;const aura=document.createElement('div');aura.className='po-cup-aura';b.appendChild(aura);const beans=[['73%','14%','11s','-1s','-26px'],['82%','19%','14s','-7s','30px'],['65%','9%','13s','-4s','42px'],['91%','13%','15s','-10s','-37px'],['54%','10%','17s','-3s','19px']];beans.forEach(([l,bt,d,de,t])=>{const e=document.createElement('i');e.className='po-floating-bean';e.style.setProperty('--left',l);e.style.setProperty('--bottom',bt);e.style.setProperty('--duration',d);e.style.setProperty('--delay',de);e.style.setProperty('--travel',t);b.appendChild(e)})})();</script><script id="po-visible-motion-hotfix-runtime">(function(){function fix(){const b=document.getElementById('pickoutBackdrop');if(!b)return;const cup=b.querySelector('.backdrop-coffee');const beans=[...b.querySelectorAll('.po-floating-bean')];if(!cup||!beans.length)return;const rect=cup.getBoundingClientRect();const parent=b.getBoundingClientRect();beans.forEach((el,i)=>{el.style.setProperty('left',Math.max(5,rect.left-parent.left+rect.width*(.15+i*.16))+'px','important');el.style.setProperty('bottom',Math.max(15,parent.bottom-rect.top-rect.height*.55)+'px','important');el.style.setProperty('animation-delay',(-i*1.7)+'s','important')})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fix);else fix();window.addEventListener('resize',fix,{passive:true})})();</script><script id="po-upper-wall-motion-runtime">(function(){function init(){const b=document.getElementById('pickoutBackdrop');if(!b||b.querySelector('.po-upper-light'))return;const glow=document.createElement('div');glow.className='po-upper-light';b.appendChild(glow);for(let i=0;i<22;i++){const e=document.createElement('i');e.className='po-upper-spark';e.style.setProperty('--left',(7+(i*37)%86)+'%');e.style.setProperty('--top',(7+(i*17)%36)+'%');e.style.setProperty('--size',(3+i%3*2)+'px');e.style.setProperty('--time',(5+i%6)+'s');e.style.setProperty('--delay',(-i*.8)+'s');b.appendChild(e)}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();</script><script id="po-splash-atmosphere-runtime">(function(){function init(){const b=document.getElementById('pickoutSplash2026');if(!b||b.querySelector('.po-splash-lamp'))return;const lamp=document.createElement('div');lamp.className='po-splash-lamp';b.appendChild(lamp);for(let i=0;i<19;i++){const p=document.createElement('i');p.className='po-splash-particle';p.style.setProperty('--x',(7+(i*37)%88)+'%');p.style.setProperty('--y',(6+(i*13)%39)+'%');p.style.setProperty('--sz',(3+i%3*2)+'px');p.style.setProperty('--t',(4+i%5)+'s');p.style.setProperty('--d',(-i*.7)+'s');b.appendChild(p)}for(let i=0;i<5;i++){const p=document.createElement('i');p.className='po-splash-bean';p.style.setProperty('--x',(64+i*7)+'%');p.style.setProperty('--y',(49+i%3*9)+'%');p.style.setProperty('--t',(6+i)+'s');p.style.setProperty('--d',(-i*1.4)+'s');b.appendChild(p)}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();</script><script id="po-splash-exact-background-sync-runtime">(function(){function sync(){const splash=document.getElementById('pickoutSplash2026');const source=document.getElementById('pickoutBackdrop');if(!splash||!source||splash.querySelector('.po-splash-shared-backdrop'))return;const wrapper=document.createElement('div');wrapper.className='po-splash-shared-backdrop';for(const cls of ['backdrop-bricks','backdrop-wood','po-brick-wood-seam','po-classic-rail']){const original=source.querySelector('.'+cls);if(original){const copy=original.cloneNode(false);wrapper.appendChild(copy)}}splash.insertBefore(wrapper,splash.firstChild)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync);else sync()})();</script><script id="po-cart-visible-runtime-v22">
 window.poCartVisual=function(button){
 try{
- const cart=document.querySelector('.cart-fab');if(!cart||!button)return;
- document.getElementById('poCartFlyV22')?.remove();
- const source=button.closest('.card')?.querySelector('.productArt img');
- const start=button.getBoundingClientRect(),end=cart.getBoundingClientRect();
- const fly=document.createElement('div');fly.id='poCartFlyV22';
- if(source&&source.complete&&source.naturalWidth){
-  const img=document.createElement('img');img.src=source.currentSrc||source.src;img.alt='';img.decoding='async';fly.appendChild(img);
- }else fly.textContent='☕';
- fly.style.setProperty('left',(start.left+start.width/2)+'px','important');
- fly.style.setProperty('top',(start.top+start.height/2)+'px','important');
- document.body.appendChild(fly);
- // Restore the exact proven left/top transition mechanism. No CSS keyframe animations.
- void fly.offsetWidth;
- fly.classList.add('po-moving');
- requestAnimationFrame(()=>requestAnimationFrame(()=>{
-  fly.classList.add('po-end');
-  fly.style.setProperty('left',(end.left+end.width/2)+'px','important');
-  fly.style.setProperty('top',(end.top+end.height/2)+'px','important');
- }));
- setTimeout(()=>{
-  fly.remove();
-  if(cart.isConnected){cart.classList.add('po-cart-bump-v27');setTimeout(()=>cart.classList.remove('po-cart-bump-v27'),240);}
-  const note=document.createElement('div');note.id='poCartToastV22';note.textContent='✓ اتضاف للسلة';
-  note.style.setProperty('left',Math.max(8,end.left-25)+'px','important');
-  note.style.setProperty('top',Math.max(8,end.top-60)+'px','important');
-  document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
- },1900);
+const cart=document.querySelector('.cart-fab');if(!cart)return;
+document.getElementById('poCartFlyV22')?.remove();
+const start=button.getBoundingClientRect(),end=cart.getBoundingClientRect();
+const fly=document.createElement('div');fly.id='poCartFlyV22';
+const source=button.closest('.card')?.querySelector('.productArt img');
+if(source&&source.complete&&source.naturalWidth){
+ const img=document.createElement('img');img.src=source.currentSrc||source.src;img.alt='';
+ img.style.cssText='display:block;width:100%;height:100%;object-fit:contain;';
+ fly.appendChild(img);
+}else{fly.textContent='☕';}
+fly.style.setProperty('left',(start.left+start.width/2)+'px','important');
+fly.style.setProperty('top',(start.top+start.height/2)+'px','important');
+document.body.appendChild(fly);
+void fly.offsetWidth;
+fly.classList.add('po-moving');
+requestAnimationFrame(()=>requestAnimationFrame(()=>{
+fly.classList.add('po-end');
+fly.style.setProperty('left',(end.left+end.width/2)+'px','important');
+fly.style.setProperty('top',(end.top+end.height/2)+'px','important');
+}));
+setTimeout(()=>{
+fly.remove();
+cart.animate([{transform:'scale(1)'},{transform:'scale(1.22)'},{transform:'scale(1)'}],{duration:380});
+const note=document.createElement('div');note.id='poCartToastV22';note.textContent='✓ اتضاف للسلة';
+note.style.setProperty('left',Math.max(8,end.left-25)+'px','important');
+note.style.setProperty('top',Math.max(8,end.top-60)+'px','important');
+document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
+},1250);
 }catch(e){console.error('PICKOUT cart animation',e)}
 };
 </script></body></html>
