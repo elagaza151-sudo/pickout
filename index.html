@@ -1202,6 +1202,29 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
  #pickoutSplash2026 .po-cup{max-height:24dvh!important}
 }
 </style>
+<style id="po-android-scene-loader-v4">
+/* Layout the illustrated café banner itself, not only its neighbouring CTA. */
+@media(max-width:767px){
+ .hero{width:100%!important;grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+ .hero>.pick-scene{box-sizing:border-box!important;display:block!important;position:relative!important;width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;min-height:0!important;aspect-ratio:1.28!important;align-self:stretch!important;margin:0!important;overflow:hidden!important;perspective:none!important;filter:none!important;border-radius:18px}
+ .hero .pick-scene .scene-sign{top:28%!important;left:7%!important;font-size:clamp(14px,5vw,22px)!important;padding:7px!important;border-width:5px!important;max-width:60%!important}
+ .hero .pick-scene .scene-cup{left:35%!important;bottom:13%!important;width:clamp(104px,32vw,145px)!important;height:clamp(95px,28vw,125px)!important;animation:none!important;transform:none!important}
+ .hero .pick-scene .scene-cup:before{right:-34px!important;width:35px!important;height:45px!important;border-width:9px!important}
+ .hero .pick-scene .scene-shelf{width:clamp(70px,24vw,110px)!important;right:5%!important}
+ .hero .pick-scene .shelf-a{top:36%!important}
+ .hero .pick-scene .shelf-b{top:57%!important}
+ .hero .pick-scene .scene-leaves{font-size:clamp(55px,18vw,95px)!important}
+ .hero .pick-scene .scene-counter{height:22%!important}
+ #pickoutSplash2026{height:100dvh!important;min-height:0!important;max-height:100dvh!important;overflow:hidden!important}
+ #pickoutSplash2026>.po-content{position:absolute!important;inset:0!important;width:100%!important;max-width:100%!important;min-height:0!important;height:100%!important;margin:0!important;padding:clamp(20px,5vw,36px)!important;gap:clamp(14px,3vh,24px)!important;justify-content:center!important;box-sizing:border-box!important;transform:none!important}
+ #pickoutSplash2026 .po-title{flex:0 0 auto!important;font-size:clamp(26px,8vw,40px)!important;white-space:nowrap!important}
+ #pickoutSplash2026 .po-cup{width:clamp(110px,35vw,145px)!important;height:clamp(105px,29vw,125px)!important;max-height:none!important;flex:0 0 auto!important}
+ #pickoutSplash2026 .po-steam{height:65px!important;filter:none!important}
+ #pickoutSplash2026 .po-cup b{font-size:11px!important}
+ #pickoutSplash2026 .po-progress{width:min(75vw,250px)!important}
+ #pickoutSplash2026 .po-splash-visible-effects{pointer-events:none}
+}
+</style>
 </head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
@@ -1578,7 +1601,7 @@ setTimeout(()=>{
  splash.classList.add('po-exit');
  splash.addEventListener('animationend',e=>{if(e.target===splash)dismissSplash()});
  setTimeout(dismissSplash,950);
-},5100);
+},2600);
 let closeTimer;
 const originalClose=window.closeModal;
 window.closeModal=function(){
