@@ -1138,6 +1138,40 @@ html:not(.po-scene-ready) #pickoutBackdrop{visibility:hidden!important}
 html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!important;opacity:1!important}
 </style>
 
+
+<style id="pickout-mobile-layout-v2">
+/* Preserve the existing animated café backdrop and loading sequence. */
+@media (max-width:760px){
+ html,body{max-width:100%;overflow-x:hidden}
+ main,.section,.hero,.nav{min-width:0;max-width:100%}
+ .hero>*{min-width:0;max-width:100%}
+ .hero h1{font-size:clamp(30px,9vw,44px);overflow-wrap:anywhere}
+ .hero p{font-size:clamp(13px,3.7vw,16px)}
+ .actions{flex-wrap:wrap}
+ .actions>*{min-width:0;max-width:100%}
+ .section{min-width:0}
+ #menuCards{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;align-items:stretch}
+ #menuCards .card{min-width:0!important;width:100%;padding:12px!important;overflow:hidden;display:flex;flex-direction:column;gap:6px}
+ #menuCards .productArt{height:clamp(125px,35vw,185px)!important;padding:7px!important;min-width:0}
+ #menuCards .photo-stage,#menuCards .photo-stage img{max-width:100%;min-width:0}
+ #menuCards .card h3{font-size:clamp(12px,3.4vw,15px)!important;line-height:1.6;overflow-wrap:anywhere;margin:4px 0}
+ #menuCards .card p{font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+ #menuCards .productPrice{margin-top:auto}
+ #menuCards .card button{max-width:100%;width:100%;font-size:12px;padding:9px 5px;white-space:normal}
+ #menuCards .product-vessel{animation:none!important;transform:none!important;filter:none!important}
+ #menuCards .product-3d:before{animation:none!important}
+ #menuCards .card{transform-style:flat!important}
+ #menuCards .photo-stage{perspective:none!important;transform-style:flat!important}
+ #menuCards .productArt{perspective:none!important}
+ .filters{max-width:100%;gap:6px}
+ .filter{font-size:12px;padding:7px 10px}
+ .modal .dialog,.dialog.wide{max-width:calc(100vw - 24px)}
+}
+@media (max-width:360px){
+ #menuCards{grid-template-columns:minmax(0,1fr)!important}
+ #menuCards .productArt{height:180px!important}
+}
+</style>
 </head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
