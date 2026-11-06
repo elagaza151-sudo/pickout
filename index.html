@@ -1206,7 +1206,7 @@ async function loadPickoutBackend(){
   pickoutDb.from('delivery_zones').select('id,name,name_ar,delivery_fee').eq('is_active',true).order('sort_order')
  ]);
  if(c.error||p.error){console.error(c.error||p.error||z.error);return;}
- liveCategories=c.data||[];liveProducts=p.data||[];deliveryZones=z.data||[];
+ liveCategories=c.data||[];liveProducts=p.data||[];deliveryZones=z.data||[];await restoreReorder();
  if(liveProducts.length){
   const cats=['الكل',...liveCategories.map(x=>x.name_ar||x.name)];
   document.getElementById('filters').innerHTML=cats.map((x,i)=>`<button class="filter ${i===0?'active':''}" onclick="drawLiveMenu('${safeText(x).replace(/'/g,"\'")}')">${safeText(x)}</button>`).join('');
@@ -1215,6 +1215,7 @@ async function loadPickoutBackend(){
   document.getElementById('menuCards').innerHTML='<article class="card"><h3>المنيو بيتجهز</h3><p>لسه مفيش أصناف مضافة لقاعدة البيانات. أول ما الإدارة تضيف المنتجات هتظهر هنا تلقائيًا.</p></article>';
  }
 }
+async function restoreReorder(){if(new URLSearchParams(location.search).get('reorder')!=='1')return;let items;try{items=JSON.parse(sessionStorage.getItem('pickoutReorder')||'[]');sessionStorage.removeItem('pickoutReorder')}catch{return}if(!Array.isArray(items)||!items.length)return;const next=[];const skipped=[];for(const item of items){const p=liveProducts.find(x=>x.id===item.product_id);if(!p){skipped.push(item.name||'صنف غير متاح');continue}const r=await pickoutDb.from('product_options').select('id').eq('product_id',p.id).eq('is_active',true);const available=new Set((r.data||[]).map(o=>o.id));const old=Array.isArray(item.options)?item.options:[];const optionIds=old.map(o=>typeof o==='string'?o:o?.id||o?.option_id).filter(Boolean);if(optionIds.some(id=>!available.has(id))){skipped.push(p.name_ar||p.name+' (إضافة غير متاحة)');continue}const key=p.id+'|'+optionIds.slice().sort().join(',');next.push({key,product_id:p.id,name:p.name_ar||p.name,price:Number(p.base_price),quantity:Math.max(1,Math.min(30,Number(item.quantity)||1)),option_ids:optionIds})}if(!next.length){alert('الأصناف القديمة مش متاحة حاليًا: '+skipped.join('، '));return}cart=next;updateCartCount();showCart();if(skipped.length)alert('لم تتم إضافة: '+skipped.join('، '));}
 function drawLiveMenu(category){
  document.querySelectorAll('#filters .filter').forEach(b=>b.classList.toggle('active',b.textContent===category));
  const rows=category==='الكل'?liveProducts:liveProducts.filter(p=>{const c=liveCategories.find(x=>x.id===p.category_id);return (c?.name_ar||c?.name)===category});
