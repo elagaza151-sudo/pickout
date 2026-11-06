@@ -1128,7 +1128,7 @@ var img=new Image();
 img.onload=function(){if(img.decode){img.decode().then(function(){finish(false)},function(){finish(true)})}else finish(false)};
 img.onerror=function(){finish(true)};
 img.src='https://commons.wikimedia.org/wiki/Special:FilePath/Red_brick_texture_wall.jpg?width=1024';
-setTimeout(function(){finish(true)},7500);
+setTimeout(function(){finish(true)},1400);
 })();
 </script><style id="po-no-brown-first-frame-v41">
 /* The pre-texture first frame must be neutral, not a full brown screen. */
@@ -1170,6 +1170,36 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
 @media (max-width:360px){
  #menuCards{grid-template-columns:minmax(0,1fr)!important}
  #menuCards .productArt{height:180px!important}
+}
+</style>
+
+<style id="po-realme-c67-mobile-v3">
+/* Realme C67 / Android Chrome: keep primary café scene and loader intact. */
+@media(max-width:767px){
+ html,body{width:100%;max-width:100%;overflow-x:clip}
+ .hero .actions{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;width:100%;max-width:100%}
+ .hero .actions>a,.hero .actions>.btn,.hero .actions>.menu-cta{display:flex!important;box-sizing:border-box!important;width:100%!important;min-width:0!important;max-width:100%!important;min-height:48px;align-items:center;justify-content:center;text-align:center;margin:0!important;white-space:normal!important}
+ .hero .actions>.menu-cta{justify-content:space-between;padding:12px 14px!important}
+ .hero .actions .menu-cta-copy{min-width:0;flex:1;overflow-wrap:anywhere}
+ .hero .actions .menu-cta-copy small{display:block;white-space:normal}
+ .hero .actions>.btn{padding:12px!important;line-height:1.6}
+ #pickoutSplash2026{width:100%!important;max-width:100%!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important}
+ #pickoutSplash2026 .po-content{box-sizing:border-box!important;width:min(100% - 32px,380px)!important;max-width:calc(100vw - 32px)!important;min-width:0!important;padding:14px!important;margin:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:clamp(8px,2vh,18px)!important;transform:none!important}
+ #pickoutSplash2026 .po-title{font-size:clamp(24px,8vw,40px)!important;line-height:1.25!important;max-width:100%!important;white-space:normal!important;text-align:center!important;letter-spacing:0!important}
+ #pickoutSplash2026 .po-cup{max-width:min(58vw,210px)!important;max-height:30dvh!important;flex-shrink:1!important}
+ #pickoutSplash2026 .po-content p{font-size:clamp(12px,3.5vw,16px)!important;text-align:center!important;margin:4px 0!important}
+ #pickoutSplash2026 .po-progress{width:min(70vw,260px)!important;max-width:100%!important}
+ #menuCards .photo-stage img{animation:none!important;transform:none!important;filter:none!important}
+ #menuCards .card{animation:none!important;opacity:1!important;transform:none!important;transition:none!important}
+ #menuCards .productArt,#menuCards .photo-stage{transform-style:flat!important;perspective:none!important}
+ #menuCards .product-vessel{animation:none!important;filter:none!important}
+ .atmosphere,.ambient-light{display:none!important}
+ #liveCafe .smoke,#liveCafe .steam-wisp{animation:none!important;filter:none!important;opacity:.25!important}
+ #pickoutBackdrop .backdrop-vapor{animation:none!important;filter:none!important}
+}
+@media(max-width:380px){
+ #pickoutSplash2026 .po-content{gap:8px!important}
+ #pickoutSplash2026 .po-cup{max-height:24dvh!important}
 }
 </style>
 </head>
