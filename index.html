@@ -1225,6 +1225,32 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
  #pickoutSplash2026 .po-splash-visible-effects{pointer-events:none}
 }
 </style>
+
+<style id="po-android-performance-stability-v42">
+/* Android performance: preserve the cafe artwork, reduce continuous GPU repaints. */
+@media(max-width:767px){
+ html{scroll-behavior:auto!important;overflow-x:clip!important}
+ body{overflow-x:clip!important;background-attachment:scroll!important}
+ body::before,body::after,#liveCafe::before,#liveCafe::after{animation:none!important;transform:none!important}
+ #liveCafe .lampGlow,#liveCafe .steam-ribbon,#liveCafe .coffee-bean,#liveCafe .dust,
+ .ambient-light,.atmosphere,.scene-coffee-glow{animation:none!important;filter:none!important}
+ #liveCafe .steam-ribbon,#liveCafe .coffee-bean,#liveCafe .dust{display:none!important}
+ #menuCards .photo-stage img,#menuCards .productArt img,#menuCards .menu-photo{animation:none!important;will-change:auto!important;transform:none!important;transition:none!important}
+ #menuCards .card,#menuCards .card:hover{animation:none!important;opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+ header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ .cart-fab{animation:none!important}
+ .hero,.hero::before,.hero::after{max-width:100%;background-attachment:scroll!important}
+ .hero .pick-scene{max-width:100%;contain:layout paint}
+ .modal{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ .modal.show .dialog{filter:none!important}
+ #pickoutBackdrop .backdrop-vapor{animation:none!important;filter:none!important}
+ #menuCards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #menuCards .card{min-width:0!important}
+ #menuCards .productArt{height:clamp(125px,35vw,185px)!important}
+ .menu-cta{max-width:100%!important;min-width:0!important}
+}
+@media(max-width:360px){#menuCards{grid-template-columns:minmax(0,1fr)!important}}
+</style>
 </head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
