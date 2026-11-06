@@ -1681,18 +1681,32 @@ document.addEventListener('click',e=>{if(e.target.closest('[onclick*="openModal"
  const links=[...document.querySelectorAll('header .nav nav a[href^="#"]')];
  const sections=links.map(a=>({a,el:document.querySelector(a.getAttribute('href'))})).filter(x=>x.el);
  if(!sections.length)return;
+ let current=null,scheduled=false;
  function update(){
-  const line=window.scrollY+Math.min(180,window.innerHeight*.3);
+  const scroll=window.scrollY, line=Math.min(180,window.innerHeight*.3);
   let active=sections[0];
-  for(const x of sections){if(x.el.getBoundingClientRect().top+window.scrollY<=line)active=x}
-  if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-35)active=sections.reduce((best,x)=>x.el.offsetTop>best.el.offsetTop?x:best);
-  sections.forEach(x=>{x.a.classList.toggle('po-nav-active',x===active);if(x===active)x.a.setAttribute('aria-current','location');else x.a.removeAttribute('aria-current')});
+  for(const x of sections){if(x.el.getBoundingClientRect().top<=line)active=x}
+  if(window.innerHeight+scroll>=document.documentElement.scrollHeight-35){
+   active=sections.reduce((best,x)=>x.el.offsetTop>best.el.offsetTop?x:best);
+  }
+  if(active===current)return;
+  current=active;
+  sections.forEach(x=>{
+   const selected=x===active;
+   x.a.classList.toggle('po-nav-active',selected);
+   if(selected)x.a.setAttribute('aria-current','location');
+   else x.a.removeAttribute('aria-current');
+  });
  }
- let scheduled=false;
- window.addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(()=>{scheduled=false;update()})}},{passive:true});
- window.addEventListener('resize',update);
- links.forEach(a=>a.addEventListener('click',()=>setTimeout(update,450)));
- update();
+ function schedule(){
+  if(scheduled)return;
+  scheduled=true;
+  requestAnimationFrame(()=>{scheduled=false;update()});
+ }
+ window.addEventListener('scroll',schedule,{passive:true});
+ window.addEventListener('resize',schedule,{passive:true});
+ links.forEach(a=>a.addEventListener('click',()=>setTimeout(schedule,450)));
+ schedule();
 })();
 </script><script id="pickout-live-cafe-realism-runtime">
 (function(){
