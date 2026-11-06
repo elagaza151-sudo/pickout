@@ -1607,42 +1607,6 @@ closeTimer=setTimeout(()=>{modal.classList.remove('show','pick-closing');modal.q
 };
 document.addEventListener('click',e=>{if(e.target.closest('[onclick*="openModal"]')){clearTimeout(closeTimer);document.getElementById('modal')?.classList.remove('pick-closing')}},true)
 })();
-</script><script type="text/plain" id="pickout-menu-motion-engine-disabled">
-/* Animate real rendered product images, including products drawn asynchronously from Supabase. */
-(function(){
-const menu=document.getElementById('menuCards');if(!menu)return;
-const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const running=new WeakMap();
-function start(){
-menu.querySelectorAll('.photo-stage img').forEach((img,i)=>{
-if(running.has(img))return;
-if(reduce)return;
-const motion=img.animate([
-{transform:'translate3d(-14px,15px,0) rotate(-17deg) scale(.72)',filter:'drop-shadow(8px 12px 6px #0009)',offset:0},
-{transform:'translate3d(3px,-15px,0) rotate(11deg) scale(1.18)',filter:'drop-shadow(-8px 22px 12px #000b)',offset:.32},
-{transform:'translate3d(0,-28px,0) rotate(22deg) scale(1.65)',filter:'drop-shadow(-15px 28px 16px #000c)',offset:.55},
-{transform:'translate3d(12px,-6px,0) rotate(-11deg) scale(1.12)',filter:'drop-shadow(10px 20px 11px #000b)',offset:.77},
-{transform:'translate3d(-14px,15px,0) rotate(-17deg) scale(.72)',filter:'drop-shadow(8px 12px 6px #0009)',offset:1}
-],{duration:3300,iterations:Infinity,easing:'ease-in-out',delay:-(i%9)*230});
-running.set(img,motion);
-});
-}
-const obs=new MutationObserver(start);obs.observe(menu,{childList:true,subtree:true});start();
-})();
-</script><script type="text/plain" id="pickout-reference-selection-disabled">
-(function(){
-const menu=document.getElementById('menuCards');if(!menu)return;
-let selected=0,timer;
-function apply(){
-const cards=[...menu.querySelectorAll(':scope > .card')];if(!cards.length)return;
-selected=((selected%cards.length)+cards.length)%cards.length;
-cards.forEach((c,i)=>{c.classList.toggle('po-selected',i===selected);c.classList.toggle('po-neighbor',Math.abs(i-selected)===1);c.classList.toggle('po-dim',Math.abs(i-selected)>1)});
-}
-function reset(){clearInterval(timer);timer=setInterval(()=>{if(document.hidden)return;selected++;apply()},3400)}
-menu.addEventListener('click',e=>{const card=e.target.closest('.card');if(!card||e.target.closest('button,a,input'))return;selected=[...menu.children].indexOf(card);apply();reset()});
-new MutationObserver(()=>{selected=0;apply()}).observe(menu,{childList:true});
-apply();reset();
-})();
 </script><script id="pickout-polish-runtime-v2">
 (function(){
  const backdrop=document.getElementById('pickoutBackdrop');
