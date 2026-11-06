@@ -1248,8 +1248,8 @@ async function submitPickoutOrder(){
  const btn=status.parentElement.querySelector('button');btn.disabled=true;btn.textContent='جاري إرسال الطلب...';
  const {data,error}=await pickoutDb.rpc('submit_guest_order',payload);
  if(error){status.textContent='تعذر إرسال الطلب: '+error.message;btn.disabled=false;btn.textContent='تأكيد الطلب';return;}
- if(window.pickoutRememberOrder)window.pickoutRememberOrder(data,payload.p_customer_phone);
- cart=[];updateCartCount();document.getElementById('modalContent').innerHTML=`<h3>طلبك وصل بنجاح 🎉</h3><p>رقم الطلب: <strong>#${data.order_number}</strong></p><p>قيمة المنتجات: ${egp(data.subtotal)}</p><p>الضريبة: ${egp(data.tax_amount||0)}</p><p>رسوم الخدمة: ${egp(data.service_amount||0)}</p><p>الدليفري: ${egp(data.delivery_fee)}</p><h3>الإجمالي: ${egp(data.total)}</h3><p>هنبدأ نجهز طلبك وهنحدث حالته من الفرع.</p><p><a class="btn primary" href="./track.html?order=${encodeURIComponent(data.order_number)}&phone=${encodeURIComponent(payload.p_customer_phone)}">📦 تابع حالة طلبك مباشرة</a></p>`;
+ if(window.pickoutRememberOrder)window.pickoutRememberOrder(data,payload.p_customer_phone);try{sessionStorage.setItem("pickoutLastOrderPhone",payload.p_customer_phone)}catch{}
+ cart=[];updateCartCount();document.getElementById('modalContent').innerHTML=`<h3>طلبك وصل بنجاح 🎉</h3><p>رقم الطلب: <strong>#${data.order_number}</strong></p><p>قيمة المنتجات: ${egp(data.subtotal)}</p><p>الضريبة: ${egp(data.tax_amount||0)}</p><p>رسوم الخدمة: ${egp(data.service_amount||0)}</p><p>الدليفري: ${egp(data.delivery_fee)}</p><h3>الإجمالي: ${egp(data.total)}</h3><p>هنبدأ نجهز طلبك وهنحدث حالته من الفرع.</p><p><a class="btn primary" href="./track.html?order=${encodeURIComponent(data.order_number)}">📦 تابع حالة طلبك مباشرة</a></p>`;
 }
 loadPickoutBackend();
 </script>
