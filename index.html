@@ -1227,6 +1227,27 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
  #pickoutSplash2026 .po-splash-visible-effects{pointer-events:none}
 }
 </style>
+
+<!-- Mobile GPU budget: keep the cafe atmosphere and splash, avoid dozens of simultaneous layers. -->
+<style id="pickout-mobile-gpu-budget-2026">
+@media (max-width: 767px) {
+  /* Preserve the primary smoke and warm lighting while removing decorative overdraw. */
+  #pickoutBackdrop .po-gold-dust,
+  #pickoutBackdrop .po-upper-spark,
+  #pickoutSplash2026 .po-splash-particle,
+  #pickoutSplash2026 .po-splash-bean { display:none !important; }
+  #pickoutBackdrop .po-cafe-mist:nth-of-type(n+4),
+  #pickoutBackdrop .po-aroma:nth-of-type(n+5) { display:none !important; }
+  /* Avoid costly fixed-layer blur during touch scrolling. */
+  header { -webkit-backdrop-filter:none !important; backdrop-filter:none !important; background:rgba(27,19,14,.96) !important; }
+  #liveCafe .smoke, .atmosphere:before, .atmosphere:after { filter:blur(9px) !important; }
+  #liveCafe .lampGlow, .ambient-light { filter:blur(8px) !important; }
+  .card { animation-duration:.3s !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #pickoutBackdrop .po-gold-dust, #pickoutBackdrop .po-upper-spark { display:none !important; }
+}
+</style>
 </head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
