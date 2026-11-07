@@ -1298,6 +1298,24 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
   #pickoutSplash2026.po-exit {pointer-events:none;}
 }
 </style>
+
+<style id="po-mobile-menu-reveal-v4">
+@media(max-width:767px){
+ header .nav{position:relative;min-height:68px;justify-content:flex-end;}
+ header .nav>.brand{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;min-width:0!important;width:min(42vw,190px)!important;height:auto!important;display:flex!important;justify-content:center!important;align-items:center!important;margin:0!important;z-index:2;}
+ header .nav>.brand img{width:100%!important;max-height:55px!important;object-position:center!important;filter:none!important;}
+ header .nav>.btn{position:relative;z-index:1;max-width:29vw;padding:9px 10px;font-size:12px;white-space:nowrap;}
+ /* Reveal only when cards approach the viewport; no animation while offscreen. */
+ .po-menu-reveal-ready #menuCards>.card{animation:none!important;transition:opacity .38s ease,transform .38s cubic-bezier(.2,.75,.3,1)!important;opacity:0!important;transform:translate3d(0,18px,0)!important;}
+ .po-menu-reveal-ready #menuCards>.card.po-menu-visible{opacity:1!important;transform:translate3d(0,0,0)!important;}
+ #menuCards>.card img{content-visibility:auto;}
+ /* Keep visual design but reduce redundant repaints while moving the page. */
+ #pickoutBackdrop .po-window-ray,#pickoutBackdrop .po-amber-lamp{animation:none!important;}
+}
+@media(max-width:767px) and (prefers-reduced-motion:reduce){
+ .po-menu-reveal-ready #menuCards>.card{opacity:1!important;transform:none!important;transition:none!important;}
+}
+</style>
 </head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
@@ -1801,4 +1819,34 @@ document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
 },1250);
 }catch(e){console.error('PICKOUT cart animation',e)}
 };
-</script><script src="customer-sync.js?v=customer25" defer></script><script src="language-switch.js?v=2" defer></script></body></html>
+</script><script src="customer-sync.js?v=customer25" defer></script><script src="language-switch.js?v=2" defer></script>
+<script id="po-mobile-menu-reveal-runtime-v4">
+(function(){
+ const root=document.getElementById('menuCards');
+ if(!root||!window.matchMedia('(max-width:767px)').matches)return;
+ if(!('IntersectionObserver' in window))return;
+ const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(reduce)return;
+ const seen=new WeakSet();
+ const observer=new IntersectionObserver(entries=>{
+   for(const entry of entries){
+     if(!entry.isIntersecting)continue;
+     entry.target.classList.add('po-menu-visible');
+     observer.unobserve(entry.target);
+   }
+ },{rootMargin:'0px 0px 75px 0px',threshold:.04});
+ function register(){
+   for(const card of root.children){
+     if(!card.classList.contains('card')||seen.has(card))continue;
+     seen.add(card);
+     observer.observe(card);
+   }
+ }
+ document.documentElement.classList.add('po-menu-reveal-ready');
+ register();
+ const changes=new MutationObserver(register);
+ changes.observe(root,{childList:true});
+ window.addEventListener('pagehide',()=>{observer.disconnect();changes.disconnect()},{once:true});
+})();
+</script>
+</body></html>
