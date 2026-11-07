@@ -1287,35 +1287,36 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
 
 
 
-<style id="po-center-only-zoom-v13">
-/* On mobile, animate once to the same held zoom as the desktop hover. */
-@keyframes poZoomToDesktopHold{
- 0%{transform:translate3d(0,0,0) rotate(0deg) scale(1);filter:drop-shadow(0 12px 9px #0007)}
- 100%{transform:translate3d(0,-12px,0) rotate(-5deg) scale(1.38);filter:drop-shadow(0 23px 15px #000a)}
-}
+<style id="po-center-only-zoom-v14">
+/* Match desktop's held hover zoom. Only the center card scales, no looping animation. */
 @media(max-width:767px){
  #menuCards .card .photo-stage img,
  #menuCards .card:hover .photo-stage img,
  #menuCards .card:active .photo-stage img,
- #menuCards .card:focus-within .photo-stage img{
+ #menuCards .card:focus-within .photo-stage img,
+ #menuCards .card.po-selected .photo-stage img,
+ #menuCards .card.po-neighbor .photo-stage img{
   animation:none!important;
   transform:translate3d(0,0,0) rotate(0deg) scale(1)!important;
   filter:drop-shadow(0 12px 9px #0007)!important;
-  transition:none!important;
+  transition:transform .65s cubic-bezier(.2,.85,.25,1),filter .65s ease!important;
   will-change:auto!important;
  }
  #menuCards .card.po-center-zoom .photo-stage img,
- #menuCards .card.po-center-zoom:hover .photo-stage img{
-  animation:poZoomToDesktopHold .65s cubic-bezier(.2,.85,.25,1) 1 forwards!important;
-  will-change:transform!important;
+ #menuCards .card.po-center-zoom:hover .photo-stage img,
+ #menuCards .card.po-center-zoom:active .photo-stage img,
+ #menuCards .card.po-center-zoom:focus-within .photo-stage img,
+ #menuCards .card.po-center-zoom.po-selected .photo-stage img,
+ #menuCards .card.po-center-zoom.po-neighbor .photo-stage img{
+  animation:none!important;
+  transform:translate3d(0,-12px,0) rotate(-5deg) scale(1.38)!important;
+  filter:drop-shadow(0 23px 15px #000a)!important;
  }
  #menuCards .card img{content-visibility:visible!important}
  #menuCards .productArt:before,#menuCards .photo-stage:before,#menuCards .photo-stage:after{animation:none!important}
  body:before,body:after,#pickoutBackdrop .backdrop-light,#pickoutBackdrop .backdrop-coffee{animation:none!important}
 }
-@media(max-width:767px) and (prefers-reduced-motion:reduce){
- #menuCards .card.po-center-zoom .photo-stage img{animation:none!important;transform:translate3d(0,-12px,0) rotate(-5deg) scale(1.38)!important}
-}
+@media(max-width:767px) and (prefers-reduced-motion:reduce){#menuCards .card .photo-stage img{transition:none!important}}
 </style>
 </head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
