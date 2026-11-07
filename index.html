@@ -1318,7 +1318,25 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
 }
 @media(max-width:767px) and (prefers-reduced-motion:reduce){#menuCards .card .photo-stage img{transition:none!important}}
 </style>
-</head>
+<style id="po-mobile-smoothness-v15">
+/* Mobile performance: keep the finished product zoom untouched. */
+@media(max-width:767px){
+ #pickoutBackdrop .cafe-spark,
+ #pickoutBackdrop .extra-vapor,
+ #pickoutBackdrop .backdrop-vapor,
+ #pickoutBackdrop .po-window-ray,
+ #pickoutBackdrop .po-amber-lamp,
+ #pickoutBackdrop .po-lamp-glow,
+ #pickoutBackdrop .po-cup-aura{
+  animation:none!important;
+  filter:none!important;
+ }
+ #pickoutBackdrop .cafe-spark,
+ #pickoutBackdrop .extra-vapor{display:none!important}
+ #menuCards .card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ #menuCards .card .productArt{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+}
+</style></head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
 <div class="po-content"><div class="po-title">PICK <span>&amp;</span> OUT</div><div class="po-cup"><i class="po-steam po-s1"></i><i class="po-steam po-s2"></i><i class="po-steam po-s3"></i><div class="po-coffee"></div><div class="po-handle"></div><b>PICK <span>&amp;</span> OUT</b></div><p>جاري تحضير تجربتك...</p><div class="po-progress"><i></i></div></div></div>
@@ -1864,10 +1882,13 @@ document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
   raf=0;
   const center=window.innerHeight/2;
   let closest=null,best=Infinity;
-  for(const card of root.querySelectorAll(':scope > .card')){
-   if(!card.querySelector('.photo-stage img'))continue;
+  for(const card of root.children){
+   if(!card.classList.contains('card'))continue;
    const rect=card.getBoundingClientRect();
-   const photo=card.querySelector('.productArt').getBoundingClientRect();
+   if(rect.bottom<center-160||rect.top>center+160)continue;
+   const art=card.querySelector('.productArt');
+   if(!art||!art.querySelector('.photo-stage img'))continue;
+   const photo=art.getBoundingClientRect();
    if(photo.bottom<center-95||photo.top>center+95)continue;
    const d=Math.abs((photo.top+photo.bottom)/2-center);
    if(d<best){best=d;closest=card;}
