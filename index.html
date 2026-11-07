@@ -1336,6 +1336,20 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
  #menuCards .card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
  #menuCards .card .productArt{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 }
+</style><style id="po-light-ambient-and-spin-cart-v16">
+/* Small, compositor-only glow: no large blur/filter or background repaint. */
+@media(max-width:767px){
+ #pickoutBackdrop .po-mobile-soft-glow{
+ position:absolute;left:8%;top:16%;width:72px;height:72px;border-radius:50%;
+ background:radial-gradient(circle,rgba(255,187,99,.18),rgba(255,187,99,0) 72%);
+ pointer-events:none;animation:poSoftGlowDrift 12s ease-in-out infinite alternate;
+ }
+}
+@keyframes poSoftGlowDrift{
+ from{transform:translate3d(0,0,0);opacity:.35}
+ to{transform:translate3d(24px,34px,0);opacity:.8}
+}
+@media(prefers-reduced-motion:reduce){#pickoutBackdrop .po-mobile-soft-glow{animation:none}}
 </style></head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
@@ -1664,7 +1678,7 @@ function startDrinkSpin(){
  setTimeout(()=>{
   result.hidden=false;
   const image=winner.image_url||photoForProduct(winner);
-  result.innerHTML=(image?'<img src="'+safeText(image)+'" alt="">':'')+'<b>🎉 اختيارنا ليك: '+safeText(winner.name_ar||winner.name)+'</b><br><strong>'+egp(winner.base_price)+'</strong><br><small>اختيار عشوائي من المنيو.</small><br><button class="btn" style="margin-top:12px" onclick="poCartVisual(this);addToCart(\''+winner.id+'\');closeModal()">ضيفه للسلة</button>';
+  result.innerHTML=(image?'<img src="'+safeText(image)+'" alt="">':'')+'<b>🎉 اختيارنا ليك: '+safeText(winner.name_ar||winner.name)+'</b><br><strong>'+egp(winner.base_price)+'</strong><br><small>اختيار عشوائي من المنيو.</small><br><button class="btn" style="margin-top:12px" data-product-image="'+safeText(image)+'" onclick="poCartVisual(this);addToCart(\''+winner.id+'\');closeModal()">ضيفه للسلة</button>';
   btn.disabled=false;drinkSpinBusy=false;
  },8350);
 }
@@ -1814,9 +1828,11 @@ document.getElementById('poCartFlyV22')?.remove();
 const start=button.getBoundingClientRect(),end=cart.getBoundingClientRect();
 const fly=document.createElement('div');fly.id='poCartFlyV22';
 const source=button.closest('.card')?.querySelector('.productArt img');
-if(source&&source.complete&&source.naturalWidth){
- const img=document.createElement('img');img.src=source.currentSrc||source.src;img.alt='';
+const selectedImage=button.dataset.productImage||(source&&source.complete&&source.naturalWidth?(source.currentSrc||source.src):'');
+if(selectedImage){
+ const img=document.createElement('img');img.src=selectedImage;img.alt='';
  img.style.cssText='display:block;width:100%;height:100%;object-fit:contain;';
+ img.onerror=function(){this.remove();fly.textContent='☕'};
  fly.appendChild(img);
 }else{fly.textContent='☕';}
 fly.style.setProperty('left',(start.left+start.width/2)+'px','important');
@@ -1904,5 +1920,13 @@ document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
  window.addEventListener('scroll',schedule,{passive:true});
  window.addEventListener('resize',schedule,{passive:true});
  schedule();
+})();
+</script><script id="po-light-ambient-runtime-v16">
+(function(){
+ if(!matchMedia('(max-width:767px)').matches)return;
+ const backdrop=document.getElementById('pickoutBackdrop');
+ if(backdrop&&!backdrop.querySelector('.po-mobile-soft-glow')){
+  const glow=document.createElement('i');glow.className='po-mobile-soft-glow';glow.setAttribute('aria-hidden','true');backdrop.appendChild(glow);
+ }
 })();
 </script></body></html>
