@@ -192,7 +192,7 @@ transform:translateX(-100%);animation:introSweep 1.5s .35s ease forwards}
 #menuCards .card:hover .photo-stage img{animation-play-state:paused;transform:perspective(850px) rotateY(12deg) rotateX(5deg) translateY(-9px) scale(1.075);filter:drop-shadow(0 21px 15px rgba(0,0,0,.55))}
 @keyframes pickoutProductFloat{0%,100%{transform:perspective(850px) rotateY(-7deg) rotateX(2deg) translateY(0) scale(.98)}50%{transform:perspective(850px) rotateY(7deg) rotateX(-2deg) translateY(-8px) scale(1.02)}}
 @media(max-width:650px){#menuCards .productArt{height:175px!important;padding:9px}#menuCards .photo-stage img{max-width:180px;max-height:155px}}
-@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img{animation:none!important;transform:none!important;will-change:auto}#menuCards .card:hover .photo-stage img{transform:none}}
+@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img{animation:none!important;transform:none;will-change:auto}#menuCards .card:hover .photo-stage img{transform:none}}
 </style>
 <style id="pickout-enhancements">
 /* Warm moving red-brick wall over natural wood */
@@ -392,8 +392,8 @@ body>.modal,body>.intro,#introV3{z-index:9999!important}
 #menuCards .card{position:relative!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;min-width:0!important;isolation:isolate}
 #menuCards .productArt{position:relative!important;flex:none!important;height:175px!important;width:100%!important;overflow:hidden!important;clip-path:inset(0 round 13px)!important;contain:paint!important;transform:none!important;perspective:650px!important;margin-bottom:12px!important}
 #menuCards .photo-stage{width:100%!important;height:100%!important;overflow:hidden!important;display:block!important;transform:none!important;perspective:650px!important;border-radius:13px!important;background:radial-gradient(ellipse at center,#795037,#2b180f)!important}
-#menuCards .photo-stage img{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:cover!important;object-position:center 48%!important;border-radius:13px!important;box-shadow:none!important;filter:saturate(1.06) contrast(1.04)!important;transform:scale(1.025)!important;animation:productPhotoSafe 6s ease-in-out infinite!important;transform-origin:center!important}
-#menuCards .card:hover .photo-stage img{animation-play-state:paused!important;transform:scale(1.09)!important}
+#menuCards .photo-stage img{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:cover!important;object-position:center 48%!important;border-radius:13px!important;box-shadow:none!important;filter:saturate(1.06) contrast(1.04)!important;transform:scale(1.025);animation:productPhotoSafe 6s ease-in-out infinite!important;transform-origin:center!important}
+#menuCards .card:hover .photo-stage img{animation-play-state:paused!important;transform:scale(1.09)}
 #menuCards .productArt:after,#menuCards .photo-stage:after{display:none!important}
 #menuCards .card h3,#menuCards .card p,#menuCards .card .productPrice,#menuCards .card button{position:relative!important;z-index:4!important;transform:none!important}
 #menuCards .card h3{font-size:16px!important;line-height:1.6!important;margin:4px 4px 6px!important;min-height:25px!important}
@@ -473,7 +473,7 @@ body>.modal,body>.intro,#introV3{z-index:9999!important}
 #menuCards .card{overflow:hidden!important}
 #menuCards .productArt{height:185px!important;overflow:hidden!important;position:relative!important;isolation:isolate!important}
 #menuCards .photo-stage{position:absolute!important;inset:0!important;overflow:hidden!important;display:block!important}
-#menuCards .photo-stage img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;transform:scale(1.02)!important;animation:photoZoomContained 5s ease-in-out infinite!important;filter:saturate(1.12)!important}
+#menuCards .photo-stage img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;transform:scale(1.02);animation:photoZoomContained 5s ease-in-out infinite!important;filter:saturate(1.12)!important}
 @keyframes photoZoomContained{50%{transform:scale(1.1)}}
 #menuCards .card h3,#menuCards .card p,#menuCards .productPrice,#menuCards .card button{position:relative!important;z-index:3!important}
 </style><style id="pickout-only-fullscreen-loader">
@@ -543,7 +543,7 @@ html,body{margin:0}
 #menuCards .card:hover .photo-stage img{animation:pickout3DVisible 2s ease-in-out infinite!important;filter:drop-shadow(0 22px 15px rgba(0,0,0,.6))!important}
 @keyframes pickout3DVisible{0%,100%{transform:perspective(850px) rotateY(-12deg) rotateX(4deg) translateY(0) scale(.95)}50%{transform:perspective(850px) rotateY(12deg) rotateX(-4deg) translateY(-13px) scale(1.045)}}
 @media(max-width:650px){#menuCards .productArt{height:175px!important}#menuCards .photo-stage img{max-height:150px!important;max-width:175px!important}}
-@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .card:hover .photo-stage img{animation:none!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .card:hover .photo-stage img{animation:none!important;transform:none}}
 </style><style id="pickout-product-depth-v1">
 /* Product depth stage: floating object, parallax, rim light, and dynamic ground shadow */
 #menuCards .productArt{position:relative!important;isolation:isolate;overflow:hidden!important;perspective:1100px!important;background:radial-gradient(ellipse at 50% 65%,#80502b77,#1d100a 78%)!important}
@@ -564,7 +564,7 @@ html,body{margin:0}
 #menuCards .card:hover .photo-stage img{animation:pickoutZoomOrbit 2.2s ease-in-out infinite!important;animation-delay:0s!important}
 @keyframes pickoutZoomOrbit{0%,100%{transform:perspective(950px) translate3d(-5px,4px,0) rotateY(-10deg) rotateZ(-2deg) scale(.83)}35%{transform:perspective(950px) translate3d(3px,-13px,35px) rotateY(5deg) rotateZ(1deg) scale(1.09)}65%{transform:perspective(950px) translate3d(7px,-17px,45px) rotateY(12deg) rotateZ(2deg) scale(1.18)}}
 @media(max-width:650px){#menuCards .photo-stage img{max-width:190px!important;max-height:160px!important}}
-@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .card:hover .photo-stage img{animation:none!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .card:hover .photo-stage img{animation:none!important;transform:none}}
 </style><style id="pickout-cinematic-product-motion">
 #menuCards .productArt{position:relative!important;isolation:isolate!important;overflow:hidden!important;perspective:1200px!important}
 #menuCards .productArt:before{content:"";position:absolute;inset:-45%;background:conic-gradient(from 0deg,transparent 0deg,#e7b65b18 65deg,transparent 110deg,#1ae58814 220deg,transparent 290deg);animation:pickoutAuraSpin 9s linear infinite;pointer-events:none}
@@ -590,7 +590,7 @@ html,body{margin:0}
 83%{transform:perspective(1100px) translate3d(-4px,5px,15px) rotateZ(-15deg) rotateY(-18deg) rotateX(5deg) scale(.8);filter:drop-shadow(12px 13px 7px #0009)}
 }
 @media(max-width:650px){#menuCards .photo-stage img{max-width:170px!important;max-height:145px!important}}
-@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .card:hover .photo-stage img,#menuCards .productArt:before,#menuCards .photo-stage:after{animation:none!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .card:hover .photo-stage img,#menuCards .productArt:before,#menuCards .photo-stage:after{animation:none!important;transform:none}}
 </style><style id="pickout-visible-product-animation-fix">
 /* Keep image in frame while making the motion unmissable */
 #menuCards .card{overflow:visible!important}
@@ -610,11 +610,11 @@ html,body{margin:0}
 </style><style id="pickout-reference-showcase">
 /* TikTok reference: selectable product lineup, not random endless wobbling */
 #menuCards .photo-stage,#menuCards .photo-stage img,#menuCards .productArt:before,#menuCards .photo-stage:after{animation:none!important}
-#menuCards .photo-stage img{transform:none!important;transition:transform .65s cubic-bezier(.2,.85,.25,1),filter .65s ease!important}
+#menuCards .photo-stage img{transform:none;transition:transform .65s cubic-bezier(.2,.85,.25,1),filter .65s ease!important}
 #menuCards .card{transition:transform .65s cubic-bezier(.2,.85,.25,1),opacity .45s ease,box-shadow .5s ease!important;cursor:pointer}
 #menuCards .card.po-selected{z-index:4!important;transform:translateY(-12px) scale(1.035)!important;box-shadow:0 22px 42px #0007!important}
-#menuCards .card.po-selected .photo-stage img{transform:translateY(-10px) scale(1.35) rotate(-3deg)!important;filter:drop-shadow(0 28px 17px #000a)!important}
-#menuCards .card.po-neighbor .photo-stage img{transform:translateX(-8px) scale(.86) rotate(6deg)!important;filter:drop-shadow(0 12px 8px #0007)!important}
+#menuCards .card.po-selected .photo-stage img{transform:translateY(-10px) scale(1.35) rotate(-3deg);filter:drop-shadow(0 28px 17px #000a)!important}
+#menuCards .card.po-neighbor .photo-stage img{transform:translateX(-8px) scale(.86) rotate(6deg);filter:drop-shadow(0 12px 8px #0007)!important}
 #menuCards .card.po-dim{opacity:.7}
 #menuCards .card.po-selected .productArt{overflow:visible!important}
 @media(prefers-reduced-motion:reduce){#menuCards .card,#menuCards .photo-stage img{transition:none!important}}
@@ -626,7 +626,7 @@ html,body{margin:0}
 #menuCards .productArt:before,#menuCards .photo-stage:after{animation:none!important}
 #menuCards .photo-stage{animation:none!important;transform:none!important;will-change:auto!important}
 #menuCards .photo-stage img,#menuCards .card.po-selected .photo-stage img,#menuCards .card.po-neighbor .photo-stage img{
-animation:none!important;transform:translate3d(0,0,0) scale(1) rotate(0deg)!important;
+animation:none!important;transform:translate3d(0,0,0) scale(1) rotate(0deg);
 filter:drop-shadow(0 12px 9px #0007)!important;
 transition:transform .48s cubic-bezier(.2,.8,.2,1),filter .48s ease!important;
 will-change:auto!important;backface-visibility:hidden!important
@@ -634,10 +634,10 @@ will-change:auto!important;backface-visibility:hidden!important
 #menuCards .card:hover{z-index:10!important;box-shadow:0 16px 32px #0005!important}
 #menuCards .card:hover .productArt{z-index:11!important}
 #menuCards .card:hover .photo-stage img{
-animation:none!important;transform:translate3d(0,-18px,0) rotate(-7deg) scale(1.58)!important;
+animation:none!important;transform:translate3d(0,-18px,0) rotate(-7deg) scale(1.58);
 filter:drop-shadow(0 23px 15px #000a)!important;will-change:transform!important
 }
-@media(max-width:650px){#menuCards .card:hover .photo-stage img{transform:translate3d(0,-12px,0) rotate(-5deg) scale(1.38)!important}}
+@media(max-width:650px){#menuCards .card:hover .photo-stage img{transform:translate3d(0,-12px,0) rotate(-5deg) scale(1.38)}}
 @media(prefers-reduced-motion:reduce){#menuCards .card:hover .photo-stage img{transition:none!important}}
 </style><style id="pickout-polish-november">
 .nav .brand{display:flex!important;align-items:center!important;width:clamp(165px,21vw,260px)!important;min-width:145px!important;max-width:260px!important;overflow:visible!important;flex-shrink:0!important}
@@ -1191,7 +1191,7 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
  #pickoutSplash2026 .po-cup{max-width:min(58vw,210px)!important;max-height:30dvh!important;flex-shrink:1!important}
  #pickoutSplash2026 .po-content p{font-size:clamp(12px,3.5vw,16px)!important;text-align:center!important;margin:4px 0!important}
  #pickoutSplash2026 .po-progress{width:min(70vw,260px)!important;max-width:100%!important}
- #menuCards .photo-stage img{animation:none!important;transform:none!important;filter:none!important}
+ #menuCards .photo-stage img{animation:none!important;transform:none;filter:none!important}
  #menuCards .card{animation:none!important;opacity:1!important;transform:none!important;transition:none!important}
  #menuCards .productArt,#menuCards .photo-stage{transform-style:flat!important;perspective:none!important}
  #menuCards .product-vessel{animation:none!important;filter:none!important}
