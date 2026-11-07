@@ -1319,17 +1319,17 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
 
 
 
-<style id="po-auto-zoom-v8">
+<style id="po-auto-zoom-v9">
 @media(max-width:767px){
- #menuCards .card .photo-stage img,#menuCards .card:hover .photo-stage img{animation:none!important;filter:none!important;will-change:auto!important;}
+ #menuCards .card .photo-stage img,#menuCards .card:hover .photo-stage img{
+ animation:none!important;animation-play-state:paused!important;will-change:auto!important;
+ }
  #menuCards .card.po-zoom-visible .photo-stage img,#menuCards .card.po-zoom-visible:hover .photo-stage img{
  animation:pickoutHeroZoomRoll 4.5s cubic-bezier(.45,0,.3,1) infinite!important;
- animation-play-state:running!important;
- animation-delay:0s!important;
- will-change:transform!important;
+ animation-play-state:running!important;will-change:transform!important;
  }
- #menuCards .productArt:before,#menuCards .photo-stage:before,#menuCards .photo-stage:after{animation:none!important;}
- body:before,body:after,#pickoutBackdrop .backdrop-light,#pickoutBackdrop .backdrop-coffee{animation:none!important;}
+ #menuCards .productArt:before,#menuCards .photo-stage:before,#menuCards .photo-stage:after{animation:none!important}
+ body:before,body:after,#pickoutBackdrop .backdrop-light,#pickoutBackdrop .backdrop-coffee{animation:none!important}
 }
 @media(max-width:767px) and (prefers-reduced-motion:reduce){#menuCards .card.po-zoom-visible .photo-stage img{animation:none!important}}
 </style>
@@ -1868,29 +1868,35 @@ document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
 </script>
 
 
-<script id="po-auto-zoom-observer-v7">
+<script id="po-auto-zoom-runtime-v9">
 (function(){
- const root=document.getElementById('menuCards');if(!root||!matchMedia('(max-width:767px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- let observer=null;
- function setup(){
-  if(observer)observer.disconnect();
-  const cards=Array.from(root.querySelectorAll(':scope > .card'));
-  observer=new IntersectionObserver(entries=>{
-   entries.forEach(entry=>{
-    const card=entry.target;
-    if(entry.isIntersecting){
-      if(!card.classList.contains('po-zoom-visible')){
-       card.classList.add('po-zoom-visible');
-       const img=card.querySelector('.photo-stage img');
-       if(img){img.style.removeProperty('animation');}
-      }
-    }else{card.classList.remove('po-zoom-visible');}
-   });
-  },{rootMargin:'-25% 0px -25% 0px',threshold:0});
-  cards.forEach(card=>observer.observe(card));
+ const root=document.getElementById('menuCards');
+ if(!root||!window.matchMedia('(max-width:767px)').matches)return;
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(reduced)return;
+ let observed=new Set(),observer=null;
+ function setActive(card,yes){
+  card.classList.toggle('po-zoom-visible',yes);
+  const img=card.querySelector('.photo-stage img');
+  if(!img)return;
+  if(yes){
+   img.style.setProperty('animation','pickoutHeroZoomRoll 4.5s cubic-bezier(.45,0,.3,1) infinite','important');
+   img.style.setProperty('animation-play-state','running','important');
+  }else{
+   img.style.removeProperty('animation');
+   img.style.removeProperty('animation-play-state');
+  }
  }
- new MutationObserver(setup).observe(root,{childList:true});
- setup();
+ function init(){
+  if(observer)observer.disconnect();
+  observed.forEach(c=>setActive(c,false));observed.clear();
+  observer=new IntersectionObserver(entries=>{
+   for(const entry of entries)setActive(entry.target,entry.isIntersecting);
+  },{rootMargin:'-12% 0px -12% 0px',threshold:0});
+  root.querySelectorAll(':scope > .card').forEach(c=>{observed.add(c);observer.observe(c)});
+ }
+ new MutationObserver(init).observe(root,{childList:true});
+ init();
 })();
 </script>
 </body></html>
