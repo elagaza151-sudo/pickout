@@ -1316,6 +1316,19 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
  .po-menu-reveal-ready #menuCards>.card{opacity:1!important;transform:none!important;transition:none!important;}
 }
 </style>
+
+<style id="po-center-zoom-perf-v5">
+@media(max-width:767px){
+ /* Disable dozens of simultaneous offscreen product animations. */
+ #menuCards .photo-stage img,#menuCards .card:hover .photo-stage img{animation:none!important;transform:translateZ(0) scale(.92)!important;filter:none!important;will-change:auto!important;}
+ #menuCards .productArt:before,#menuCards .photo-stage:before,#menuCards .photo-stage:after{animation:none!important;}
+ #menuCards .card.po-center-zoom .photo-stage img{animation:poCenterZoomV5 1.1s cubic-bezier(.18,.7,.24,1) both!important;will-change:transform!important;}
+ @keyframes poCenterZoomV5{0%{transform:translate3d(0,9px,0) scale(.78)}55%{transform:translate3d(0,-8px,0) scale(1.13)}78%{transform:translate3d(0,-3px,0) scale(1.035)}100%{transform:translate3d(0,0,0) scale(1.06)}}
+ #menuCards .card{contain:layout style paint;}
+ body:before,body:after,#pickoutBackdrop .backdrop-light,#pickoutBackdrop .backdrop-coffee{animation:none!important;}
+}
+@media(max-width:767px) and (prefers-reduced-motion:reduce){#menuCards .card.po-center-zoom .photo-stage img{animation:none!important;transform:none!important}}
+</style>
 </head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
@@ -1850,3 +1863,20 @@ document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
 })();
 </script>
 </body></html>
+<script id="po-center-zoom-runtime-v5">
+(function(){
+ if(!window.matchMedia('(max-width:767px)').matches||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const root=document.getElementById('menuCards');if(!root)return;
+ let cards=[],active=null,scheduled=false;
+ function refresh(){cards=Array.from(root.children).filter(el=>el.classList.contains('card'));active=null;cards.forEach(c=>c.classList.remove('po-center-zoom'));schedule();}
+ function update(){scheduled=false;if(!cards.length)return;const mid=innerHeight*.5;let best=null,dist=Infinity;
+ for(const c of cards){const r=c.getBoundingClientRect();if(r.bottom<innerHeight*.22||r.top>innerHeight*.78)continue;const d=Math.abs((r.top+r.bottom)/2-mid);if(d<dist){dist=d;best=c;}}
+ if(best===active)return;
+ if(active)active.classList.remove('po-center-zoom');active=best;
+ if(active)active.classList.add('po-center-zoom');
+ }
+ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(update);}}
+ const changes=new MutationObserver(refresh);changes.observe(root,{childList:true});
+ addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});refresh();
+})();
+</script>
