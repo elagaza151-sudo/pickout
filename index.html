@@ -1319,19 +1319,25 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
 
 
 
-<style id="po-auto-zoom-v9">
+<style id="po-auto-zoom-v10">
 @media(max-width:767px){
- #menuCards .card .photo-stage img,#menuCards .card:hover .photo-stage img{
- animation:none!important;animation-play-state:paused!important;will-change:auto!important;
- }
- #menuCards .card.po-zoom-visible .photo-stage img,#menuCards .card.po-zoom-visible:hover .photo-stage img{
+ /* Original animation always exists; JavaScript only pauses offscreen images. */
+ #menuCards .card .photo-stage img,
+ #menuCards .card:hover .photo-stage img,
+ #menuCards .card.po-zoom-visible .photo-stage img{
  animation:pickoutHeroZoomRoll 4.5s cubic-bezier(.45,0,.3,1) infinite!important;
- animation-play-state:running!important;will-change:transform!important;
+ animation-play-state:running!important;
+ animation-delay:0s!important;
+ will-change:auto!important;
+ }
+ #menuCards .card.po-zoom-paused .photo-stage img,
+ #menuCards .card.po-zoom-paused:hover .photo-stage img{
+ animation-play-state:paused!important;
  }
  #menuCards .productArt:before,#menuCards .photo-stage:before,#menuCards .photo-stage:after{animation:none!important}
  body:before,body:after,#pickoutBackdrop .backdrop-light,#pickoutBackdrop .backdrop-coffee{animation:none!important}
 }
-@media(max-width:767px) and (prefers-reduced-motion:reduce){#menuCards .card.po-zoom-visible .photo-stage img{animation:none!important}}
+@media(max-width:767px) and (prefers-reduced-motion:reduce){#menuCards .card .photo-stage img{animation:none!important}}
 </style>
 </head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
@@ -1868,35 +1874,25 @@ document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
 </script>
 
 
-<script id="po-auto-zoom-runtime-v9">
+<script id="po-auto-zoom-runtime-v10">
 (function(){
  const root=document.getElementById('menuCards');
- if(!root||!window.matchMedia('(max-width:767px)').matches)return;
- const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- if(reduced)return;
- let observed=new Set(),observer=null;
- function setActive(card,yes){
-  card.classList.toggle('po-zoom-visible',yes);
-  const img=card.querySelector('.photo-stage img');
-  if(!img)return;
-  if(yes){
-   img.style.setProperty('animation','pickoutHeroZoomRoll 4.5s cubic-bezier(.45,0,.3,1) infinite','important');
-   img.style.setProperty('animation-play-state','running','important');
-  }else{
-   img.style.removeProperty('animation');
-   img.style.removeProperty('animation-play-state');
-  }
- }
- function init(){
+ if(!root||!matchMedia('(max-width:767px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ let observer;
+ function setup(){
   if(observer)observer.disconnect();
-  observed.forEach(c=>setActive(c,false));observed.clear();
+  const cards=Array.from(root.querySelectorAll(':scope > .card'));
+  cards.forEach(c=>c.classList.remove('po-zoom-paused'));
+  if(!('IntersectionObserver' in window))return;
   observer=new IntersectionObserver(entries=>{
-   for(const entry of entries)setActive(entry.target,entry.isIntersecting);
-  },{rootMargin:'-12% 0px -12% 0px',threshold:0});
-  root.querySelectorAll(':scope > .card').forEach(c=>{observed.add(c);observer.observe(c)});
+   for(const e of entries){
+    e.target.classList.toggle('po-zoom-paused',!e.isIntersecting);
+   }
+  },{rootMargin:'-15% 0px -15% 0px',threshold:0});
+  cards.forEach(c=>observer.observe(c));
  }
- new MutationObserver(init).observe(root,{childList:true});
- init();
+ new MutationObserver(setup).observe(root,{childList:true});
+ setup();
 })();
 </script>
 </body></html>
