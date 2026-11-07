@@ -1287,24 +1287,23 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
 
 
 
-<style id="po-auto-zoom-v11">
-/* Mobile: original cinematic product animation, always on without touch/scroll JS. */
+<style id="po-center-only-zoom-v12">
 @media(max-width:767px){
  #menuCards .card .photo-stage img,
  #menuCards .card:hover .photo-stage img,
  #menuCards .card:active .photo-stage img,
  #menuCards .card:focus-within .photo-stage img{
-  animation-name:pickoutHeroZoomRoll!important;
-  animation-duration:4.5s!important;
-  animation-timing-function:cubic-bezier(.45,0,.3,1)!important;
-  animation-iteration-count:infinite!important;
-  animation-play-state:running!important;
-  animation-delay:0s!important;
-  animation-fill-mode:both!important;
+ animation:pickoutHeroZoomRoll 4.5s cubic-bezier(.45,0,.3,1) infinite both!important;
+ animation-play-state:paused!important;
+ animation-delay:0s!important;
  }
- #menuCards .card img{content-visibility:visible!important;}
- #menuCards .productArt:before,#menuCards .photo-stage:before,#menuCards .photo-stage:after{animation:none!important;}
- body:before,body:after,#pickoutBackdrop .backdrop-light,#pickoutBackdrop .backdrop-coffee{animation:none!important;}
+ #menuCards .card.po-center-zoom .photo-stage img,
+ #menuCards .card.po-center-zoom:hover .photo-stage img{
+ animation-play-state:running!important;
+ }
+ #menuCards .card img{content-visibility:visible!important}
+ #menuCards .productArt:before,#menuCards .photo-stage:before,#menuCards .photo-stage:after{animation:none!important}
+ body:before,body:after,#pickoutBackdrop .backdrop-light,#pickoutBackdrop .backdrop-coffee{animation:none!important}
 }
 @media(max-width:767px) and (prefers-reduced-motion:reduce){#menuCards .card .photo-stage img{animation:none!important}}
 </style>
@@ -1844,4 +1843,34 @@ document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
 
 
 
-</body></html>
+<script id="po-center-only-zoom-runtime-v12">
+(function(){
+ const root=document.getElementById('menuCards');
+ if(!root||!window.matchMedia('(max-width:767px)').matches)return;
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ let active=null,raf=0;
+ function update(){
+  raf=0;
+  const center=window.innerHeight/2;
+  let closest=null,best=Infinity;
+  for(const card of root.querySelectorAll(':scope > .card')){
+   if(!card.querySelector('.photo-stage img'))continue;
+   const rect=card.getBoundingClientRect();
+   const photo=card.querySelector('.productArt').getBoundingClientRect();
+   if(photo.bottom<center-95||photo.top>center+95)continue;
+   const d=Math.abs((photo.top+photo.bottom)/2-center);
+   if(d<best){best=d;closest=card;}
+  }
+  if(closest===active)return;
+  if(active)active.classList.remove('po-center-zoom');
+  active=closest;
+  if(active)active.classList.add('po-center-zoom');
+ }
+ function schedule(){if(!raf)raf=requestAnimationFrame(update)}
+ const mutations=new MutationObserver(()=>{if(active&&!root.contains(active))active=null;schedule()});
+ mutations.observe(root,{childList:true});
+ window.addEventListener('scroll',schedule,{passive:true});
+ window.addEventListener('resize',schedule,{passive:true});
+ schedule();
+})();
+</script></body></html>
