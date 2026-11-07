@@ -1318,26 +1318,15 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
 </style>
 
 
-<style id="po-product-cinematic-on-scroll-v6">
+
+<style id="po-auto-zoom-v7">
 @media(max-width:767px){
- /* Keep the existing cinematic zoom keyframes, not a replacement animation. */
- #menuCards .photo-stage img,#menuCards .card:hover .photo-stage img{
-  animation:pickoutCinematicZoom 3.1s cubic-bezier(.45,0,.55,1) infinite!important;
-  animation-play-state:paused!important;
-  animation-delay:0s!important;
-  transform:perspective(1000px) translate3d(0,10px,0) rotateY(-9deg) rotateZ(-3deg) scale(.76);
-  filter:none!important;will-change:auto!important;
- }
- #menuCards .card.po-zoom-active .photo-stage img,#menuCards .card.po-zoom-active:hover .photo-stage img{
-  animation-play-state:running!important;will-change:transform!important;
- }
+ #menuCards .card .photo-stage img,#menuCards .card:hover .photo-stage img{animation:none!important;transform:perspective(1000px) scale(.83) rotateY(-9deg)!important;filter:none!important;will-change:auto!important;}
+ #menuCards .card.po-zoom-visible .photo-stage img,#menuCards .card.po-zoom-visible:hover .photo-stage img{animation:pickoutCinematicZoom 3.1s cubic-bezier(.45,0,.55,1) 1 both!important;transform-origin:center!important;will-change:transform!important;}
  #menuCards .productArt:before,#menuCards .photo-stage:before,#menuCards .photo-stage:after{animation:none!important;}
- #menuCards .card{contain:layout style paint;}
- /* Freeze expensive full-screen ambient layers, retain the actual artwork. */
- body:before,body:after,#pickoutBackdrop .backdrop-light,#pickoutBackdrop .backdrop-coffee,
- #pickoutBackdrop .po-lamp-glow,#pickoutBackdrop .po-cup-aura,#liveCafe:before,#liveCafe:after{animation:none!important;}
+ body:before,body:after,#pickoutBackdrop .backdrop-light,#pickoutBackdrop .backdrop-coffee{animation:none!important;}
 }
-@media(max-width:767px) and (prefers-reduced-motion:reduce){#menuCards .photo-stage img,#menuCards .card.po-zoom-active .photo-stage img{animation:none!important;transform:none!important}}
+@media(max-width:767px) and (prefers-reduced-motion:reduce){#menuCards .card.po-zoom-visible .photo-stage img{animation:none!important;transform:none!important}}
 </style>
 </head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
@@ -1873,21 +1862,30 @@ document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
 })();
 </script>
 
-<script id="po-product-cinematic-scroll-runtime-v6">
+
+<script id="po-auto-zoom-observer-v7">
 (function(){
- if(!matchMedia('(max-width:767px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- const root=document.getElementById('menuCards');if(!root)return;
- let active=null,raf=0;
- function update(){raf=0;const cards=root.querySelectorAll(':scope > .card');const mid=innerHeight*.5;let best=null,distance=Infinity;
- for(const card of cards){const rect=card.getBoundingClientRect();if(rect.bottom<innerHeight*.3||rect.top>innerHeight*.7)continue;const d=Math.abs((rect.top+rect.bottom)*.5-mid);if(d<distance){distance=d;best=card;}}
- if(best===active)return;
- if(active)active.classList.remove('po-zoom-active');active=best;
- if(active){/* Restart the original cinematic zoom as the item reaches the screen center. */
- active.classList.add('po-zoom-active');const img=active.querySelector('.photo-stage img');if(img){img.style.animation='none';void img.offsetWidth;img.style.removeProperty('animation');}}
+ const root=document.getElementById('menuCards');if(!root||!matchMedia('(max-width:767px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ let observer=null;
+ function setup(){
+  if(observer)observer.disconnect();
+  const cards=Array.from(root.querySelectorAll(':scope > .card'));
+  observer=new IntersectionObserver(entries=>{
+   entries.forEach(entry=>{
+    const card=entry.target;
+    if(entry.isIntersecting){
+      if(!card.classList.contains('po-zoom-visible')){
+       card.classList.add('po-zoom-visible');
+       const img=card.querySelector('.photo-stage img');
+       if(img){img.style.removeProperty('animation');}
+      }
+    }else{card.classList.remove('po-zoom-visible');}
+   });
+  },{rootMargin:'-38% 0px -38% 0px',threshold:0});
+  cards.forEach(card=>observer.observe(card));
  }
- function schedule(){if(!raf)raf=requestAnimationFrame(update)}
- new MutationObserver(()=>{if(active&&!root.contains(active))active=null;schedule()}).observe(root,{childList:true});
- addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});schedule();
+ new MutationObserver(setup).observe(root,{childList:true});
+ setup();
 })();
 </script>
 </body></html>
