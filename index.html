@@ -1319,23 +1319,24 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
 
 
 
-<style id="po-auto-zoom-v10">
+<style id="po-auto-zoom-v11">
+/* Mobile: original cinematic product animation, always on without touch/scroll JS. */
 @media(max-width:767px){
- /* Original animation always exists; JavaScript only pauses offscreen images. */
  #menuCards .card .photo-stage img,
  #menuCards .card:hover .photo-stage img,
- #menuCards .card.po-zoom-visible .photo-stage img{
- animation:pickoutHeroZoomRoll 4.5s cubic-bezier(.45,0,.3,1) infinite!important;
- animation-play-state:running!important;
- animation-delay:0s!important;
- will-change:auto!important;
+ #menuCards .card:active .photo-stage img,
+ #menuCards .card:focus-within .photo-stage img{
+  animation-name:pickoutHeroZoomRoll!important;
+  animation-duration:4.5s!important;
+  animation-timing-function:cubic-bezier(.45,0,.3,1)!important;
+  animation-iteration-count:infinite!important;
+  animation-play-state:running!important;
+  animation-delay:0s!important;
+  animation-fill-mode:both!important;
  }
- #menuCards .card.po-zoom-paused .photo-stage img,
- #menuCards .card.po-zoom-paused:hover .photo-stage img{
- animation-play-state:paused!important;
- }
- #menuCards .productArt:before,#menuCards .photo-stage:before,#menuCards .photo-stage:after{animation:none!important}
- body:before,body:after,#pickoutBackdrop .backdrop-light,#pickoutBackdrop .backdrop-coffee{animation:none!important}
+ #menuCards .card img{content-visibility:visible!important;}
+ #menuCards .productArt:before,#menuCards .photo-stage:before,#menuCards .photo-stage:after{animation:none!important;}
+ body:before,body:after,#pickoutBackdrop .backdrop-light,#pickoutBackdrop .backdrop-coffee{animation:none!important;}
 }
 @media(max-width:767px) and (prefers-reduced-motion:reduce){#menuCards .card .photo-stage img{animation:none!important}}
 </style>
@@ -1874,25 +1875,5 @@ document.body.appendChild(note);setTimeout(()=>note.remove(),1100);
 </script>
 
 
-<script id="po-auto-zoom-runtime-v10">
-(function(){
- const root=document.getElementById('menuCards');
- if(!root||!matchMedia('(max-width:767px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- let observer;
- function setup(){
-  if(observer)observer.disconnect();
-  const cards=Array.from(root.querySelectorAll(':scope > .card'));
-  cards.forEach(c=>c.classList.remove('po-zoom-paused'));
-  if(!('IntersectionObserver' in window))return;
-  observer=new IntersectionObserver(entries=>{
-   for(const e of entries){
-    e.target.classList.toggle('po-zoom-paused',!e.isIntersecting);
-   }
-  },{rootMargin:'-15% 0px -15% 0px',threshold:0});
-  cards.forEach(c=>observer.observe(c));
- }
- new MutationObserver(setup).observe(root,{childList:true});
- setup();
-})();
-</script>
+
 </body></html>
