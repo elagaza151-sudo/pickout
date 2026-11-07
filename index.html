@@ -607,38 +607,6 @@ html,body{margin:0}
 }
 @keyframes pickoutStageBounce{0%,100%{transform:translateY(6px)}50%{transform:translateY(-9px)}}
 @media(prefers-reduced-motion:reduce){#menuCards .photo-stage,#menuCards .photo-stage img{animation:none!important}}
-</style><style id="pickout-reference-showcase">
-/* TikTok reference: selectable product lineup, not random endless wobbling */
-#menuCards .photo-stage,#menuCards .photo-stage img,#menuCards .productArt:before,#menuCards .photo-stage:after{animation:none!important}
-#menuCards .photo-stage img{transform:none;transition:transform .65s cubic-bezier(.2,.85,.25,1),filter .65s ease!important}
-#menuCards .card{transition:transform .65s cubic-bezier(.2,.85,.25,1),opacity .45s ease,box-shadow .5s ease!important;cursor:pointer}
-#menuCards .card.po-selected{z-index:4!important;transform:translateY(-12px) scale(1.035)!important;box-shadow:0 22px 42px #0007!important}
-#menuCards .card.po-selected .photo-stage img{transform:translateY(-10px) scale(1.35) rotate(-3deg);filter:drop-shadow(0 28px 17px #000a)!important}
-#menuCards .card.po-neighbor .photo-stage img{transform:translateX(-8px) scale(.86) rotate(6deg);filter:drop-shadow(0 12px 8px #0007)!important}
-#menuCards .card.po-dim{opacity:.7}
-#menuCards .card.po-selected .productArt{overflow:visible!important}
-@media(prefers-reduced-motion:reduce){#menuCards .card,#menuCards .photo-stage img{transition:none!important}}
-</style><style id="pickout-hover-only-performance-fix">
-/* No auto motion. Animate only the hovered product, using compositor-friendly transforms. */
-#menuCards .card{opacity:1!important;transform:none!important;transition:box-shadow .25s ease!important;will-change:auto!important;z-index:1}
-#menuCards .card.po-selected,#menuCards .card.po-neighbor,#menuCards .card.po-dim{opacity:1!important;transform:none!important;box-shadow:none!important}
-#menuCards .productArt{overflow:visible!important;isolation:isolate!important}
-#menuCards .productArt:before,#menuCards .photo-stage:after{animation:none!important}
-#menuCards .photo-stage{animation:none!important;transform:none!important;will-change:auto!important}
-#menuCards .photo-stage img,#menuCards .card.po-selected .photo-stage img,#menuCards .card.po-neighbor .photo-stage img{
-animation:none!important;transform:translate3d(0,0,0) scale(1) rotate(0deg);
-filter:drop-shadow(0 12px 9px #0007)!important;
-transition:transform .48s cubic-bezier(.2,.8,.2,1),filter .48s ease!important;
-will-change:auto!important;backface-visibility:hidden!important
-}
-#menuCards .card:hover{z-index:10!important;box-shadow:0 16px 32px #0005!important}
-#menuCards .card:hover .productArt{z-index:11!important}
-#menuCards .card:hover .photo-stage img{
-animation:none!important;transform:translate3d(0,-18px,0) rotate(-7deg) scale(1.58);
-filter:drop-shadow(0 23px 15px #000a)!important;will-change:transform!important
-}
-@media(max-width:650px){#menuCards .card:hover .photo-stage img{transform:translate3d(0,-12px,0) rotate(-5deg) scale(1.38)}}
-@media(prefers-reduced-motion:reduce){#menuCards .card:hover .photo-stage img{transition:none!important}}
 </style><style id="pickout-polish-november">
 .nav .brand{display:flex!important;align-items:center!important;width:clamp(165px,21vw,260px)!important;min-width:145px!important;max-width:260px!important;overflow:visible!important;flex-shrink:0!important}
 .nav .brand img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:78px!important;object-fit:contain!important;object-position:center!important;transform:none!important}
