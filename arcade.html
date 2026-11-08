@@ -13,27 +13,70 @@ main{width:100%;min-width:0}
 #leaders table{min-width:290px}
 #googleBtn{max-width:100%;white-space:normal;text-align:center}
 @media(max-width:600px){
- body{padding:12px;font-size:14px}
+ body{padding:12px;font-size:14px;min-width:0}
  main{max-width:100%}
  h1{font-size:clamp(23px,6vw,32px);line-height:1.3}
  h2{font-size:20px}
  .box{padding:14px;margin:12px 0;border-radius:13px}
  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
- .grid>div{min-width:0}
+ .grid>div{min-width:0;overflow:hidden}.grid>div h3{overflow-wrap:anywhere;font-size:clamp(14px,4vw,18px)}
  .grid img{height:95px!important}
  button{padding:11px 9px;margin:4px 2px}
  input{max-width:100%;margin:4px 0}
- #area{display:block}
+ #area{display:block;width:100%;min-width:0}#play{max-width:100%;overflow:hidden}
  #area>button{display:inline-block;min-width:calc(50% - 8px);margin:4px 2px}
  #cards button{height:clamp(52px,15vw,65px)}
 }
 @media(max-width:350px){.grid{grid-template-columns:1fr}#area>button{min-width:100%}}
 </style><main><a href="./">← الموقع الرئيسي</a><h1>🎮 PICK & OUT ARCADE</h1><div class="box" id="login"><h2>الدخول للألعاب باستخدام Google</h2><p>سجّل بحساب Google علشان نحفظ نقاطك وترتيبك الأسبوعي.</p><button id="googleBtn" onclick="googleLogin()" style="background:#fff;color:#242424;display:inline-flex;align-items:center;gap:10px"><span style="font-size:22px;color:#4285f4;font-weight:900">G</span> متابعة باستخدام Google</button><p id="googleStatus" style="font-size:13px;color:#d4b9a1">تسجيل Google مخصص للعملاء في الألعاب.</p></div><div class="box hide" id="account"><b id="who"></b> · <span id="points"></span> نقطة <button onclick="logoutArcade()">خروج</button></div><div class="box"><h2>🏆 ترتيب الأسبوع</h2><p id="prize"></p><div id="leaders"></div></div><div class="box" id="achievements"><h2>🏅 أوسمتي وإنجازاتي</h2><p>الأوسمة مرتبطة بحساب Google الخاص بيك. افتح الألعاب وحقق الإنجازات علشان تفتح أوسمة جديدة!</p><div id="badgeList" class="grid">سجّل دخولك بحساب Google لعرض الأوسمة.</div></div><div class="box"><h2>الألعاب</h2><div class="grid"><div><img src="./assets/arcade-memory.svg" alt="Coffee Memory" style="width:100%;height:120px;object-fit:cover;border-radius:12px"><h3>Coffee Memory</h3><button onclick="start('memory')">العب</button></div><div><img src="./assets/arcade-catch.svg" alt="Catch the Coffee" style="width:100%;height:120px;object-fit:cover;border-radius:12px"><h3>Catch the Coffee</h3><button onclick="start('catch')">العب</button></div><div><img src="./assets/arcade-barista.svg" alt="Barista Rush" style="width:100%;height:120px;object-fit:cover;border-radius:12px"><h3>Barista Rush</h3><button onclick="start('barista')">العب</button></div><div><img src="./assets/arcade-guess.svg" alt="Guess the Drink" style="width:100%;height:120px;object-fit:cover;border-radius:12px"><h3>Guess the Drink</h3><button onclick="start('guess')">العب</button></div></div></div><div class="box hide" id="play"><h2 id="title"></h2><p id="clock"></p><div id="area"></div><p id="msg"></p><button onclick="end()">إغلاق</button></div></main><script>
 const db=supabase.createClient('https://ybnujvjcqrrvacquedyr.supabase.co','sb_publishable_oFXCDAq2QHOvyFcZGAe7NA_hL-MBiAM',{auth:{storageKey:'pickout-arcade-google-session-v1',persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}),$=id=>document.getElementById(id),safe=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));let user=null,game='',score=0,secs=0,timer=null,interval=null,active=false;
-async function googleLogin(){const btn=$('googleBtn');btn.disabled=true;$('googleStatus').textContent='جاري فتح تسجيل Google...';const {error}=await db.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname+location.search}});if(error){btn.disabled=false;$('googleStatus').textContent='تعذر تسجيل Google: '+error.message+' — تأكد من تفعيل Google Provider وRedirect URL في Supabase.'}}
-async function logoutArcade(){localStorage.removeItem('arcadeUser');await db.auth.signOut();location.reload()}
-async function restoreGoogle(){const btn=$('googleBtn');const {data:{session},error}=await db.auth.getSession();if(error||!session?.user){if(btn)btn.disabled=false;return;}const {data,error:loginError}=await db.rpc('arcade_google_login');if(loginError){$('googleStatus').textContent='تعذر ربط Google: '+loginError.message;if(btn)btn.disabled=false;return}user=data;localStorage.setItem('arcadeUser',JSON.stringify(user));display();loadBadges();const g=new URLSearchParams(location.search).get('game');if(['memory','catch','barista','guess'].includes(g))start(g)}
-function display(){if(!user)return;$('login').classList.add('hide');$('account').classList.remove('hide');$('who').textContent=user.name;$('points').textContent=user.points}restoreGoogle();
+let restoring=false,restoredAuthId=null;
+const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+function setLoginStatus(message){$('googleStatus').textContent=message}
+async function googleLogin(){
+ const btn=$('googleBtn');btn.disabled=true;
+ setLoginStatus('جاري تحويلك لتسجيل Google...');
+ try{
+  const {error}=await db.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname+location.search}});
+  if(error)throw error;
+ }catch(error){btn.disabled=false;setLoginStatus('تعذر تسجيل Google: '+error.message)}
+}
+async function logoutArcade(){
+ clear();user=null;restoredAuthId=null;localStorage.removeItem('arcadeUser');
+ await db.auth.signOut();location.replace(location.pathname);
+}
+async function restoreGoogle(session){
+ if(!session?.user){$('googleBtn').disabled=false;return}
+ if(restoring||restoredAuthId===session.user.id)return;
+ restoring=true;$('googleBtn').disabled=true;setLoginStatus('جاري تجهيز حساب الألعاب...');
+ try{
+  let result;
+  for(let attempt=0;attempt<3;attempt++){
+   result=await db.rpc('arcade_google_login');
+   if(!result.error&&result.data)break;
+   if(attempt<2)await wait(500*(attempt+1));
+  }
+  if(result?.error||!result?.data)throw result?.error||new Error('لم يتم تحميل بيانات اللاعب');
+  user=result.data;restoredAuthId=session.user.id;
+  localStorage.setItem('arcadeUser',JSON.stringify(user));
+  display();loadBadges();
+  const g=new URLSearchParams(location.search).get('game');
+  if(['memory','catch','barista','guess'].includes(g)&&!active)start(g);
+ }catch(error){
+  setLoginStatus('تعذر تجهيز الحساب: '+(error?.message||'خطأ مؤقت')+' — اضغط إعادة المحاولة.');
+  $('googleBtn').disabled=false;
+  $('googleBtn').onclick=()=>restoreGoogle(session);
+  $('googleBtn').textContent='إعادة المحاولة';
+ }finally{restoring=false}
+}
+db.auth.onAuthStateChange((event,session)=>{
+ if(event==='SIGNED_OUT'){user=null;restoredAuthId=null;return}
+ if((event==='INITIAL_SESSION'||event==='SIGNED_IN')&&session?.user){
+  // Defer database calls until the auth callback finishes handling OAuth tokens.
+  setTimeout(()=>restoreGoogle(session),0);
+ }
+});
+function display(){if(!user)return;$('login').classList.add('hide');$('account').classList.remove('hide');$('who').textContent=user.name;$('points').textContent=user.points}
 async function loadBadges(){if(!user)return;const {data,error}=await db.rpc('arcade_achievements');const el=$('badgeList');if(!el)return;if(error){el.textContent='تعذر تحميل الأوسمة: '+error.message;return}el.innerHTML=(data||[]).map(b=>'<div style="background:#251710;border:1px solid '+(b.unlocked?'#2bbb76':'#72503d')+';border-radius:12px;padding:15px;opacity:'+(b.unlocked?'1':'.65')+'"><div style="font-size:35px">'+(b.unlocked?b.icon:'🔒')+'</div><b>'+safe(b.title)+'</b><p>'+safe(b.description)+'</p><small>'+(b.unlocked?'تم فتح الوسام!':'التقدم: '+b.progress+' / '+b.target)+'</small></div>').join('')}
 async function load(){const [a,b,c]=await Promise.all([db.rpc('arcade_leaderboard'),db.from('arcade_rewards').select('id,title,cost').eq('active',true),db.from('arcade_settings').select('*').single()]);$('prize').textContent='جائزة المركز الأول: '+(c.data?.weekly_prize||'يحددها المدير');$('leaders').innerHTML=a.error?a.error.message:'<table><tr><th>المركز</th><th>الاسم</th><th>النتيجة</th></tr>'+(a.data||[]).map((x,i)=>'<tr><td>'+(i+1)+'</td><td>'+safe(x.name)+'</td><td>'+x.total+'</td></tr>').join('')+'</table>';}
 async function redeem(id){if(!user)return alert('سجل الأول');if(!confirm('تأكيد الاستبدال؟'))return;const {data,error}=await db.rpc('arcade_redeem',{p_player:user.id,p_token:user.token,p_reward:id});if(error)return alert(error.message);user.points=data.remaining;localStorage.setItem('arcadeUser',JSON.stringify(user));display();alert('تم تسجيل طلبك رقم '+data.redemption_id+'، استلمه من الكافيه')}
