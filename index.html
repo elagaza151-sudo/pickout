@@ -2,7 +2,13 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><script id="pickout-canonical-host-2026">
+(function(){
+ if(location.hostname!=='elagaza151-sudo.github.io')return;
+ var path=location.pathname.replace(/^\/pickout(?=\/|$)/i,'')||'/';
+ location.replace('https://pickandoutt.pages.dev'+path+location.search+location.hash);
+})();
+</script>
 <title>Pickout | اطلب واستلم من الكافيه</title>
 <!-- Early connections only: no changes to layout, images, or animations. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1407,7 +1413,7 @@ function spin(){let a=['آيس لاتيه 🧊','كابتشينو ☕','موهي
 // Pickout live ordering integration. Publishable/anon key is intended for browser use; RLS and RPC enforce access.
 const PICKOUT_SUPABASE_URL='https://ybnujvjcqrrvacquedyr.supabase.co';
 const PICKOUT_SUPABASE_KEY='sb_publishable_oFXCDAq2QHOvyFcZGAe7NA_hL-MBiAM';
-const pickoutDb=window.supabase.createClient(PICKOUT_SUPABASE_URL,PICKOUT_SUPABASE_KEY);
+const pickoutDb=window.supabase.createClient(PICKOUT_SUPABASE_URL,PICKOUT_SUPABASE_KEY,{auth:{storageKey:'pickout-public-customer-v1',persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
 let liveProducts=[],liveCategories=[],deliveryZones=[],cart=[],checkoutFees={tax_percent:0,service_percent:0};
 const egp=n=>Number(n||0).toLocaleString('ar-EG',{maximumFractionDigits:2})+' ج';
 function safeText(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
