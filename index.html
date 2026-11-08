@@ -1355,47 +1355,33 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
 }
 </style>
 <style id="po-desktop-product-motion-isolation-2026">
-/* Restore the ORIGINAL pickoutSuperZoomRoll and pickoutStageBounce keyframes
-   from this site's legacy design, but run them on desktop hover only. */
+/* Desktop showcase: hover once, push the product forward, then hold it. */
 @media (min-width:768px) {
-  #menuCards > .card {
-    animation:none!important;
-    opacity:1!important;
-    transform:none!important;
-    will-change:auto!important;
-    transition:transform .25s ease,box-shadow .25s ease!important;
-  }
-  #menuCards > .card:hover {transform:translateY(-4px)!important;z-index:5!important}
-  #menuCards .photo-stage,
-  #menuCards .productArt::before,
-  #menuCards .photo-stage::before,
-  #menuCards .photo-stage::after {
-    animation:none!important;
-    will-change:auto!important;
-  }
-  #menuCards .photo-stage {transform:none!important}
-  #menuCards .photo-stage img {
-    animation:none!important;
-    transform:none!important;
-    transform-origin:center center!important;
-    will-change:auto!important;
-    transition:transform .35s ease,filter .35s ease!important;
-  }
+ #menuCards>.card{animation:none!important;opacity:1!important;transform:none!important;will-change:auto!important;transition:box-shadow .3s ease!important}
+ #menuCards>.card:hover{z-index:5!important}
+ #menuCards .photo-stage,
+ #menuCards .productArt::before,
+ #menuCards .photo-stage::before,
+ #menuCards .photo-stage::after{animation:none!important;will-change:auto!important}
+ #menuCards .photo-stage{transform:none!important;overflow:visible!important}
+ #menuCards .photo-stage img,
+ #menuCards .card:hover .photo-stage img{
+   animation:none!important;
+   transform:perspective(950px) translate3d(0,0,0) rotateY(0deg) rotateZ(0deg) scale(1)!important;
+   transform-origin:center!important;
+   transition:transform .65s cubic-bezier(.2,.85,.25,1),filter .65s ease!important;
+   will-change:auto!important;
+   filter:drop-shadow(0 12px 9px #0007)!important;
+ }
 }
 @media (min-width:768px) and (hover:hover) and (pointer:fine) {
-  #menuCards .card:hover .photo-stage {
-    animation:pickoutStageBounce 2.8s ease-in-out infinite!important;
-  }
-  #menuCards .card:hover .photo-stage img {
-    /* Original legacy zoom + roll animation, not a newly approximated motion. */
-    animation:pickoutSuperZoomRoll 3.8s ease-in-out infinite!important;
-    transform:none;
-    will-change:transform!important;
-  }
+ #menuCards .card:hover .photo-stage img{
+   transform:perspective(950px) translate3d(0,-16px,65px) rotateY(12deg) rotateZ(-6deg) scale(1.38)!important;
+   filter:drop-shadow(0 25px 17px #000b)!important;
+ }
 }
-@media (min-width:768px) and (prefers-reduced-motion:reduce) {
-  #menuCards .card:hover .photo-stage,
-  #menuCards .card:hover .photo-stage img {animation:none!important}
+@media (min-width:768px) and (prefers-reduced-motion:reduce){
+ #menuCards .photo-stage img,#menuCards .card:hover .photo-stage img{transition:none!important}
 }
 </style>
 </head>
