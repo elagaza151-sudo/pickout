@@ -1355,68 +1355,47 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
 }
 </style>
 <style id="po-desktop-product-motion-isolation-2026">
-/* PC-only regression fix: prevent legacy mobile/product loops leaking into desktop.
-   Retain the original cafe backdrop, loading screen and mobile behaviors. */
-@media (min-width: 768px) {
+/* Restore the ORIGINAL pickoutSuperZoomRoll and pickoutStageBounce keyframes
+   from this site's legacy design, but run them on desktop hover only. */
+@media (min-width:768px) {
   #menuCards > .card {
-    animation: none !important;
-    animation-delay: 0s !important;
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-    will-change: auto !important;
-    transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease !important;
+    animation:none!important;
+    opacity:1!important;
+    transform:none!important;
+    will-change:auto!important;
+    transition:transform .25s ease,box-shadow .25s ease!important;
   }
-  #menuCards > .card:hover {
-    transform: translateY(-4px) !important;
-  }
+  #menuCards > .card:hover {transform:translateY(-4px)!important;z-index:5!important}
   #menuCards .photo-stage,
-  #menuCards .photo-stage:hover,
   #menuCards .productArt::before,
   #menuCards .photo-stage::before,
   #menuCards .photo-stage::after {
-    animation: none !important;
-    animation-delay: 0s !important;
-    will-change: auto !important;
+    animation:none!important;
+    will-change:auto!important;
   }
-  #menuCards .photo-stage {
-    transform: none !important;
-  }
-  #menuCards .photo-stage img,
-  #menuCards .card:hover .photo-stage img,
-  #menuCards .card:active .photo-stage img,
-  #menuCards .card:focus-within .photo-stage img,
-  #menuCards .card.po-center-zoom .photo-stage img {
-    animation: none !important;
-    animation-delay: 0s !important;
-    transform: none !important;
-    transform-origin: center !important;
-    will-change: auto !important;
-    filter: drop-shadow(0 12px 10px rgba(0,0,0,.48)) !important;
-    transition: transform .25s ease, filter .25s ease !important;
-  }
-}
-@media (min-width: 768px) and (hover:hover) and (pointer:fine) {
-  /* Independent transform properties bypass the old !important transform resets.
-     Run the old-style rolling 3D zoom only while the pointer is over the card. */
-  #menuCards .card:hover .photo-stage img {
-    animation: poDesktopHover3DRoll 2.8s ease-in-out infinite !important;
-    transform: perspective(900px) !important;
-    transform-origin: center center !important;
-    filter: drop-shadow(0 22px 16px rgba(0,0,0,.58)) !important;
-  }
-  @keyframes poDesktopHover3DRoll {
-    0%,100% { scale: 1; rotate: y -16deg; translate: 0 0; }
-    25% { scale: 1.13; rotate: y 9deg; translate: 0 -8px; }
-    50% { scale: 1.32; rotate: y 22deg; translate: 0 -17px; }
-    75% { scale: 1.15; rotate: y -10deg; translate: 0 -9px; }
-  }
-}
-@media (min-width: 768px) and (prefers-reduced-motion:reduce) {
-  #menuCards > .card,
+  #menuCards .photo-stage {transform:none!important}
   #menuCards .photo-stage img {
-    transition: none !important;
+    animation:none!important;
+    transform:none!important;
+    transform-origin:center center!important;
+    will-change:auto!important;
+    transition:transform .35s ease,filter .35s ease!important;
   }
+}
+@media (min-width:768px) and (hover:hover) and (pointer:fine) {
+  #menuCards .card:hover .photo-stage {
+    animation:pickoutStageBounce 2.8s ease-in-out infinite!important;
+  }
+  #menuCards .card:hover .photo-stage img {
+    /* Original legacy zoom + roll animation, not a newly approximated motion. */
+    animation:pickoutSuperZoomRoll 3.8s ease-in-out infinite!important;
+    transform:none;
+    will-change:transform!important;
+  }
+}
+@media (min-width:768px) and (prefers-reduced-motion:reduce) {
+  #menuCards .card:hover .photo-stage,
+  #menuCards .card:hover .photo-stage img {animation:none!important}
 }
 </style>
 </head>
