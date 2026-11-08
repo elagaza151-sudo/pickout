@@ -1397,9 +1397,19 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
   }
 }
 @media (min-width: 768px) and (hover:hover) and (pointer:fine) {
+  /* Independent transform properties bypass the old !important transform resets.
+     Run the old-style rolling 3D zoom only while the pointer is over the card. */
   #menuCards .card:hover .photo-stage img {
-    transform: perspective(900px) translateY(-12px) rotateY(-7deg) scale(1.18) !important;
+    animation: poDesktopHover3DRoll 2.8s ease-in-out infinite !important;
+    transform: perspective(900px) !important;
+    transform-origin: center center !important;
     filter: drop-shadow(0 22px 16px rgba(0,0,0,.58)) !important;
+  }
+  @keyframes poDesktopHover3DRoll {
+    0%,100% { scale: 1; rotate: y -16deg; translate: 0 0; }
+    25% { scale: 1.13; rotate: y 9deg; translate: 0 -8px; }
+    50% { scale: 1.32; rotate: y 22deg; translate: 0 -17px; }
+    75% { scale: 1.15; rotate: y -10deg; translate: 0 -9px; }
   }
 }
 @media (min-width: 768px) and (prefers-reduced-motion:reduce) {
