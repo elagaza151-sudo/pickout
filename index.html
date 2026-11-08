@@ -1355,33 +1355,34 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
 }
 </style>
 <style id="po-desktop-product-motion-isolation-2026">
-/* Desktop showcase: hover once, push the product forward, then hold it. */
-@media (min-width:768px) {
- #menuCards>.card{animation:none!important;opacity:1!important;transform:none!important;will-change:auto!important;transition:box-shadow .3s ease!important}
- #menuCards>.card:hover{z-index:5!important}
- #menuCards .photo-stage,
- #menuCards .productArt::before,
- #menuCards .photo-stage::before,
- #menuCards .photo-stage::after{animation:none!important;will-change:auto!important}
- #menuCards .photo-stage{transform:none!important;overflow:visible!important}
- #menuCards .photo-stage img,
- #menuCards .card:hover .photo-stage img{
-   animation:none!important;
-   transform:perspective(950px) translate3d(0,0,0) rotateY(0deg) rotateZ(0deg) scale(1)!important;
-   transform-origin:center!important;
-   transition:transform .65s cubic-bezier(.2,.85,.25,1),filter .65s ease!important;
-   will-change:auto!important;
-   filter:drop-shadow(0 12px 9px #0007)!important;
+/* Desktop: static until pointer hover, then original rotating 3D zoom.
+   Cover both photo-stage images and direct productArt images. */
+@media(min-width:768px){
+ #menuCards>.card{animation:none!important;opacity:1!important;transform:none!important}
+ #menuCards>.card:hover{z-index:10!important}
+ #menuCards .photo-stage,#menuCards .productArt::before,#menuCards .photo-stage::before,#menuCards .photo-stage::after{animation:none!important}
+ #menuCards .photo-stage{overflow:visible!important}
+ #menuCards .photo-stage img,#menuCards .productArt>img{
+   animation:none!important;animation-delay:0s!important;
+   transform:perspective(900px) translate3d(0,0,0) rotateY(0deg) rotateZ(0deg) scale(1)!important;
+   transform-origin:center center!important;
+   transition:transform .4s ease,filter .4s ease!important;
  }
 }
-@media (min-width:768px) and (hover:hover) and (pointer:fine) {
- #menuCards .card:hover .photo-stage img{
-   transform:perspective(950px) translate3d(0,-16px,65px) rotateY(12deg) rotateZ(-6deg) scale(1.38)!important;
-   filter:drop-shadow(0 25px 17px #000b)!important;
+@media(min-width:768px) and (hover:hover) and (pointer:fine){
+ #menuCards .card:hover .photo-stage img,#menuCards .card:hover .productArt>img{
+   animation:poOriginal3DHover 2.8s ease-in-out infinite!important;
+   animation-delay:0s!important;
+   will-change:transform,filter!important;
  }
 }
-@media (min-width:768px) and (prefers-reduced-motion:reduce){
- #menuCards .photo-stage img,#menuCards .card:hover .photo-stage img{transition:none!important}
+@keyframes poOriginal3DHover{
+ 0%,100%{transform:perspective(1000px) translate3d(-8px,8px,0) rotateY(-18deg) rotateZ(-12deg) scale(.9);filter:drop-shadow(10px 12px 8px #0009)}
+ 35%{transform:perspective(1000px) translate3d(2px,-15px,55px) rotateY(12deg) rotateZ(8deg) scale(1.34);filter:drop-shadow(-10px 22px 13px #000b)}
+ 65%{transform:perspective(1000px) translate3d(9px,-19px,75px) rotateY(22deg) rotateZ(-7deg) scale(1.48);filter:drop-shadow(12px 25px 16px #000b)}
+}
+@media(min-width:768px) and (prefers-reduced-motion:reduce){
+ #menuCards .card:hover .photo-stage img,#menuCards .card:hover .productArt>img{animation:none!important}
 }
 </style>
 </head>
