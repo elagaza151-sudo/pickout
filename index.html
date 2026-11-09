@@ -1354,37 +1354,7 @@ html:not(.po-scene-ready) #pickoutSplash2026 .po-content{visibility:visible!impo
  header .nav>.btn{max-width:27vw!important}
 }
 </style>
-<style id="po-desktop-product-motion-isolation-2026">
-/* Desktop: static until pointer hover, then original rotating 3D zoom.
-   Cover both photo-stage images and direct productArt images. */
-@media(min-width:768px){
- #menuCards>.card{animation:none!important;opacity:1!important;transform:none!important}
- #menuCards>.card:hover{z-index:10!important}
- #menuCards .photo-stage,#menuCards .productArt::before,#menuCards .photo-stage::before,#menuCards .photo-stage::after{animation:none!important}
- #menuCards .photo-stage{overflow:visible!important}
- #menuCards .photo-stage img,#menuCards .productArt>img{
-   animation:none!important;animation-delay:0s!important;
-   transform:perspective(900px) translate3d(0,0,0) rotateY(0deg) rotateZ(0deg) scale(1)!important;
-   transform-origin:center center!important;
-   transition:transform .4s ease,filter .4s ease!important;
- }
-}
-@media(min-width:768px) and (hover:hover) and (pointer:fine){
- #menuCards .card:hover .photo-stage img,#menuCards .card:hover .productArt>img{
-   animation:poOriginal3DHover 2.8s ease-in-out infinite!important;
-   animation-delay:0s!important;
-   will-change:transform,filter!important;
- }
-}
-@keyframes poOriginal3DHover{
- 0%,100%{transform:perspective(1000px) translate3d(-8px,8px,0) rotateY(-18deg) rotateZ(-12deg) scale(.9);filter:drop-shadow(10px 12px 8px #0009)}
- 35%{transform:perspective(1000px) translate3d(2px,-15px,55px) rotateY(12deg) rotateZ(8deg) scale(1.34);filter:drop-shadow(-10px 22px 13px #000b)}
- 65%{transform:perspective(1000px) translate3d(9px,-19px,75px) rotateY(22deg) rotateZ(-7deg) scale(1.48);filter:drop-shadow(12px 25px 16px #000b)}
-}
-@media(min-width:768px) and (prefers-reduced-motion:reduce){
- #menuCards .card:hover .photo-stage img,#menuCards .card:hover .productArt>img{animation:none!important}
-}
-</style>
+
 </head>
 <body class="po-loading-active"><div id="pickout-language-switch" data-no-translate aria-label="Language / اللغة" style="position:fixed!important;bottom:18px!important;left:18px!important;z-index:2147483647!important;display:flex!important;gap:4px;padding:6px;background:#241710;border:2px solid #e0b275;border-radius:30px;box-shadow:0 5px 24px #0009;direction:ltr"><button type="button" data-lang="ar" style="border:0;border-radius:20px;background:#16804a;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">عربي</button><button type="button" data-lang="en" style="border:0;border-radius:20px;background:transparent;color:white;padding:10px 14px;font:bold 14px Arial;cursor:pointer">English</button></div><div id="pickoutBackdrop" aria-hidden="true"><div class="backdrop-bricks"></div><div class="backdrop-wood"></div><div class="backdrop-light"></div><div class="backdrop-coffee"><div class="backdrop-vapor v1"></div><div class="backdrop-vapor v2"></div><div class="backdrop-vapor v3"></div><div class="backdrop-coffee-surface"></div><div class="backdrop-coffee-handle"></div><strong>PICK<span>&amp;</span>OUT</strong></div></div><div id="pickoutSplash2026" style="position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100dvh!important;z-index:2147483647!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;margin:0!important;padding:0!important;background:transparent!important;box-sizing:border-box!important;opacity:1;visibility:visible" role="status" aria-label="جاري تحميل PICK & OUT">
 <div class="po-wall"></div><div class="po-floor"></div><div class="po-glow"></div><div class="po-splash-lamp"></div><div class="po-splash-visible-effects" aria-hidden="true"><i class="po-visible-dust d1"></i><i class="po-visible-dust d2"></i><i class="po-visible-dust d3"></i><i class="po-visible-dust d4"></i><i class="po-visible-dust d5"></i><i class="po-visible-dust d6"></i><i class="po-visible-bean b1"></i><i class="po-visible-bean b2"></i><i class="po-visible-bean b3"></i></div>
@@ -1973,28 +1943,21 @@ document.addEventListener('click',function(e){
 });
 </script>
 <!-- Desktop-only product hover 3D repair; leave mobile, backdrop and splash untouched. -->
-<style id="po-desktop-pointer-3d-repair">
+
+
+<style id="po-restored-pre-mobile-desktop-showcase">
+/* Restore the original pre-mobile SuperZoomRoll keyframes on desktop only. */
 @media (min-width:768px) and (hover:hover) and (pointer:fine){
- #menuCards .card .photo-stage img{animation:none!important;animation-play-state:paused!important;transition:transform .28s ease-out,filter .28s ease-out!important;transform-origin:center center!important;will-change:transform!important;backface-visibility:visible!important}
- #menuCards .card:hover .photo-stage img{animation:none!important;animation-play-state:paused!important}
+ #menuCards .card .photo-stage img{animation:none!important;transform:translate3d(0,0,0) rotate(0deg) scale(1)!important;transition:transform .48s cubic-bezier(.2,.8,.2,1),filter .48s ease!important}
+ #menuCards .card:hover .photo-stage img{animation:pickoutSuperZoomRoll 2.4s ease-in-out infinite!important;transform-origin:center!important;will-change:transform,filter!important}
+ #menuCards .card:hover{z-index:10!important}
 }
-@media (prefers-reduced-motion:reduce){#menuCards .card .photo-stage img{transition:none!important}}
+@keyframes pickoutSuperZoomRoll{
+0%,100%{transform:translate(-12px,12px) rotate(-18deg) scale(.68);filter:drop-shadow(9px 12px 8px #000a)}
+35%{transform:translate(4px,-14px) rotate(9deg) scale(1.15);filter:drop-shadow(-9px 23px 14px #000b)}
+55%{transform:translate(0,-23px) rotate(19deg) scale(1.52);filter:drop-shadow(-17px 29px 16px #000c)}
+75%{transform:translate(10px,-8px) rotate(-9deg) scale(1.18);filter:drop-shadow(9px 22px 13px #000b)}
+}
+@media (prefers-reduced-motion:reduce){#menuCards .card:hover .photo-stage img{animation:none!important}}
 </style>
-<script id="po-desktop-pointer-3d-repair-runtime">
-(function(){
- const mq=window.matchMedia('(min-width:768px) and (hover:hover) and (pointer:fine)');
- const root=document.getElementById('menuCards');if(!root)return;
- let active=null,frame=0,px=0,py=0;
- function imageOf(card){return card&&card.querySelector('.photo-stage img')}
- function reset(){if(frame)cancelAnimationFrame(frame);frame=0;if(active){const img=imageOf(active);if(img){img.style.removeProperty('transform');img.style.removeProperty('filter')}active=null}}
- function paint(){frame=0;if(!active||!mq.matches)return;const img=imageOf(active);if(!img)return;
- const x=Math.max(-1,Math.min(1,px)),y=Math.max(-1,Math.min(1,py));
- img.style.setProperty('transform','perspective(900px) translate3d(0,-9px,45px) rotateX('+(-y*12).toFixed(2)+'deg) rotateY('+(x*17).toFixed(2)+'deg) scale(1.18)','important');
- img.style.setProperty('filter','drop-shadow('+(-x*14).toFixed(1)+'px 22px 14px rgba(0,0,0,.65))','important');
- }
- root.addEventListener('pointermove',function(e){if(!mq.matches||e.pointerType==='touch')return;const card=e.target.closest('.card');if(!card||!root.contains(card))return;const img=imageOf(card);if(!img)return;if(active!==card){reset();active=card}const rect=card.getBoundingClientRect();px=((e.clientX-rect.left)/rect.width-.5)*2;py=((e.clientY-rect.top)/rect.height-.5)*2;if(!frame)frame=requestAnimationFrame(paint)},{passive:true});
- root.addEventListener('pointerout',function(e){if(active&&!active.contains(e.relatedTarget))reset()});
- root.addEventListener('pointercancel',reset);window.addEventListener('blur',reset);mq.addEventListener('change',reset);
-})();
-</script>
 </body></html>
