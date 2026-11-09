@@ -1970,4 +1970,26 @@ document.addEventListener('click',function(e){
 }
 @media(prefers-reduced-motion:reduce){#menuCards>.card .photo-stage img{transition:none!important}}
 </style>
+
+<style id="po-mobile-footer-controls-clearance">
+@media(max-width:767px){
+ footer{padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))!important}
+ body.po-footer-visible .cart-fab,
+ body.po-footer-visible #pickout-language-switch{
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  transform:translateY(16px)!important;transition:opacity .18s ease,transform .18s ease,visibility .18s!important;
+ }
+}
+</style>
+<script id="po-mobile-footer-controls-clearance-runtime">
+(function(){
+ const footer=document.querySelector('footer');if(!footer||!('IntersectionObserver' in window))return;
+ const mobile=window.matchMedia('(max-width:767px)');
+ const observer=new IntersectionObserver(entries=>{
+  document.body.classList.toggle('po-footer-visible',mobile.matches&&entries[0].isIntersecting);
+ },{threshold:0,rootMargin:'0px 0px 0px 0px'});
+ observer.observe(footer);
+ mobile.addEventListener('change',()=>{if(!mobile.matches)document.body.classList.remove('po-footer-visible')});
+})();
+</script>
 </body></html>
