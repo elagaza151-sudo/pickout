@@ -1975,7 +1975,9 @@ document.addEventListener('click',function(e){
 @media(max-width:767px){
  footer{padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))!important}
  body.po-footer-visible .cart-fab,
- body.po-footer-visible #pickout-language-switch{
+ body.po-footer-visible #pickout-language-switch,
+ body.po-footer-visible #poTrackBtn,
+ body.po-footer-visible #poTrackPanel{
   opacity:0!important;visibility:hidden!important;pointer-events:none!important;
   transform:translateY(16px)!important;transition:opacity .18s ease,transform .18s ease,visibility .18s!important;
  }
