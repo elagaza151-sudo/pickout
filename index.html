@@ -1945,41 +1945,29 @@ document.addEventListener('click',function(e){
 <!-- Desktop-only product hover 3D repair; leave mobile, backdrop and splash untouched. -->
 
 
-<style id="po-restored-pre-mobile-desktop-showcase">
-/* Restore the original pre-mobile SuperZoomRoll keyframes on desktop only. */
-@media (min-width:768px) and (hover:hover) and (pointer:fine){
- #menuCards .card .photo-stage img{animation:none!important;transform:translate3d(0,0,0) rotate(0deg) scale(1)!important;transition:transform .48s cubic-bezier(.2,.8,.2,1),filter .48s ease!important}
- #menuCards .card:hover .photo-stage img{animation:pickoutSuperZoomRoll 2.4s ease-in-out infinite!important;transform-origin:center!important;will-change:transform,filter!important}
- #menuCards .card:hover{z-index:10!important}
-}
-@keyframes pickoutSuperZoomRoll{
-0%,100%{transform:translate(-12px,12px) rotate(-18deg) scale(.68);filter:drop-shadow(9px 12px 8px #000a)}
-35%{transform:translate(4px,-14px) rotate(9deg) scale(1.15);filter:drop-shadow(-9px 23px 14px #000b)}
-55%{transform:translate(0,-23px) rotate(19deg) scale(1.52);filter:drop-shadow(-17px 29px 16px #000c)}
-75%{transform:translate(10px,-8px) rotate(-9deg) scale(1.18);filter:drop-shadow(9px 22px 13px #000b)}
-}
-@media (prefers-reduced-motion:reduce){#menuCards .card:hover .photo-stage img{animation:none!important}}
-</style>
 
-<style id="po-original-animation-wrapper-fix">
-/* Animate an independent wrapper: legacy !important transforms on IMG cannot cancel this motion. */
+
+
+
+<style id="po-desktop-original-held-hover-2026">
+/* Original held zoom: no looping rotation, no automatic movement. Desktop only. */
 @media(min-width:768px) and (hover:hover) and (pointer:fine){
- #menuCards .photo-stage .po-original-motion-shell{display:flex;align-items:center;justify-content:center;width:100%;height:100%;transform-origin:center center;pointer-events:none}
- #menuCards .card:hover .photo-stage .po-original-motion-shell{animation:pickoutSuperZoomRoll 2.4s ease-in-out infinite}
- #menuCards .photo-stage .po-original-motion-shell img{max-width:100%;max-height:100%}
- #menuCards .card:hover .photo-stage .po-original-motion-shell img{animation:none!important}
+ #menuCards>.card{overflow:visible!important;isolation:visible!important;position:relative}
+ #menuCards>.card:hover{z-index:30!important}
+ #menuCards>.card .productArt,#menuCards>.card .photo-stage{overflow:visible!important;clip-path:none!important}
+ #menuCards>.card .photo-stage img{
+  animation:none!important;
+  transform:translate3d(0,0,0) rotate(0deg) scale(1)!important;
+  filter:drop-shadow(0 12px 9px #0007)!important;
+  transform-origin:center center!important;
+  transition:transform .48s cubic-bezier(.2,.8,.2,1),filter .48s ease!important;
+ }
+ #menuCards>.card:hover .photo-stage img{
+  animation:none!important;
+  transform:translate3d(0,-18px,0) rotate(-7deg) scale(1.58)!important;
+  filter:drop-shadow(0 23px 15px #000a)!important;
+ }
 }
-@media(prefers-reduced-motion:reduce){#menuCards .card:hover .photo-stage .po-original-motion-shell{animation:none!important}}
+@media(prefers-reduced-motion:reduce){#menuCards>.card .photo-stage img{transition:none!important}}
 </style>
-<script id="po-original-animation-wrapper-runtime">
-(function(){
- const root=document.getElementById('menuCards');if(!root)return;
- function mount(){root.querySelectorAll('.card .photo-stage img').forEach(img=>{
-  if(img.parentElement?.classList.contains('po-original-motion-shell'))return;
-  const shell=document.createElement('span');shell.className='po-original-motion-shell';
-  img.parentNode.insertBefore(shell,img);shell.appendChild(img);
- })}
- mount();new MutationObserver(mount).observe(root,{childList:true,subtree:true});
-})();
-</script>
 </body></html>
