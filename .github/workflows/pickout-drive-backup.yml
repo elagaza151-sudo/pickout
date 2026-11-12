@@ -1,0 +1,64 @@
+name: PICK & OUT encrypted daily backup to Google Drive
+on:
+  schedule:
+    - cron: '15 2 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pickout-drive-backup
+  cancel-in-progress: false
+jobs:
+  backup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      DATABASE_URL: ${{ secrets.PICKOUT_BACKUP_DATABASE_URL }}
+      RCLONE_CONFIG_B64: ${{ secrets.PICKOUT_DRIVE_RCLONE_CONFIG_B64 }}
+      BACKUP_PASSPHRASE: ${{ secrets.PICKOUT_BACKUP_PASSPHRASE }}
+    steps:
+      - name: Validate required secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          for key in DATABASE_URL RCLONE_CONFIG_B64 BACKUP_PASSPHRASE; do
+            if [[ -z "${!key:-}" ]]; then echo "::error::Missing secret $key"; exit 1; fi
+          done
+      - name: Install rclone
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y rclone
+          rclone version
+      - name: Dump PostgreSQL database
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pickout-backup"
+          chmod 700 "$RUNNER_TEMP/pickout-backup"
+          docker run --rm --network host -e DATABASE_URL="$DATABASE_URL" \
+            -v "$RUNNER_TEMP/pickout-backup:/backup" postgres:17 \
+            sh -ec 'pg_dump --dbname="$DATABASE_URL" --format=custom --no-owner --no-acl --file=/backup/database.dump && pg_restore --list /backup/database.dump >/dev/null'
+      - name: Encrypt and upload to private Drive folder
+        shell: bash
+        run: |
+          set -euo pipefail
+          export RCLONE_CONFIG="$RUNNER_TEMP/rclone.conf"
+          printf '%s' "$RCLONE_CONFIG_B64" | base64 --decode > "$RCLONE_CONFIG"
+          chmod 600 "$RCLONE_CONFIG"
+          cd "$RUNNER_TEMP/pickout-backup"
+          test -s database.dump
+          printf '%s' "$BACKUP_PASSPHRASE" > passphrase
+          chmod 600 passphrase
+          name="pickout-$(date -u +%Y-%m-%dT%H-%M-%SZ)-run${GITHUB_RUN_ID}.dump.enc"
+          openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt \
+            -in database.dump -out "$name" -pass file:passphrase
+          sha256sum "$name" > "$name.sha256"
+          rclone copyto "$name" "pickoutdrive:PICKOUT-Backups/$name" --retries 3
+          rclone copyto "$name.sha256" "pickoutdrive:PICKOUT-Backups/$name.sha256" --retries 3
+          remote_size="$(rclone size "pickoutdrive:PICKOUT-Backups/$name" --json | python3 -c 'import json,sys; print(json.load(sys.stdin)["bytes"])')"
+          test "$remote_size" = "$(stat -c %s "$name")"
+          echo "Encrypted backup uploaded and remote size verified: $name"
+          # Remove files older than 30 days ONLY inside dedicated backup folder.
+          rclone delete "pickoutdrive:PICKOUT-Backups" --min-age 30d --include 'pickout-*.dump.enc*'
+          rm -f database.dump "$name" "$name.sha256" passphrase "$RCLONE_CONFIG"
