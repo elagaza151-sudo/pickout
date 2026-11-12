@@ -1711,7 +1711,7 @@ return '<div class="photo-stage"><img loading="lazy" src="'+safeText(real||photo
 window.drawLiveMenu=function(category){
 const rows=category==='الكل'?liveProducts:liveProducts.filter(p=>{const c=liveCategories.find(x=>x.id===p.category_id);return(c?.name_ar||c?.name)===category});
 document.querySelectorAll('#filters .filter').forEach(b=>b.classList.toggle('active',b.textContent===category));
-document.getElementById('menuCards').innerHTML=rows.map((p,i)=>'<article class="card" style="--card-index:'+(i%12)+'"><div class="productArt">'+pickoutProductVisual(p)+'</div><h3>'+safeText(p.name_ar||p.name)+'</h3><p>'+safeText(p.description||'')+'</p><div class="productPrice">'+egp(p.base_price)+'</div><button class="btn primary" onclick="poCartVisual(this);addToCart(\''+p.id+'\')">أضف للسلة</button></article>').join('');
+document.getElementById('menuCards').innerHTML=rows.map((p,i)=>'<article class="card" style="--card-index:'+(i%12)+'"><div class="productArt">'+pickoutProductVisual(p)+'</div><h3>'+safeText(p.name_ar||p.name)+'</h3><p>'+safeText(p.description||'')+'</p><div class="productPrice">'+egp(p.base_price)+'</div>'+(p.is_available?'<button class="btn primary" onclick="addToCart(\''+p.id+'\')">أضف للسلة</button>':'<button class="btn" disabled aria-disabled="true">غير متاح حاليًا</button>')+'</article>').join('');
 };
 </script>
 
