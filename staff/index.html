@@ -10,7 +10,7 @@ document.querySelectorAll('#nav [data-page]').forEach(btn=>btn.addEventListener(
 window.addEventListener('pageshow',()=>showStaffPage('dashboard'));window.pickoutApplyManagerUI=function(manager){window.pickoutStaffIsManager=!!manager;document.querySelectorAll('[data-page="staff"],.staff-manager-only').forEach(el=>el.hidden=!manager);if(!manager&&document.getElementById('staff')&&!document.getElementById('staff').classList.contains('hide'))showStaffPage('dashboard')};
 showStaffPage('dashboard');document.getElementById('dashboard').appendChild(document.getElementById('loyaltyManager'));
 </script><style id="pickout-layout-fixes-2026">
-#cashier{scroll-margin-top:18px}#cashier .panel{margin-bottom:16px}
+#cashier{scroll-margin-top:18px}#cashierPaymentPanel{scroll-margin-top:20px}#nav .staff-manager-only[hidden]{display:none!important}#cashier .panel{margin-bottom:16px}
 #cashier .pos-category-tabs{position:sticky;top:0;z-index:6;display:flex;gap:8px;overflow-x:auto;padding:12px 8px;background:#211812;border:1px solid #6c4c35;border-radius:14px;margin-bottom:12px;scrollbar-width:thin}
 #cashier .pos-category-tabs button{white-space:nowrap;border:1px solid #876043;background:#35261d;color:#f8e5d3;padding:10px 17px;border-radius:20px;cursor:pointer}
 #cashier .pos-category-tabs button.active{background:#d99a62;color:#21150f;font-weight:bold}
@@ -32,4 +32,4 @@ const loyalty=$('loyaltyManager');if(loyalty){const staff=$('staff');const dash=
 const inventory=$('inventory');if(inventory){const extra=$('managerExtra'),tools=$('staffAdminTools');if(extra){const first=extra.querySelector('.panel');if(first){first.insertAdjacentHTML('afterbegin','<div class="inventory-guide"><b>خطوات الجرد:</b> ① سجّل الخامة أولًا من قسم إضافة خامة ② أضف المورد ③ اختار المورد والخامة ④ أدخل الكمية بالكيلو وسعر الكيلو ⑤ احفظ فاتورة الشراء. رصيد المخزون بيتحدث تلقائيًا.</div>')}}}
 })();
 </script>
-<script src="staff-fees.js?v=tax27" defer></script><script src="barista-tickets.js?v=sound28" defer></script><script src="operations.js?v=notify25" defer></script><script src="extended.js?v=inventory37" defer></script><script src="../language-switch.js?v=11" defer></script></body></html>
+<script src="staff-fees.js?v=tax27" defer></script><script src="barista-tickets.js?v=sound28" defer></script><script src="operations.js?v=notify25" defer></script><script src="extended.js?v=pos38" defer></script><script src="../language-switch.js?v=11" defer></script></body></html>
