@@ -1099,7 +1099,7 @@ html.po-scene-fallback #pickoutBackdrop .backdrop-bricks{background-image:linear
 <script id="po-scene-image-gate-v40">
 (function(){
 var done=false;
-function finish(fallback){if(done)return;done=true;if(fallback)document.documentElement.classList.add('po-scene-fallback');document.documentElement.classList.add('po-scene-ready')}
+function finish(fallback){if(!fallback)document.documentElement.classList.remove('po-scene-fallback');if(done)return;done=true;if(fallback)document.documentElement.classList.add('po-scene-fallback');document.documentElement.classList.add('po-scene-ready')}
 var img=new Image();
 img.onload=function(){if(img.decode){img.decode().then(function(){finish(false)},function(){finish(true)})}else finish(false)};
 img.onerror=function(){finish(true)};
