@@ -1420,13 +1420,13 @@ let liveProducts=[],liveCategories=[],deliveryZones=[],cart=[],checkoutFees={tax
 const egp=n=>Number(n||0).toLocaleString('ar-EG',{maximumFractionDigits:2})+' ج';
 function safeText(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 async function loadPickoutBackend(){
- const feeResult=await pickoutDb.rpc('get_checkout_fees');if(!feeResult.error&&feeResult.data)checkoutFees=feeResult.data;
+ pickoutDb.rpc('get_checkout_fees').then(({data,error})=>{if(!error&&data)checkoutFees=data}).catch(console.warn);
  const [c,p,z]=await Promise.all([
   pickoutDb.from('menu_categories').select('id,name,name_ar,sort_order').eq('is_active',true).order('sort_order'),
   pickoutDb.from('menu_products').select('id,category_id,name,name_ar,description,image_url,base_price,is_featured,is_available,inventory_auto_blocked').order('sort_order'),
   pickoutDb.from('delivery_zones').select('id,name,name_ar,delivery_fee').eq('is_active',true).order('sort_order')
  ]);
- if(c.error||p.error){console.error(c.error||p.error||z.error);return;}
+ if(p.error){console.error('Menu products failed',p.error);document.getElementById('menuCards').innerHTML='<article class="card"><h3>تعذر تحميل المنيو</h3><p>'+safeText(p.error.message)+'</p><button class="btn" onclick="loadPickoutBackend()">إعادة المحاولة</button></article>';return;}if(c.error)console.warn('Categories unavailable',c.error);
  liveCategories=c.data||[];liveProducts=p.data||[];deliveryZones=z.data||[];await restoreReorder();
  if(liveProducts.length){
   const cats=['الكل',...liveCategories.map(x=>x.name_ar||x.name)];
