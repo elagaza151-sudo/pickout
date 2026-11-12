@@ -1,7 +1,5 @@
 name: PICK & OUT encrypted daily database backup to R2
 on:
-  schedule:
-    - cron: '15 2 * * *'
   workflow_dispatch:
 permissions:
   contents: read
