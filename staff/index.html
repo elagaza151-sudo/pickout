@@ -21,6 +21,35 @@ showStaffPage('dashboard');document.getElementById('settings').appendChild(docum
 #nav .navbtn[data-page="employee-performance"],#nav .navbtn[data-page="daily-tasks"],#nav .navbtn[data-page="sales-intelligence"],#nav .navbtn[data-page="loyalty-settings"]{font-size:13px}
 @media(max-width:800px){#cashier .pos-category-tabs{top:0}#inventory #managerExtra .row>*{width:100%;flex-basis:100%}}
 </style>
+<style id="pickout-cashier-mobile-responsive-2026">
+@media screen and (max-width:800px){
+ html,body{max-width:100%;overflow-x:hidden}
+ .layout{display:block!important;width:100%!important;min-width:0!important}
+ .layout>aside,.layout>main{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box}
+ .layout>main{margin:0!important;padding:12px!important}
+ #cashier,#cashier .panel,#cashier .extra-section,#cashier .card,#cashier #posBox,#cashier #extraPos{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+ #cashier .panel{padding:14px 12px}
+ #cashier .pos-layout{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:14px!important}
+ #cashier .pos-layout>div{min-width:0;max-width:100%}
+ #cashier .pos-products{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px;max-height:none;overflow:visible}
+ #cashier .pos-product{min-width:0;min-height:100px;padding:12px 9px;overflow-wrap:anywhere;word-break:normal;font-size:13px}
+ #cashier .pos-category-tabs{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+ #cashier .pos-category-tabs button{flex:0 0 auto}
+ #cashier input:not([type=checkbox]):not([type=radio]),#cashier select,#cashier textarea{max-width:100%;min-width:0;box-sizing:border-box}
+ #cashier #posSearch,#cashier #posTable,#cashier #posCustomer,#cashier #posPhone,#cashier #posEmail{width:100%!important;display:block;margin-bottom:9px}
+ #cashier #posBox .card{padding:13px 11px}
+ #cashier .row{min-width:0;flex-wrap:wrap}
+ #cashier button{max-width:100%;white-space:normal}
+ #cashier #posCart,#cashier .cart-line{min-width:0;overflow-wrap:anywhere}
+ #cashier #posCartTitle{margin-top:0}
+ #cashier h2{font-size:19px}
+ #cashier h3{font-size:17px;overflow-wrap:anywhere}
+}
+@media screen and (max-width:360px){
+ #cashier .pos-products{gap:7px}
+ #cashier .pos-product{padding:10px 7px;font-size:12px}
+}
+</style>
 <script id="pickout-layout-fixes-runtime">
 (function(){
 const $=id=>document.getElementById(id),cashier=$('cashier'),newOrder=$('extraPos'),payment=$('posPaymentStep'),open=$('posOpenOrders');
